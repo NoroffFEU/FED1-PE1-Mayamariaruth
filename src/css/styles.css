@@ -1,0 +1,12 @@
+body {
+  color: #333333;
+  min-height: 100vh;
+}
+
+#bg {
+  background: linear-gradient(to bottom, #0790a5, #1f789c);
+}
+
+#logo {
+  width: 183px;
+}
