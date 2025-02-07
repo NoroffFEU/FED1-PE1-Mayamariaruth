@@ -27,4 +27,11 @@ body {
   font-size: 27px;
   padding: 2px 5px;
   cursor: pointer;
+  margin-bottom: 9px;
+}
+
+nav {
+  height: 431px;
+  background-color: #ffffff;
+  color: #333333;
 }
