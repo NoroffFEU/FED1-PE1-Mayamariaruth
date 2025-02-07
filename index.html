@@ -18,6 +18,14 @@
     <link rel="manifest" href="/site.webmanifest" />
     <!-- CSS link & Font Awesome icons -->
     <link rel="stylesheet" href="src/css/styles.css" />
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome icons -->
     <script
       src="https://kit.fontawesome.com/11ca27fbbb.js"
       crossorigin="anonymous"
@@ -29,9 +37,20 @@
   <body id="bg">
     <!-- Header -->
     <header>
-      <a href="index.html">
-        <img src="assets/images/logo.png" id="logo" alt="HotView Labs Logo" />
-      </a>
+      <section class="mobile-nav">
+        <div>
+          <a href="index.html">
+            <img
+              src="assets/images/logo.png"
+              id="logo"
+              alt="HotView Labs Logo"
+            />
+          </a>
+        </div>
+        <div>
+          <i class="fa-solid fa-bars" id="hamburger"></i>
+        </div>
+      </section>
     </header>
     <!-- Main content -->
     <main>

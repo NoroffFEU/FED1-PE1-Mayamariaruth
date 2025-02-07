@@ -1,12 +1,30 @@
 body {
   color: #333333;
   min-height: 100vh;
+  font-family: "Montserrat", sans-serif;
+  margin: 0px 16px;
 }
 
 #bg {
   background: linear-gradient(to bottom, #0790a5, #1f789c);
 }
 
+.mobile-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 106px;
+}
+
 #logo {
   width: 183px;
+}
+
+#hamburger {
+  color: #ffffff;
+  border: #ffffff 1px solid;
+  border-radius: 5px;
+  font-size: 27px;
+  padding: 2px 5px;
+  cursor: pointer;
 }
