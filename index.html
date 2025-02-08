@@ -51,33 +51,30 @@
           <i class="fa-solid fa-bars" id="hamburger"></i>
         </div>
       </section>
+      <!-- Mobile navigation overlay -->
       <nav>
-        <a href="index.html">
-          <span>Home</span>
-          <hr />
+        <a href="index.html" class="nav-link">
+          <span class="nav-item">Home</span>
         </a>
-        <a href="templates/post/feed.html">
-          <span>Blog</span>
-          <hr />
+        <a href="templates/post/feed.html" class="nav-link">
+          <span class="nav-item">Blog</span>
         </a>
-        <a href="templates/account/register.html">
-          <span>Register</span>
-          <hr />
+        <a href="templates/account/register.html" class="nav-link">
+          <span class="nav-item">Register</span>
         </a>
-        <a href="templates/account/login.html">
-          <span>Login</span>
-          <hr />
+        <a href="templates/account/login.html" class="nav-link">
+          <span class="nav-item">Login</span>
         </a>
-        <p>Looking for something specific?</p>
+        <p id="nav-text">Looking for something specific?</p>
         <form method="GET">
           <input
-            type="email"
-            name="newsemail"
-            id="newsemail"
+            type="search"
+            name="search"
+            id="nav-search"
             placeholder="Search posts, categories or authors"
             required
           />
-          <button>
+          <button class="nav-search-btn">
             <i class="fa-solid fa-magnifying-glass"></i>
           </button>
         </form>
