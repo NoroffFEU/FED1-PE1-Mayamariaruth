@@ -14,6 +14,25 @@ body {
   align-items: center;
   justify-content: space-between;
   height: 106px;
+  z-index: 1100;
+  width: 100%;
+  position: fixed;
+  box-sizing: border-box;
+  top: 0;
+  left: 0;
+  padding: 0px 16px;
+}
+
+.mobile-nav.nav-active {
+  background-color: #0790a5;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+    rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}
+
+#hamburger.nav-active {
+  font-size: 30px;
 }
 
 #logo {
@@ -24,10 +43,15 @@ body {
   color: #ffffff;
   border: #ffffff 1px solid;
   border-radius: 5px;
-  font-size: 27px;
+  font-size: 30px;
   padding: 2px 5px;
   cursor: pointer;
   margin-bottom: 9px;
+}
+
+#hamburger.fa-xmark {
+  font-size: 32px;
+  padding: 1px 6px;
 }
 
 nav {
@@ -36,12 +60,12 @@ nav {
   background-color: #ffffff;
   display: flex;
   flex-direction: column;
-  padding: 30px 16px;
+  padding: 50px 16px 30px;
   position: fixed;
   width: 92%;
   z-index: 1000;
   transform: translateY(-100%);
-  top: 86%;
+  top: 85%;
   left: 0;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
