@@ -31,6 +31,7 @@ body {
 }
 
 nav {
+  visibility: hidden;
   height: 370px;
   background-color: #ffffff;
   display: flex;
@@ -40,15 +41,16 @@ nav {
   width: 92%;
   z-index: 1000;
   transform: translateY(-100%);
-  transition: transform 0.3s ease-in-out;
   top: 86%;
   left: 0;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+    rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
 }
 
 nav.nav-active {
-  transform: translateY(0);
+  visibility: visible;
 }
 
 .nav-link {
