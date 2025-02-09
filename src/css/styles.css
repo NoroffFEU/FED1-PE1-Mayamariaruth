@@ -2,6 +2,7 @@
 body {
   color: #333333;
   min-height: 100vh;
+  margin: 0;
   font-family: "Montserrat", sans-serif;
   padding: 0px 16px;
   max-width: 1440px;
@@ -121,7 +122,8 @@ nav.nav-active {
   padding-left: 15px;
 }
 
-#nav-search::placeholder {
+#nav-search::placeholder,
+#footer-email::placeholder {
   font-size: 16px;
   color: rgba(51, 51, 51, 0.38);
 }
@@ -143,6 +145,112 @@ nav.nav-active {
 }
 
 /* Footer */
+footer {
+  display: grid;
+  background-color: #ffffff;
+  box-shadow: rgba(0, 0, 0, 0.36) 0px 22px 70px 4px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  margin-left: -16px;
+  margin-right: -16px;
+  padding: 0px 16px 40px;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: auto auto;
+}
+
+.col-1 {
+  text-align: center;
+  grid-column: span 2;
+  padding: 18px 0px 40px;
+}
+
+.footer-heading {
+  font-size: 24px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+#font {
+  font-weight: 400;
+}
+
+.footer-text {
+  font-size: 16px;
+  margin-bottom: 24px;
+}
+
+#footer-email {
+  width: 94%;
+  height: 49px;
+  border: #333333 solid 1px;
+  border-radius: 20px;
+  padding-left: 15px;
+}
+
+.subscribe-btn {
+  position: absolute;
+  color: #ffffff;
+  background-color: #eda92e;
+  height: 53px;
+  width: 147px;
+  right: 15px;
+  border-radius: 20px;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.subscribe-btn:hover {
+  color: #333333;
+  background-color: #ffffff;
+  border: #eda92e solid 1px;
+}
+
+.col-2 {
+  display: grid;
+  border-left: solid 1px #333333;
+  padding-left: 12px;
+  margin-left: 8px;
+}
+
+.col-3 {
+  display: grid;
+  border-left: solid 1px #333333;
+  padding-left: 12px;
+  margin-left: 20px;
+}
+
+.sub-container {
+  display: flex;
+  height: 50px;
+  align-items: center;
+  align-content: flex-end;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 13px;
+}
+
+.footer-sub {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.fa-link {
+  color: #1f789c;
+  font-size: 24px;
+}
+
+.fa-comments {
+  color: #eda92e;
+  font-size: 24px;
+}
+
+.footer-links {
+  font-size: 16px;
+  padding-bottom: 20px;
+  text-decoration: none;
+  color: #333333;
+}
 
 /* Media queries */
 @media (min-width: 768px) {
