@@ -9,11 +9,11 @@ import "./post.js";
 document.addEventListener("DOMContentLoaded", function () {
   const hamburger = document.getElementById("hamburger");
   const nav = document.querySelector("nav");
-  const mobileNav = document.querySelector(".mobile-nav");
+  const headerNav = document.querySelector(".header-nav");
 
   hamburger.addEventListener("click", function () {
     nav.classList.toggle("nav-active");
-    mobileNav.classList.toggle("nav-active");
+    headerNav.classList.toggle("nav-active");
 
     // Toggle between hamburger and close icon
     if (nav.classList.contains("nav-active")) {

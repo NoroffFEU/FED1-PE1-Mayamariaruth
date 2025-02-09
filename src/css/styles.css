@@ -9,7 +9,7 @@ body {
   background: linear-gradient(to bottom, #0790a5, #1f789c);
 }
 
-.mobile-nav {
+.header-nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -23,7 +23,7 @@ body {
   padding: 0px 16px;
 }
 
-.mobile-nav.nav-active {
+.header-nav.nav-active {
   background-color: #0790a5;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
@@ -36,7 +36,9 @@ body {
 }
 
 #logo {
-  width: 183px;
+  transition: width 0.3s ease;
+  width: 70%;
+  max-width: 295px;
 }
 
 #hamburger {
@@ -54,18 +56,22 @@ body {
   padding: 1px 6px;
 }
 
+#navbar {
+  display: none;
+}
+
 nav {
   visibility: hidden;
-  height: 370px;
+  box-sizing: border-box;
   background-color: #ffffff;
   display: flex;
   flex-direction: column;
   padding: 50px 16px 30px;
   position: fixed;
-  width: 92%;
+  width: 100%;
   z-index: 1000;
   transform: translateY(-100%);
-  top: 85%;
+  top: 88px;
   left: 0;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
@@ -75,6 +81,7 @@ nav {
 
 nav.nav-active {
   visibility: visible;
+  transform: translateY(0);
 }
 
 .nav-link {
@@ -120,4 +127,76 @@ nav.nav-active {
   background-color: #0790a5;
   font-size: 24px;
   color: #ffffff;
+}
+
+#logout-link {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  #hamburger,
+  nav {
+    display: none;
+  }
+
+  .header-nav.nav-active {
+    background-color: transparent;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    box-shadow: none;
+  }
+
+  #logo {
+    width: 80%;
+    max-width: 359px;
+  }
+
+  #navbar {
+    display: flex;
+    border: 1px solid #ffffff;
+    border-radius: 30px;
+    width: 70%;
+    max-width: 750px;
+    justify-content: space-evenly;
+    transition: width 0.3s ease;
+    height: 44px;
+  }
+
+  .navbar-btns {
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    width: 100%;
+    text-align: center;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .navbar-btns:hover {
+    background-color: #ffffff;
+    color: #333333;
+    border-radius: 30px;
+  }
+
+  .search-icon {
+    font-size: 18px;
+    width: 50%;
+  }
+}
+
+@media (min-width: 998px) {
+  #logo {
+    width: 275px;
+  }
+
+  .navbar-btns {
+    font-size: 16px;
+  }
+
+  .search-icon {
+    font-size: 20px;
+  }
 }

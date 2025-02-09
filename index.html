@@ -37,7 +37,7 @@
   <body id="bg">
     <!-- Header -->
     <header>
-      <section class="mobile-nav">
+      <section class="header-nav">
         <div>
           <a href="index.html">
             <img
@@ -47,8 +47,32 @@
             />
           </a>
         </div>
+        <!-- Mobile hamburger icon -->
         <div>
           <i class="fa-solid fa-bars" id="hamburger"></i>
+        </div>
+        <!-- Navigation bar (Large screens) -->
+        <div id="navbar">
+          <a href="index.html" class="navbar-btns">
+            <span>Home</span>
+          </a>
+          <a href="templates/post/feed.html" class="navbar-btns">
+            <span>Blog</span>
+          </a>
+          <!-- Logged out links -->
+          <a href="templates/account/register.html" class="navbar-btns">
+            <span>Register</span>
+          </a>
+          <a href="templates/account/login.html" class="navbar-btns">
+            <span>Login</span>
+          </a>
+          <!-- Logged in user links -->
+          <a href="index.html" id="logout-link" class="navbar-btns">
+            <span>Logout</span>
+          </a>
+          <a href="#" class="navbar-btns search-icon">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </a>
         </div>
       </section>
       <!-- Mobile navigation overlay -->
@@ -59,11 +83,16 @@
         <a href="templates/post/feed.html" class="nav-link">
           <span class="nav-item">Blog</span>
         </a>
+        <!-- Logged out links -->
         <a href="templates/account/register.html" class="nav-link">
           <span class="nav-item">Register</span>
         </a>
         <a href="templates/account/login.html" class="nav-link">
           <span class="nav-item">Login</span>
+        </a>
+        <!-- Logged in user links -->
+        <a href="index.html" class="nav-link" id="logout-link">
+          <span class="nav-item">Logout</span>
         </a>
         <p id="nav-text">Looking for something specific?</p>
         <form method="GET">
