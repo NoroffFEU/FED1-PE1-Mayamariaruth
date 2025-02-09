@@ -1,14 +1,23 @@
+/* General styling */
 body {
   color: #333333;
   min-height: 100vh;
   font-family: "Montserrat", sans-serif;
   padding: 0px 16px;
+  max-width: 1440px;
+  display: flex;
+  flex-direction: column;
 }
 
 #bg {
   background: linear-gradient(to bottom, #0790a5, #1f789c);
 }
 
+main {
+  flex: 1;
+}
+
+/* Header */
 .header-nav {
   display: flex;
   align-items: center;
@@ -133,6 +142,9 @@ nav.nav-active {
   display: none;
 }
 
+/* Footer */
+
+/* Media queries */
 @media (min-width: 768px) {
   #hamburger,
   nav {
