@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="HotView Labs is a global tech research and development company dedicated to providing accurate and up-to-date insights for tech leaders worldwide. Stay informed on AI, blockchain, cybersecurity, and emerging technologies."
+    />
+    <meta
+      name="keywords"
+      content="HotView Labs, tech research, technology insights, AI, blockchain, cybersecurity, data analytics, emerging technology, R&D, innovation, tech leaders"
+    />
+    <!-- Favicon -->
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="../../assets/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="../../assets/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../../assets/favicon/favicon-16x16.png"
+    />
+    <!-- CSS link & Font Awesome icons -->
+    <link rel="stylesheet" href="../../src/css/styles.css" />
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome icons -->
+    <script
+      src="https://kit.fontawesome.com/11ca27fbbb.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- JavaScript link -->
+    <script defer type="module" src="../../js/script.js"></script>
+    <title>HotView Labs | Home</title>
+  </head>
+  <body id="bg">
+    <!-- Header -->
+    <header>
+      <section class="header-nav">
+        <div>
+          <a href="../../index.html">
+            <img
+              src="../../assets/images/logo.png"
+              id="logo"
+              alt="HotView Labs Logo"
+            />
+          </a>
+        </div>
+        <!-- Mobile hamburger icon -->
+        <div>
+          <i class="fa-solid fa-bars" id="hamburger"></i>
+        </div>
+        <!-- Navigation bar (Large screens) -->
+        <div id="navbar">
+          <a href="../../index.html" class="navbar-btns">
+            <span>Home</span>
+          </a>
+          <a href="feed.html" class="navbar-btns">
+            <span>Blog</span>
+          </a>
+          <!-- Logged out links -->
+          <a href="../account/register.html" class="navbar-btns">
+            <span>Register</span>
+          </a>
+          <a href="../account/login.html" class="navbar-btns">
+            <span>Login</span>
+          </a>
+          <!-- Logged in user links -->
+          <a href="../../index.html" id="logout-link" class="navbar-btns">
+            <span>Logout</span>
+          </a>
+          <a href="#" class="navbar-btns search-icon">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </a>
+        </div>
+      </section>
+      <!-- Mobile navigation overlay -->
+      <nav>
+        <a href="../../index.html" class="nav-link">
+          <span class="nav-item">Home</span>
+        </a>
+        <a href="feed.html" class="nav-link">
+          <span class="nav-item">Blog</span>
+        </a>
+        <!-- Logged out links -->
+        <a href="../account/register.html" class="nav-link">
+          <span class="nav-item">Register</span>
+        </a>
+        <a href="../account/login.html" class="nav-link">
+          <span class="nav-item">Login</span>
+        </a>
+        <!-- Logged in user links -->
+        <a href="../../index.html" class="nav-link" id="logout-link">
+          <span class="nav-item">Logout</span>
+        </a>
+        <p id="nav-text">Looking for something specific?</p>
+        <form method="GET">
+          <input
+            type="search"
+            name="search"
+            id="nav-search"
+            placeholder="Search posts, categories or authors"
+            required
+          />
+          <button class="nav-search-btn">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </form>
+      </nav>
+    </header>
+    <!-- Main content -->
+    <main>
+      <section>
+        <h1></h1>
+      </section>
+    </main>
+    <!-- Footer -->
+    <footer>
+      <section class="footer-container">
+        <div class="col-1">
+          <h3 class="footer-heading">Hotview <span id="font">Labs</span></h3>
+          <p class="footer-text">
+            Subscribe to our newsletter for the latest trends, insights, and
+            innovations.
+          </p>
+          <form method="GET" id="footer-container">
+            <input
+              type="email"
+              name="email"
+              id="footer-email"
+              placeholder="johndoe@gmail.com"
+              required
+            />
+            <button class="subscribe-btn">Subscribe</button>
+          </form>
+        </div>
+        <div class="col-2">
+          <div class="sub-container">
+            <i class="fa-solid fa-link"></i>
+            <h4 class="footer-sub">Quick Links</h4>
+          </div>
+          <a href="feed.html" class="footer-links"><span>Blog</span></a>
+          <a href="../account/register.html" class="footer-links"
+            ><span>Register</span></a
+          >
+          <a href="../account/login.html" class="footer-links"
+            ><span>Login</span></a
+          >
+        </div>
+        <div class="col-3">
+          <div class="sub-container">
+            <i class="fa-regular fa-comments"></i>
+            <h4 class="footer-sub">Connect</h4>
+          </div>
+          <a
+            href="https://www.facebook.com/"
+            target="_blank"
+            class="footer-links"
+            ><span>Facebook</span></a
+          >
+          <a href="http://linkedin.com/" target="_blank" class="footer-links"
+            ><span>LinkedIn</span></a
+          >
+          <a href="https://x.com/" target="_blank" class="footer-links"
+            ><span>Twitter</span></a
+          >
+        </div>
+      </section>
+    </footer>
+  </body>
+</html>
