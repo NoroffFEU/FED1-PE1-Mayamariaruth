@@ -2,7 +2,7 @@
 body {
   color: #333333;
   min-height: 100vh;
-  margin: 0;
+  margin: 0 auto;
   font-family: "Montserrat", sans-serif;
   display: flex;
   flex-direction: column;
@@ -20,6 +20,12 @@ main {
 input:focus,
 textarea:focus {
   outline: 1px solid #333333;
+}
+
+.heading {
+  font-size: 24px;
+  font-weight: 600;
+  font-style: italic;
 }
 
 /* Header */
@@ -290,6 +296,7 @@ footer {
   color: #ffffff;
   font-weight: bold;
   margin-bottom: 0;
+  padding-left: 16px;
 }
 
 #hero-heading-2 {
@@ -299,6 +306,7 @@ footer {
   font-style: italic;
   margin-top: 5px;
   margin-bottom: 0;
+  padding-left: 16px;
 }
 
 .illustration-container {
@@ -323,6 +331,7 @@ footer {
   line-height: 28px;
   font-weight: 500;
   color: #ffffff;
+  padding-left: 16px;
 }
 
 .btn-container {
@@ -350,7 +359,7 @@ footer {
   border: solid 2px #eda92e;
 }
 
-.register-btn {
+.login-btn {
   font-size: 16px;
   font-weight: bold;
   border-radius: 30px;
@@ -362,7 +371,7 @@ footer {
   height: 53px;
 }
 
-.register-btn:hover {
+.login-btn:hover {
   background-color: transparent;
   border: #ffffff solid 2px;
   color: #ffffff;
@@ -373,12 +382,43 @@ footer {
   background-color: #ffffff;
   border-radius: 20px;
   width: 100%;
+  margin-bottom: 184px;
+  z-index: 2;
+  position: relative;
+}
+
+.about-container h2 {
+  width: 265px;
+  line-height: 30px;
+  padding-top: 50px;
+  padding-left: 16px;
+}
+
+.about-container p {
+  padding-left: 16px;
+  line-height: 30px;
+  font-size: 16px;
+  font-weight: 400;
 }
 
 #home-image {
   width: 100%;
-  height: 384px;
+  height: 469px;
   object-fit: cover;
+  padding-top: 25px;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  position: relative;
+  top: 5px;
+}
+
+.text1 p:last-child {
+  margin-top: 35px;
+}
+
+#bold-text {
+  font-size: 18px;
+  font-weight: 600;
 }
 
 @media (min-width: 600px) {
@@ -388,6 +428,10 @@ footer {
 }
 
 @media (min-width: 768px) {
+  .heading {
+    font-size: 35px;
+  }
+
   /* Header */
   #hamburger,
   nav {
@@ -461,6 +505,7 @@ footer {
 
   .hero-section {
     text-align: left;
+    margin-top: 2.5rem;
   }
 
   .btn-container {
@@ -470,6 +515,11 @@ footer {
   #illustration {
     width: 100%;
     transform: scale(1.2) rotate(-30deg);
+  }
+
+  .about-container h2 {
+    width: 80%;
+    line-height: 49px;
   }
 }
 
@@ -545,25 +595,74 @@ footer {
   }
 
   .hero-btn,
-  .register-btn {
+  .login-btn {
     height: 63px;
     font-size: 22px;
+  }
+
+  .about-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 70px;
+    height: 602px;
+    padding: 0;
+  }
+
+  .text1 {
+    padding-left: 35px;
+    grid-column: 1;
+  }
+
+  .img2 {
+    grid-column: 2;
+  }
+
+  .about-container h2 {
+    max-width: 400px;
+    padding-top: 30px;
+    margin-bottom: 20px;
+  }
+
+  .about-container p {
+    font-size: 18px;
+    max-width: 510px;
+  }
+
+  #bold-text {
+    font-size: 20px;
+  }
+
+  .text1 p:nth-of-type(1) {
+    margin-bottom: 40px;
+  }
+
+  #home-image {
+    height: 602px;
+    padding: 0;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 0;
+    top: 0;
   }
 }
 
 @media (min-width: 1440px) {
+  .heading {
+    font-size: 40px;
+  }
+
   #illustration {
     left: 20%;
   }
 
   .hero-heading,
   #hero-heading-2 {
-    font-size: 64px;
+    font-size: 56px;
     padding-left: 54px;
   }
 
   .hero-section h2 {
-    font-size: 32px;
+    font-size: 28px;
     padding-left: 54px;
   }
 
@@ -573,9 +672,18 @@ footer {
   }
 
   .hero-btn,
-  .register-btn {
-    height: 70px;
-    font-size: 26px;
+  .login-btn {
+    height: 66px;
+    font-size: 22px;
     max-width: 400px;
+  }
+
+  .text1 {
+    padding-left: 54px;
+    max-width: 650px;
+  }
+
+  .about-container p {
+    max-width: 550px;
   }
 }
