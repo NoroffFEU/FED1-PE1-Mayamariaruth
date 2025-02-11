@@ -4,9 +4,9 @@ body {
   min-height: 100vh;
   margin: 0;
   font-family: "Montserrat", sans-serif;
-  padding: 0px 16px;
   display: flex;
   flex-direction: column;
+  max-width: 1440px;
 }
 
 #bg {
@@ -15,7 +15,6 @@ body {
 
 main {
   flex: 1;
-  max-width: 1440px;
 }
 
 input:focus,
@@ -161,8 +160,6 @@ footer {
   box-shadow: rgba(0, 0, 0, 0.36) 0px 22px 70px 4px;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
-  margin-left: -16px;
-  margin-right: -16px;
   padding: 0px 16px 40px;
 }
 
@@ -281,7 +278,6 @@ footer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
 }
 
 .hero-section {
@@ -372,11 +368,20 @@ footer {
   color: #ffffff;
 }
 
-@media (min-width: 600px) {
-  .illustration-container {
-    overflow-y: visible;
-  }
+/* About section */
+.about-container {
+  background-color: #ffffff;
+  border-radius: 20px;
+  width: 100%;
+}
 
+#home-image {
+  width: 100%;
+  height: 384px;
+  object-fit: cover;
+}
+
+@media (min-width: 600px) {
   #illustration {
     max-width: 1100px;
   }
@@ -463,6 +468,7 @@ footer {
   }
 
   #illustration {
+    width: 100%;
     transform: scale(1.2) rotate(-30deg);
   }
 }
@@ -485,6 +491,7 @@ footer {
   footer {
     padding-bottom: 60px;
   }
+
   .footer-container {
     grid-template-columns: 2fr 1fr 1fr;
   }
@@ -552,14 +559,17 @@ footer {
   .hero-heading,
   #hero-heading-2 {
     font-size: 64px;
+    padding-left: 54px;
   }
 
   .hero-section h2 {
     font-size: 32px;
+    padding-left: 54px;
   }
 
   .btn-container {
     justify-content: flex-end;
+    padding-left: 54px;
   }
 
   .hero-btn,
