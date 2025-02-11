@@ -35,7 +35,7 @@ header {
   height: 106px;
   z-index: 1100;
   width: 100%;
-  position: fixed;
+  position: absolute;
   box-sizing: border-box;
   top: 0;
   left: 0;
@@ -280,12 +280,29 @@ footer {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  padding: 20px;
 }
 
 .hero-section {
-  z-index: 100;
+  z-index: 1;
+  text-align: center;
+}
+
+.hero-heading {
+  font-size: 32px;
+  color: #ffffff;
+  font-weight: bold;
+  margin-bottom: 0;
+}
+
+#hero-heading-2 {
+  font-size: 32px;
+  color: #eda92e;
+  font-weight: bold;
+  font-style: italic;
+  margin-top: 5px;
+  margin-bottom: 0;
 }
 
 .illustration-container {
@@ -300,12 +317,62 @@ footer {
 
 #illustration {
   position: absolute;
-  left: 50%;
+  left: 40%;
   transform: translateX(-40%) scale(1) rotate(-30deg);
   width: auto;
   height: 100%;
   object-fit: cover;
   pointer-events: none;
+}
+
+.hero-section h2 {
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 400;
+  color: #ffffff;
+}
+
+.btn-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 17px;
+  margin-top: 30px;
+}
+
+.hero-btn {
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 30px;
+  border: none;
+  color: #ffffff;
+  background-color: #eda92e;
+  width: 100%;
+  max-width: 366px;
+  height: 53px;
+}
+
+.hero-btn:hover {
+  background-color: transparent;
+  border: solid 2px #eda92e;
+}
+
+.register-btn {
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 30px;
+  border: none;
+  color: #333333;
+  background-color: #ffffff;
+  width: 100%;
+  max-width: 366px;
+  height: 53px;
+}
+
+.register-btn:hover {
+  background-color: transparent;
+  border: #ffffff solid 2px;
+  color: #ffffff;
 }
 
 @media (min-width: 768px) {
