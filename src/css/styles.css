@@ -307,19 +307,16 @@ footer {
 
 .illustration-container {
   position: absolute;
-  left: 50%;
   width: 100%;
   height: 100%;
-  transform: translateX(-50%);
   z-index: 0;
-  overflow: hidden;
+  overflow-x: clip;
 }
 
 #illustration {
   position: absolute;
-  left: 40%;
-  transform: translateX(-40%) scale(1) rotate(-30deg);
-  width: auto;
+  transform: scale(1) rotate(-30deg);
+  width: 160vw;
   height: 100%;
   object-fit: cover;
   pointer-events: none;
@@ -328,7 +325,7 @@ footer {
 .hero-section h2 {
   font-size: 18px;
   line-height: 28px;
-  font-weight: 400;
+  font-weight: 500;
   color: #ffffff;
 }
 
@@ -373,6 +370,16 @@ footer {
   background-color: transparent;
   border: #ffffff solid 2px;
   color: #ffffff;
+}
+
+@media (min-width: 600px) {
+  .illustration-container {
+    overflow-y: visible;
+  }
+
+  #illustration {
+    max-width: 1100px;
+  }
 }
 
 @media (min-width: 768px) {
@@ -441,6 +448,23 @@ footer {
   .subscribe-btn {
     font-size: 19px;
   }
+
+  /* Home */
+  .hero-container {
+    align-items: baseline;
+  }
+
+  .hero-section {
+    text-align: left;
+  }
+
+  .btn-container {
+    flex-direction: row-reverse;
+  }
+
+  #illustration {
+    transform: scale(1.2) rotate(-30deg);
+  }
 }
 
 @media (min-width: 998px) {
@@ -495,5 +519,53 @@ footer {
 
   .subscribe-btn {
     width: 180px;
+  }
+
+  /* Home */
+  #illustration {
+    left: 10%;
+    max-width: 1300px;
+    top: 10%;
+  }
+
+  .hero-heading,
+  #hero-heading-2 {
+    font-size: 48px;
+  }
+
+  .hero-section h2 {
+    font-size: 24px;
+  }
+
+  .hero-btn,
+  .register-btn {
+    height: 63px;
+    font-size: 22px;
+  }
+}
+
+@media (min-width: 1440px) {
+  #illustration {
+    left: 20%;
+  }
+
+  .hero-heading,
+  #hero-heading-2 {
+    font-size: 64px;
+  }
+
+  .hero-section h2 {
+    font-size: 32px;
+  }
+
+  .btn-container {
+    justify-content: flex-end;
+  }
+
+  .hero-btn,
+  .register-btn {
+    height: 70px;
+    font-size: 26px;
+    max-width: 400px;
   }
 }
