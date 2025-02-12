@@ -456,6 +456,97 @@ footer {
   padding-left: 10px;
 }
 
+/* Newsletter section */
+.newsletter-container {
+  background-color: #ffffff;
+  border-radius: 20px;
+  width: 100%;
+  margin-bottom: 184px;
+  text-align: center;
+  padding: 40px 0px 55px;
+}
+
+.fa-envelope {
+  font-size: 40px;
+  color: #eda92e;
+}
+
+.news1 p {
+  font-size: 18px;
+  font-style: italic;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.news1 h2 {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 29px;
+  width: 400px;
+  margin: 0 auto 40px;
+}
+
+.news-btn {
+  height: 53px;
+  right: 22px;
+}
+
+#newsletter-email {
+  height: 49px;
+  border: #333333 solid 1px;
+  border-radius: 30px;
+  padding-left: 20px;
+  font-size: 16px;
+  width: 82%;
+}
+
+.news2 {
+  margin-top: 50px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#ellipse {
+  width: 327px;
+}
+
+#letters {
+  position: absolute;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+#newsletter1 {
+  width: 185px;
+  height: 262px;
+  transform: rotate(10deg);
+  z-index: 2;
+  top: 40px;
+  position: relative;
+  border: #333333 solid 1px;
+  right: 20px;
+}
+
+#newsletter2 {
+  width: 185px;
+  height: 262px;
+  transform: rotate(-10deg);
+  position: relative;
+  bottom: -10px;
+  border: #333333 solid 1px;
+  left: 35px;
+  bottom: 30px;
+}
+
+#news-text {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 60px auto 0px;
+  width: 70%;
+}
+
 @media (min-width: 600px) {
   #illustration {
     max-width: 1100px;
@@ -538,19 +629,6 @@ footer {
     width: 50%;
   }
 
-  /* Footer */
-  #footer-email {
-    font-size: 18px;
-  }
-
-  #footer-email::placeholder {
-    font-size: 18px;
-  }
-
-  .subscribe-btn {
-    font-size: 19px;
-  }
-
   /* Home */
   .hero-container {
     align-items: baseline;
@@ -591,6 +669,50 @@ footer {
   .div2:hover #arrow {
     transform: translateX(50px);
     transition: transform 0.3s ease-in-out;
+  }
+
+  .newsletter-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    text-align: left;
+    align-items: center;
+    padding-top: 20px;
+  }
+
+  .news1 h2 {
+    margin: 0 0 25px;
+    padding-left: 16px;
+  }
+
+  .news1 p {
+    padding-left: 16px;
+    margin-bottom: 10px;
+    font-size: 20px;
+  }
+
+  .fa-envelope {
+    padding-left: 16px;
+  }
+
+  .newsletter-form {
+    display: flex;
+  }
+
+  #newsletter-email {
+    margin-left: 16px;
+    width: 86%;
+  }
+
+  .news-btn {
+    left: 32%;
+    right: 0;
+  }
+
+  #news-text {
+    margin: 0 0 0 16px;
+    width: 100%;
+    position: relative;
+    bottom: 28px;
   }
 }
 
@@ -657,6 +779,7 @@ footer {
 
   #footer-email {
     max-width: 362px;
+    font-size: 18px;
   }
 
   #footer-email::placeholder {
@@ -665,6 +788,7 @@ footer {
 
   .subscribe-btn {
     width: 180px;
+    font-size: 19px;
   }
 
   .footer-sub {
