@@ -782,13 +782,6 @@ footer {
 }
 
 @media (min-width: 998px) {
-  #nav-search::placeholder,
-  #footer-email::placeholder,
-  #search-input::placeholder,
-  #search-input {
-    font-size: 16px;
-  }
-
   /* Header */
   #logo {
     width: 275px;
@@ -853,24 +846,14 @@ footer {
 
   .footer-links {
     padding-bottom: 10px;
-    font-size: 16px;
-  }
-
-  .footer-text {
-    font-size: 16px;
   }
 
   #footer-email {
     max-width: 362px;
-    font-size: 16px;
   }
 
   .subscribe-btn {
     width: 185px;
-  }
-
-  .footer-sub {
-    font-size: 18px;
   }
 
   /* Home */
@@ -891,8 +874,8 @@ footer {
 
   .hero-btn,
   .login-btn {
-    height: 63px;
-    font-size: 22px;
+    height: 60px;
+    font-size: 20px;
   }
 
   .about-container {

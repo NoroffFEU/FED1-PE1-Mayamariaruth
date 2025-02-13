@@ -69,6 +69,12 @@
   right: 16px;
 }
 
+#search-filter-btn:hover {
+  color: #333333;
+  background-color: #ffffff;
+  border: #eda92e solid 2px;
+}
+
 @media (min-width: 768px) {
   .mobile-only {
     display: none;
