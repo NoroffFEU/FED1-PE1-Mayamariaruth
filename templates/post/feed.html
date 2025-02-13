@@ -108,7 +108,7 @@
           <span class="nav-item">Logout</span>
         </a>
         <p id="nav-text">Looking for something specific?</p>
-        <form method="GET">
+        <form action="/search" method="GET">
           <input
             type="search"
             name="search"
@@ -116,14 +116,14 @@
             placeholder="Search posts, categories or authors"
             required
           />
-          <button class="nav-search-btn">
+          <button class="nav-search-btn" type="submit">
             <i class="fa-solid fa-magnifying-glass"></i>
           </button>
         </form>
       </nav>
       <!-- Search overlay for Desktop -->
       <div id="search-overlay">
-        <form method="GET" class="search-form">
+        <form action="/search" method="GET" class="search-form">
           <input
             type="search"
             name="search"
@@ -131,16 +131,66 @@
             placeholder="Search posts, categories or authors"
             required
           />
-          <button class="search-btn">
+          <button class="search-btn" type="submit">
             <i class="fa-solid fa-magnifying-glass"></i>
           </button>
         </form>
       </div>
     </header>
     <!-- Main content -->
-    <main>
-      <section>
+    <main class="margin">
+      <!-- Latest Posts -->
+      <section id="latest-posts">
         <h1 class="heading">Latest Posts</h1>
+        <div id="latest-posts-container">
+          <!-- Latest Posts (Dynamically generated) -->
+        </div>
+      </section>
+      <!-- Blog Feed -->
+      <section id="blog-feed">
+        <hr class="styled-border" />
+        <div class="filter-bar">
+          <div class="filter-container">
+            <button id="filter-btn-mobile" class="filter-btn mobile-only">
+              Filter by<i class="fa-solid fa-caret-down"></i>
+            </button>
+            <button id="sort-btn" class="filter-btn desktop-only">
+              Sort by<i class="fa-solid fa-caret-down"></i>
+            </button>
+            <button id="category-btn" class="filter-btn desktop-only">
+              Category<i class="fa-solid fa-caret-down"></i>
+            </button>
+            <button id="author-btn" class="filter-btn desktop-only">
+              Author<i class="fa-solid fa-caret-down"></i>
+            </button>
+          </div>
+          <div id="form-div">
+            <form action="/search" method="GET">
+              <input
+                type="search"
+                name="search"
+                id="search-filter"
+                placeholder="Search for posts..."
+                required
+              />
+              <button id="search-filter-btn" type="submit">Search</button>
+            </form>
+          </div>
+          <!-- Filter overlays (Dynamically generated) -->
+          <div id="filter-overlay" class="overlay hidden">
+            <div class="overlay-content">
+              <div id="filter-options"></div>
+            </div>
+          </div>
+        </div>
+        <hr class="styled-border" />
+        <div class="blog-grid" id="blog-feed-container">
+          <!-- Blog posts (Dynamically generated) -->
+        </div>
+
+        <div class="pagination" id="pagination-container">
+          <!-- Pagination (Dynamically generated) -->
+        </div>
       </section>
     </main>
     <!-- Footer -->

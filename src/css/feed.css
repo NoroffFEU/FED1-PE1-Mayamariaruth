@@ -1,0 +1,138 @@
+.margin {
+  margin: 20px 0 90px;
+}
+
+.mobile-only {
+  display: inline-block;
+}
+.desktop-only {
+  display: none;
+}
+
+.overlay.hidden {
+  display: none;
+}
+
+.styled-border {
+  background-color: rgba(51, 51, 51, 0.5);
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2);
+}
+
+.filter-btn {
+  text-transform: uppercase;
+  text-decoration: underline;
+  border: none;
+  background-color: #ffffff;
+  font-size: 16px;
+  font-weight: 500;
+  margin: 20px 0 0 16px;
+}
+
+.fa-caret-down {
+  padding-left: 5px;
+  position: relative;
+  top: 2px;
+  font-size: 28px;
+  color: #333333;
+}
+
+.filter-bar form {
+  margin: 40px 0 45px 16px;
+  padding-right: 16px;
+  max-width: 550px;
+  position: relative;
+}
+
+#search-filter {
+  border-radius: 30px;
+  border: solid 1px #333333;
+  height: 49px;
+  padding-left: 15px;
+  font-size: 16px;
+  width: 99%;
+}
+
+#search-filter::placeholder {
+  font-size: 16px;
+  color: rgba(51, 51, 51, 0.38);
+}
+
+#search-filter-btn {
+  background-color: #eda92e;
+  color: #ffffff;
+  font-size: 16px;
+  border-radius: 30px;
+  border: none;
+  font-weight: bold;
+  padding: 16px 40px;
+  position: absolute;
+  right: 16px;
+}
+
+@media (min-width: 768px) {
+  .mobile-only {
+    display: none;
+  }
+
+  .desktop-only {
+    display: inline-block;
+  }
+
+  .filter-bar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 25px 16px;
+    align-items: center;
+  }
+
+  .filter-container {
+    display: flex;
+    gap: 20px;
+  }
+
+  .filter-bar form {
+    margin: 0;
+    width: 100%;
+  }
+
+  .filter-btn {
+    margin: 0;
+  }
+}
+
+@media (min-width: 998px) {
+  .filter-container {
+    gap: 47px;
+  }
+
+  #form-div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  #search-filter {
+    font-size: 18px;
+    height: 55px;
+  }
+
+  #search-filter::placeholder {
+    font-size: 18px;
+  }
+
+  #search-filter-btn {
+    font-size: 19px;
+    height: 57px;
+    width: 199px;
+    right: 4px;
+    bottom: -1px;
+  }
+
+  .filter-btn {
+    font-size: 18px;
+  }
+
+  .filter-bar form {
+    padding-right: 0;
+  }
+}

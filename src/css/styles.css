@@ -1,3 +1,10 @@
+@import url("./add.css");
+@import url("./edit.css");
+@import url("./feed.css");
+@import url("./login.css");
+@import url("./post.css");
+@import url("./register.css");
+
 /* General styling */
 body {
   color: #333333;
@@ -15,7 +22,6 @@ body {
 
 main {
   flex: 1;
-  padding-top: 106px;
 }
 
 input:focus,
@@ -27,6 +33,7 @@ textarea:focus {
   font-size: 24px;
   font-weight: 600;
   font-style: italic;
+  padding-left: 16px;
 }
 
 #nav-search::placeholder,
@@ -39,7 +46,7 @@ textarea:focus {
 
 /* Header */
 header {
-  height: 116px;
+  height: 110px;
 }
 
 .header-styling {
@@ -292,6 +299,10 @@ footer {
 }
 
 /* Home */
+.padding {
+  padding-top: 106px;
+}
+
 .hero-container {
   height: 100vh;
   display: flex;
@@ -404,7 +415,6 @@ footer {
   width: 265px;
   line-height: 30px;
   padding-top: 40px;
-  padding-left: 16px;
 }
 
 .about-container p {
@@ -444,7 +454,6 @@ footer {
 
 .trending-container h2 {
   padding-top: 40px;
-  padding-left: 16px;
   margin-bottom: 10px;
 }
 
@@ -699,6 +708,7 @@ footer {
 
   .btn-container {
     flex-direction: row-reverse;
+    padding-left: 16px;
   }
 
   #illustration {
@@ -774,10 +784,9 @@ footer {
 @media (min-width: 998px) {
   #nav-search::placeholder,
   #footer-email::placeholder,
-  #newsletter-email::placeholder,
   #search-input::placeholder,
   #search-input {
-    font-size: 18px;
+    font-size: 16px;
   }
 
   /* Header */
@@ -844,25 +853,24 @@ footer {
 
   .footer-links {
     padding-bottom: 10px;
-    font-size: 18px;
+    font-size: 16px;
   }
 
   .footer-text {
-    font-size: 18px;
+    font-size: 16px;
   }
 
   #footer-email {
     max-width: 362px;
-    font-size: 18px;
+    font-size: 16px;
   }
 
   .subscribe-btn {
-    width: 180px;
-    font-size: 19px;
+    width: 185px;
   }
 
   .footer-sub {
-    font-size: 20px;
+    font-size: 18px;
   }
 
   /* Home */
@@ -896,7 +904,6 @@ footer {
   }
 
   .text1 {
-    padding-left: 35px;
     grid-column: 1;
   }
 
@@ -945,7 +952,12 @@ footer {
     height: 55px;
   }
 
+  #newsletter-email::placeholder {
+    font-size: 18px;
+  }
+
   .news-btn {
+    font-size: 18px;
     height: 62px;
     width: 228px;
     top: -1px;
@@ -976,6 +988,7 @@ footer {
 @media (min-width: 1440px) {
   .heading {
     font-size: 40px;
+    padding-left: 54px;
   }
 
   .navbar-btns {
@@ -1014,8 +1027,11 @@ footer {
   }
 
   .text1 {
-    padding-left: 54px;
     max-width: 650px;
+  }
+
+  .text1 p {
+    padding-left: 54px;
   }
 
   .about-container p {
@@ -1024,10 +1040,6 @@ footer {
 
   .trending-container {
     grid-template-columns: 30% auto;
-  }
-
-  .trending-container h2 {
-    padding-left: 54px;
   }
 
   .div2 span {
