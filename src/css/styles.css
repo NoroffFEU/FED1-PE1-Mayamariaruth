@@ -15,6 +15,7 @@ body {
 
 main {
   flex: 1;
+  padding-top: 106px;
 }
 
 input:focus,
@@ -38,7 +39,15 @@ textarea:focus {
 
 /* Header */
 header {
-  height: 212px;
+  height: 116px;
+}
+
+.header-styling {
+  background-color: #0790a5;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+    rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
 }
 
 .header-nav {
@@ -233,7 +242,7 @@ footer {
 .subscribe-btn:hover {
   color: #333333;
   background-color: #ffffff;
-  border: #eda92e solid 1px;
+  border: #eda92e solid 2px;
 }
 
 .col-2 {
@@ -670,7 +679,7 @@ footer {
 
   .search-btn {
     position: absolute;
-    right: 10px;
+    right: 16px;
     border: none;
     background: transparent;
     cursor: pointer;
@@ -780,8 +789,12 @@ footer {
     font-size: 16px;
   }
 
-  .search-icon,
+  .search-icon {
+    font-size: 20px;
+  }
+
   .search-btn {
+    right: 27px;
     font-size: 20px;
   }
 
@@ -813,11 +826,11 @@ footer {
   }
 
   .col-2 {
-    margin: 50px 10px 0px 60px;
+    margin: 80px 10px 0px 60px;
   }
 
   .col-3 {
-    margin: 50px 0px 0px 40px;
+    margin: 80px 0px 0px 40px;
   }
 
   .sub-container {
@@ -963,6 +976,14 @@ footer {
 @media (min-width: 1440px) {
   .heading {
     font-size: 40px;
+  }
+
+  .navbar-btns {
+    font-size: 18px;
+  }
+
+  .search-icon {
+    font-size: 22px;
   }
 
   #illustration {
