@@ -28,6 +28,14 @@ textarea:focus {
   font-style: italic;
 }
 
+#nav-search::placeholder,
+#footer-email::placeholder,
+#newsletter-email::placeholder,
+#search-input::placeholder {
+  font-size: 16px;
+  color: rgba(51, 51, 51, 0.38);
+}
+
 /* Header */
 header {
   height: 212px;
@@ -137,13 +145,6 @@ nav.nav-active {
   font-size: 16px;
 }
 
-#nav-search::placeholder,
-#footer-email::placeholder,
-#newsletter-email::placeholder {
-  font-size: 16px;
-  color: rgba(51, 51, 51, 0.38);
-}
-
 .nav-search-btn {
   width: 74px;
   height: 56px;
@@ -158,6 +159,10 @@ nav.nav-active {
 }
 
 #logout-link {
+  display: none;
+}
+
+#search-overlay {
   display: none;
 }
 
@@ -630,6 +635,49 @@ footer {
     width: 50%;
   }
 
+  #search-overlay {
+    position: absolute;
+    width: 63%;
+    max-width: 752px;
+    transition: opacity 0.3s ease, visibility 0.3s;
+    display: none;
+    z-index: 2000;
+    top: 30px;
+    right: 16px;
+  }
+
+  #search-overlay.active {
+    display: flex;
+  }
+
+  .search-form {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    position: relative;
+  }
+
+  #search-input {
+    height: 46px;
+    width: 100%;
+    font-size: 16px;
+    border: none;
+    border-radius: 30px;
+    background: #ffffff;
+    outline: none;
+    padding-left: 16px;
+  }
+
+  .search-btn {
+    position: absolute;
+    right: 10px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    color: #33333;
+    font-size: 18px;
+  }
+
   /* Home */
   .hero-container {
     align-items: baseline;
@@ -717,7 +765,9 @@ footer {
 @media (min-width: 998px) {
   #nav-search::placeholder,
   #footer-email::placeholder,
-  #newsletter-email::placeholder {
+  #newsletter-email::placeholder,
+  #search-input::placeholder,
+  #search-input {
     font-size: 18px;
   }
 
@@ -730,8 +780,13 @@ footer {
     font-size: 16px;
   }
 
-  .search-icon {
+  .search-icon,
+  .search-btn {
     font-size: 20px;
+  }
+
+  #search-overlay {
+    width: 68%;
   }
 
   /* Footer */

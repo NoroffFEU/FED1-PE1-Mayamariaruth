@@ -25,3 +25,29 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+
+// Display search bar in desktop nav bar
+document.addEventListener("DOMContentLoaded", () => {
+  const searchIcon = document.querySelector(".search-icon");
+  const searchOverlay = document.getElementById("search-overlay");
+  const searchInput = document.getElementById("search-input");
+
+  // Open search overlay
+  searchIcon.addEventListener("click", (e) => {
+    e.preventDefault();
+    searchOverlay.classList.add("active");
+    searchInput.focus();
+  });
+
+  // Close search overlay when clicking outside
+  document.addEventListener("click", (e) => {
+    if (!searchOverlay.contains(e.target) && e.target !== searchIcon) {
+      searchOverlay.classList.remove("active");
+    }
+  });
+
+  // Prevent closing when clicking inside the overlay or input
+  searchOverlay.addEventListener("click", (e) => {
+    e.stopPropagation();
+  });
+});
