@@ -139,8 +139,39 @@
     </header>
     <!-- Main content -->
     <main>
-      <section>
-        <h1></h1>
+      <section class="acc-form">
+        <div class="centering">
+          <h1 class="form-heading">Login</h1>
+          <p>
+            Don't have an account?
+            <a href="register.html"><span class="link-text">Register</span></a>
+          </p>
+        </div>
+        <form method="POST" id="login" class="forms">
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input
+              type="email"
+              name="emailaddress"
+              id="emailaddress"
+              placeholder="name@example.com"
+              required
+            />
+            <span class="error-message" id="emailError"></span>
+          </div>
+          <div class="form-group">
+            <label for="password">Password:</label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              placeholder="••••••••"
+              required
+            />
+            <span class="error-message" id="passwordError"></span>
+          </div>
+          <button type="submit" class="form-btn" id="login-btn">Login</button>
+        </form>
       </section>
     </main>
     <!-- Footer -->

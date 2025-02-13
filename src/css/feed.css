@@ -118,24 +118,15 @@
   }
 
   #search-filter {
-    font-size: 18px;
-    height: 55px;
-  }
-
-  #search-filter::placeholder {
-    font-size: 18px;
+    font-size: 16px;
+    height: 53px;
   }
 
   #search-filter-btn {
-    font-size: 19px;
-    height: 57px;
+    height: 55px;
     width: 199px;
     right: 4px;
     bottom: -1px;
-  }
-
-  .filter-btn {
-    font-size: 18px;
   }
 
   .filter-bar form {

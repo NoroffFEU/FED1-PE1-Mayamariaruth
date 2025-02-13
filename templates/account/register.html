@@ -139,7 +139,7 @@
     </header>
     <!-- Main content -->
     <main>
-      <section class="register-form">
+      <section class="acc-form">
         <div class="centering">
           <h1 class="form-heading">Register</h1>
           <p>
@@ -147,7 +147,7 @@
             <a href="login.html"><span class="link-text">Log in</span></a>
           </p>
         </div>
-        <form method="POST" id="register">
+        <form method="POST" id="register" class="forms">
           <div class="form-group">
             <label for="name">Full name:</label>
             <input
@@ -181,7 +181,9 @@
             />
             <span class="error-message" id="passwordError"></span>
           </div>
-          <button type="submit" class="form-btn">Register</button>
+          <button type="submit" class="form-btn" id="register-btn">
+            Register
+          </button>
         </form>
       </section>
     </main>
