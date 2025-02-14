@@ -80,6 +80,15 @@
   border: #eda92e solid 2px;
 }
 
+#forgot-text {
+  font-size: 16px;
+  font-weight: 100;
+  margin: 0;
+  position: relative;
+  bottom: 20px;
+  align-self: end;
+}
+
 @media (min-width: 768px) {
   .acc-form {
     padding: 35px 0px 130px;
