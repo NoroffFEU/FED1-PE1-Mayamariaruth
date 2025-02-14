@@ -51,3 +51,22 @@ document.addEventListener("DOMContentLoaded", () => {
     e.stopPropagation();
   });
 });
+
+// Initialize Quill editor
+var quill = new Quill("#editor", {
+  theme: "snow",
+  placeholder: "Start writing your blog post here...",
+  modules: {
+    toolbar: [
+      [{ header: [1, 2, false] }],
+      ["bold", "italic", "underline"],
+      ["link", "blockquote", "code-block"],
+      [{ list: "ordered" }, { list: "bullet" }],
+    ],
+  },
+});
+
+// Store editor content in the hidden input when submitting
+document.getElementById("blogForm").addEventListener("submit", function () {
+  document.getElementById("content").value = quill.root.innerHTML;
+});
