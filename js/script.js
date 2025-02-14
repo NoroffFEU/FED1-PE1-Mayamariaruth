@@ -58,10 +58,12 @@ var quill = new Quill("#editor", {
   placeholder: "Start writing your blog post here...",
   modules: {
     toolbar: [
-      [{ header: [1, 2, false] }],
+      [{ header: [1, 2, 3, false] }],
       ["bold", "italic", "underline"],
       ["link", "blockquote", "code-block"],
       [{ list: "ordered" }, { list: "bullet" }],
+      [{ align: [] }],
+      ["image"],
     ],
   },
 });

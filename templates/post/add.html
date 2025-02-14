@@ -150,23 +150,64 @@
         <h1 class="heading">Add Post</h1>
         <form method="POST" class="blog-forms" id="add-form">
           <label for="title">Heading:</label>
-          <input type="text" id="title" name="title" />
+          <input
+            type="text"
+            id="title"
+            name="title"
+            placeholder="Enter your blog post heading"
+            required
+          />
           <label for="sub">Subheading:</label>
-          <input type="text" id="sub" name="sub" />
+          <input
+            type="text"
+            id="sub"
+            name="sub"
+            placeholder="Summarize your post in one sentence"
+            required
+          />
           <label for="author">Author:</label>
-          <input type="text" id="author" name="author" />
+          <input type="text" id="author" name="author" required />
           <label for="date">Date:</label>
-          <input type="date" id="date" name="date" />
+          <input type="date" id="date" name="date" required />
           <label for="image">Main image:</label>
-          <input type="image" id="image" name="image" />
-          <button type="">
-            <i class="fa-solid fa-trash-can"></i>Remove Image
-          </button>
+          <input type="file" id="image" name="image" required />
           <!-- Categories -->
+          <fieldset>
+            <legend>Categories:</legend>
+            <div id="categoryList">
+              <!-- Default Categories (Dynamically generated) -->
+            </div>
+            <button type="button" id="show-category">
+              <i class="fa-solid fa-plus"></i>Add Category
+            </button>
+            <!-- Hidden Form for New Category -->
+            <div id="newCategoryForm">
+              <input
+                type="text"
+                id="newCategoryInput"
+                placeholder="Enter new category"
+              />
+              <button type="button" id="add-category">Add</button>
+            </div>
+          </fieldset>
 
           <!-- Quill Editor -->
           <div id="editor"></div>
           <input type="hidden" id="content" name="content" />
+
+          <!-- Tags Input Field -->
+          <label for="tags">Tags:</label>
+          <div class="tag-container" id="tagContainer">
+            <input
+              type="text"
+              id="tagInput"
+              class="tag-input"
+              placeholder="Type and press enter (E.g. trending)"
+            />
+          </div>
+          <!-- Hidden input to store tags -->
+          <input type="hidden" id="tagsHiddenInput" name="tags" />
+          <button type="submit" class="add-btn">Add Post</button>
         </form>
       </section>
     </main>
