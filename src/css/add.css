@@ -110,6 +110,12 @@ legend {
   padding-right: 10px;
 }
 
+@media (min-width: 998px) {
+  .add-btn {
+    font-size: 20px;
+  }
+}
+
 @media (min-width: 1440px) {
   .blog-forms {
     padding-left: 54px;
