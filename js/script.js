@@ -5,8 +5,8 @@ import "./edit.js";
 import "./feed.js";
 import "./post.js";
 
-// Toggle mobile hamburger menu overlay visibility
 document.addEventListener("DOMContentLoaded", function () {
+  // Toggle mobile hamburger menu overlay visibility
   const hamburger = document.getElementById("hamburger");
   const nav = document.querySelector("nav");
   const headerNav = document.querySelector(".header-nav");
@@ -24,10 +24,8 @@ document.addEventListener("DOMContentLoaded", function () {
       hamburger.classList.add("fa-bars");
     }
   });
-});
 
-// Display search bar in desktop nav bar
-document.addEventListener("DOMContentLoaded", () => {
+  // Display search bar in desktop nav bar
   const searchIcon = document.querySelector(".search-icon");
   const searchOverlay = document.getElementById("search-overlay");
   const searchInput = document.getElementById("search-input");
@@ -46,29 +44,45 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Prevent closing when clicking inside the overlay or input
+  // Prevent closing when clicking inside the search overlay
   searchOverlay.addEventListener("click", (e) => {
-    e.stopPropagation();
+    if (e.target === searchOverlay) {
+      e.stopPropagation();
+    }
   });
-});
 
-// Initialize Quill editor
-var quill = new Quill("#editor", {
-  theme: "snow",
-  placeholder: "Start writing your blog post here...",
-  modules: {
-    toolbar: [
-      [{ header: [1, 2, 3, false] }],
-      ["bold", "italic", "underline"],
-      ["link", "blockquote", "code-block"],
-      [{ list: "ordered" }, { list: "bullet" }],
-      [{ align: [] }],
-      ["image"],
-    ],
-  },
-});
+  // Initialize Quill editor
+  const editorContainer = document.getElementById("editor");
+  if (editorContainer) {
+    var quill = new Quill("#editor", {
+      theme: "snow",
+      placeholder: "Start writing your blog post here...",
+      modules: {
+        toolbar: [
+          [{ header: [1, 2, 3, false] }],
+          ["bold", "italic", "underline"],
+          ["link", "blockquote", "code-block"],
+          [{ list: "ordered" }, { list: "bullet" }],
+          [{ align: [] }],
+          ["image"],
+        ],
+      },
+    });
 
-// Store editor content in the hidden input when submitting
-document.getElementById("blogForm").addEventListener("submit", function () {
-  document.getElementById("content").value = quill.root.innerHTML;
+    // Handle Add and Edit forms
+    const addForm = document.getElementById("add-form");
+    const editForm = document.getElementById("edit-form");
+
+    if (addForm) {
+      addForm.addEventListener("submit", function () {
+        document.getElementById("content").value = quill.root.innerHTML;
+      });
+    }
+
+    if (editForm) {
+      editForm.addEventListener("submit", function () {
+        document.getElementById("content").value = quill.root.innerHTML;
+      });
+    }
+  }
 });
