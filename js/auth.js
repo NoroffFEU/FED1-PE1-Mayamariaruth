@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// Authenticates login
+// Authenticates login with API
 export async function loginUser(email, password, apiKey) {
   const apiUrl = "https://v2.api.noroff.dev/auth/login";
 
@@ -83,13 +83,37 @@ export async function loginUser(email, password, apiKey) {
 
     if (!response.ok) throw new Error(`Error ${response.status}: Login failed`);
 
-    const data = await response.json();
-    localStorage.setItem("authToken", data.accessToken);
-    window.location.href = "index.html";
-    showNotification("Login successful! Welcome back.", "success");
-    return data;
+    // Returning the response JSON without any extra logic here
+    return await response.json();
   } catch (error) {
     console.error("Error logging in:", error);
     showNotification(error.message, "error");
   }
 }
+
+// Handle form submission for user login
+document.addEventListener("DOMContentLoaded", () => {
+  const loginForm = document.getElementById("login");
+
+  if (loginForm) {
+    loginForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const email = document.getElementById("emailaddress").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      if (!email || !password) {
+        showNotification("Please fill in both fields to log in.", "error");
+        return;
+      }
+
+      const response = await loginUser(email, password, apiKey);
+
+      if (response && response.accessToken) {
+        localStorage.setItem("authToken", response.accessToken);
+        window.location.href = "index.html";
+        showNotification("Login successful! Welcome back.", "success");
+      }
+    });
+  }
+});
