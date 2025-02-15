@@ -1,6 +1,6 @@
 // Fetch blog posts from API
 export async function fetchPosts() {
-  const apiUrl = "https://api.noroff.dev/blog/posts";
+  const apiUrl = "https://v2.api.noroff.dev/blog/posts";
 
   try {
     const response = await fetch(apiUrl);
