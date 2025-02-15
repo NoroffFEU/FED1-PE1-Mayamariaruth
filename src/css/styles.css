@@ -175,10 +175,6 @@ nav.nav-active {
   bottom: 29px;
 }
 
-#logout-link {
-  display: none;
-}
-
 #search-overlay {
   display: none;
 }

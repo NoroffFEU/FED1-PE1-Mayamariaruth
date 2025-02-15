@@ -73,14 +73,14 @@
             <span>Blog</span>
           </a>
           <!-- Logged out links -->
-          <a href="register.html" class="navbar-btns">
+          <a href="register.html" class="navbar-btns logged-out">
             <span>Register</span>
           </a>
-          <a href="login.html" class="navbar-btns">
+          <a href="login.html" class="navbar-btns logged-out">
             <span>Login</span>
           </a>
           <!-- Logged in user links -->
-          <a href="../../index.html" id="logout-link" class="navbar-btns">
+          <a href="../../index.html" class="navbar-btns logged-in">
             <span>Logout</span>
           </a>
           <a href="#" class="navbar-btns search-icon">
@@ -97,14 +97,14 @@
           <span class="nav-item">Blog</span>
         </a>
         <!-- Logged out links -->
-        <a href="register.html" class="nav-link">
+        <a href="register.html" class="nav-link logged-out">
           <span class="nav-item">Register</span>
         </a>
-        <a href="login.html" class="nav-link">
+        <a href="login.html" class="nav-link logged-out">
           <span class="nav-item">Login</span>
         </a>
         <!-- Logged in user links -->
-        <a href="../../index.html" class="nav-link" id="logout-link">
+        <a href="../../index.html" class="nav-link logged-in">
           <span class="nav-item">Logout</span>
         </a>
         <p id="nav-text">Looking for something specific?</p>
@@ -153,8 +153,8 @@
             <label for="email">Email:</label>
             <input
               type="email"
-              name="emailaddress"
-              id="emailaddress"
+              name="email"
+              id="email"
               placeholder="name@example.com"
               required
             />
@@ -172,7 +172,7 @@
             <span class="error-message" id="passwordError"></span>
           </div>
           <p id="forgot-text">Forgot password?</p>
-          <button type="submit" class="form-btn" id="login-btn">Login</button>
+          <button type="submit" class="form-btn">Login</button>
         </form>
       </section>
     </main>
