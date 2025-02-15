@@ -5,6 +5,7 @@ import "./edit.js";
 import "./feed.js";
 import "./post.js";
 
+// Navbar functionality
 document.addEventListener("DOMContentLoaded", function () {
   // Toggle mobile hamburger menu overlay visibility
   const hamburger = document.getElementById("hamburger");
@@ -50,8 +51,10 @@ document.addEventListener("DOMContentLoaded", function () {
       e.stopPropagation();
     }
   });
+});
 
-  // Initialize Quill editor
+// Initialize Quill editor
+document.addEventListener("DOMContentLoaded", function () {
   const editorContainer = document.getElementById("editor");
   if (editorContainer) {
     var quill = new Quill("#editor", {
