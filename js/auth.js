@@ -30,9 +30,12 @@ document.addEventListener("DOMContentLoaded", () => {
     registerForm.addEventListener("submit", async (event) => {
       event.preventDefault();
 
-      const username = document.getElementById("name").value.trim();
+      let username = document.getElementById("name").value.trim();
       const email = document.getElementById("email").value.trim();
       const password = document.getElementById("password").value.trim();
+
+      // Replace spaces in the full name with underscores
+      username = username.replace(/\s+/g, "_");
 
       if (!username || !email || !password) {
         showNotification(

@@ -86,3 +86,42 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 });
+
+// Display notifications function
+function showNotification(message, type = "success") {
+  const notificationContainer = document.getElementById("notifications");
+  if (!notificationContainer) return;
+
+  // Icons for success/error
+  const icons = {
+    success: '<i class="fa-solid fa-circle-check"></i>',
+    error: '<i class="fa-solid fa-triangle-exclamation"></i>',
+  };
+
+  const notification = document.createElement("div");
+  notification.className = `notification ${type}`;
+  notification.innerHTML = `
+    <div class="notification-left">
+      <span class="icon">${icons[type]}</span>
+        <div class="notification-content">
+          <h4 class="notification-heading">${
+            type === "success" ? "Success!" : "Error!"
+          }</h4>
+          <p class="notification-message">${message}</p>
+        </div>
+    </div>
+    <button class="close-btn"><i class="fa-solid fa-xmark"></i></button>
+  `;
+
+  notification.querySelector(".close-btn").addEventListener("click", () => {
+    notification.remove();
+  });
+
+  notificationContainer.appendChild(notification);
+
+  setTimeout(() => {
+    if (notification) notification.remove();
+  }, 5000);
+}
+
+showNotification();

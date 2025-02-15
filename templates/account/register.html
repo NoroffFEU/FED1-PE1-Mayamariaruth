@@ -148,13 +148,18 @@
             <a href="login.html"><span class="link-text">Log in</span></a>
           </p>
         </div>
-        <form method="POST" id="register" class="forms">
+        <form
+          method="POST"
+          id="register"
+          class="forms"
+          action="https://v2.api.noroff.dev/auth/register"
+        >
           <div class="form-group">
-            <label for="username">Full name:</label>
+            <label for="name">Full name:</label>
             <input
               type="text"
-              name="username"
-              id="username"
+              name="name"
+              id="name"
               placeholder="John Doe"
               required
             />
