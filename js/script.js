@@ -67,7 +67,6 @@ document.addEventListener("DOMContentLoaded", function () {
           ["link", "blockquote", "code-block"],
           [{ list: "ordered" }, { list: "bullet" }],
           [{ align: [] }],
-          ["image"],
         ],
       },
     });
@@ -129,11 +128,28 @@ export function showNotification(message, type = "success") {
 
 // Home page hero buttons link
 document.addEventListener("DOMContentLoaded", () => {
-  document.querySelector(".hero-btn").addEventListener("click", () => {
-    window.location.href = "/templates/post/feed.html";
-  });
+  const heroBtn = document.querySelector(".hero-btn");
+  const loginBtn = document.querySelector(".login-btn");
 
-  document.querySelector(".login-btn").addEventListener("click", () => {
-    window.location.href = "/templates/account/login.html";
-  });
+  if (heroBtn) {
+    heroBtn.addEventListener("click", () => {
+      window.location.href = "/templates/post/feed.html";
+    });
+  }
+
+  if (loginBtn) {
+    loginBtn.addEventListener("click", () => {
+      window.location.href = "/templates/account/login.html";
+    });
+  }
+});
+
+// Restrict access to edit/add pages for only logged in users
+document.addEventListener("DOMContentLoaded", () => {
+  const token = localStorage.getItem("authToken");
+  const currentPage = window.location.pathname;
+
+  if ((currentPage.includes("add") || currentPage.includes("edit")) && !token) {
+    window.location.href = "../account/login.html";
+  }
 });

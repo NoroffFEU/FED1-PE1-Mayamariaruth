@@ -111,8 +111,9 @@ document.addEventListener("DOMContentLoaded", () => {
       const response = await loginUser(email, password, apiKey);
 
       if (response && response.data && response.data.accessToken) {
-        // Store the access token in localStorage
+        // Store the access token and user info in localStorage
         localStorage.setItem("authToken", response.data.accessToken);
+        localStorage.setItem("userName", response.data.name);
         localStorage.setItem(
           "notificationMessage",
           "Login successful! Welcome back."
