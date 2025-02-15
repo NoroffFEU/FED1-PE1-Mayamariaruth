@@ -126,3 +126,14 @@ export function showNotification(message, type = "success") {
     if (notification) notification.remove();
   }, 5000);
 }
+
+// Home page hero buttons link
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelector(".hero-btn").addEventListener("click", () => {
+    window.location.href = "/templates/post/feed.html";
+  });
+
+  document.querySelector(".login-btn").addEventListener("click", () => {
+    window.location.href = "/templates/account/login.html";
+  });
+});

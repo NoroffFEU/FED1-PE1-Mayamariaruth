@@ -67,6 +67,7 @@
   padding: 16px 40px;
   position: absolute;
   right: 16px;
+  cursor: pointer;
 }
 
 #search-filter-btn:hover {

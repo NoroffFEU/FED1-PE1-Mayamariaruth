@@ -1,6 +1,6 @@
-@import url("./acc.css");
 @import url("./add.css");
 @import url("./alerts.css");
+@import url("./auth.css");
 @import url("./edit.css");
 @import url("./feed.css");
 @import url("./post.css");
@@ -173,6 +173,7 @@ nav.nav-active {
   font-size: 24px;
   color: #ffffff;
   bottom: 29px;
+  cursor: pointer;
 }
 
 #search-overlay {
@@ -241,6 +242,7 @@ footer {
   font-size: 16px;
   font-weight: bold;
   right: -1px;
+  cursor: pointer;
 }
 
 .subscribe-btn:hover {
@@ -373,6 +375,7 @@ footer {
   width: 100%;
   max-width: 366px;
   height: 53px;
+  cursor: pointer;
 }
 
 .hero-btn:hover {
@@ -390,6 +393,7 @@ footer {
   width: 100%;
   max-width: 366px;
   height: 53px;
+  cursor: pointer;
 }
 
 .login-btn:hover {
