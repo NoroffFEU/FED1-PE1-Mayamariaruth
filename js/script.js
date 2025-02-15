@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // Display notifications function
-function showNotification(message, type = "success") {
+export function showNotification(message, type = "success") {
   const notificationContainer = document.getElementById("notifications");
   if (!notificationContainer) return;
 
@@ -123,5 +123,3 @@ function showNotification(message, type = "success") {
     if (notification) notification.remove();
   }, 5000);
 }
-
-showNotification();
