@@ -1,28 +1,20 @@
+import { apiKey } from "../config.js";
 import { showNotification } from "./script.js";
 
 // Register a new user in the API
-export async function registerUser(username, email, password) {
+export async function registerUser(username, email, password, accessToken) {
   const apiUrl = "https://v2.api.noroff.dev/auth/register";
-  const checkEmailUrl = `https://v2.api.noroff.dev/auth/check-email?email=${email}`; // Placeholder URL for checking email availability
-  const checkUsernameUrl = `https://v2.api.noroff.dev/auth/check-username?username=${username}`; // Placeholder for checking username availability
 
   const userData = { name: username, email, password };
 
-  // Check if the email is already taken
   try {
-    const emailResponse = await fetch(checkEmailUrl);
-
-    if (!emailResponse.ok) {
-      showNotification(
-        "This email is already registered. Please use a different email.",
-        "error"
-      );
-      return;
-    }
-
     const response = await fetch(apiUrl, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+        "X-Noroff-API-Key": apiKey,
+      },
       body: JSON.stringify(userData),
     });
 
@@ -73,8 +65,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// Authenticates log in
-export async function loginUser(email, password) {
+// Authenticates login
+export async function loginUser(email, password, apiKey) {
   const apiUrl = "https://v2.api.noroff.dev/auth/login";
 
   const credentials = { email, password };
@@ -82,7 +74,10 @@ export async function loginUser(email, password) {
   try {
     const response = await fetch(apiUrl, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "X-Noroff-API-Key": apiKey,
+      },
       body: JSON.stringify(credentials),
     });
 
