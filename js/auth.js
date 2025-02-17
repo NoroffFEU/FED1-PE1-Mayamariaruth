@@ -109,7 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const response = await loginUser(email, password, apiKey);
 
-      if (response && response.data && response.data.accessToken) {
+      if (response && response.data.accessToken) {
         // Store the access token and user info in localStorage
         localStorage.setItem("authToken", response.data.accessToken);
         localStorage.setItem("userName", response.data.name);

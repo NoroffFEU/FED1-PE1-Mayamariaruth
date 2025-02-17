@@ -76,15 +76,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const mediaInput = document.getElementById("media");
   const authToken = localStorage.getItem("authToken");
 
-  if (!authToken) {
-    showNotification("You must be logged in to add a post.", "error");
-    return;
-  }
-
   if (form) {
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
-      const author = userName;
       const bodyContent = quill.root.innerHTML;
       document.getElementById("body").value = bodyContent;
 
@@ -109,6 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
           alt: "Image description",
         },
         tags,
+        author: userName,
       };
 
       if (
@@ -143,7 +138,6 @@ document.addEventListener("DOMContentLoaded", () => {
           window.location.href = "feed.html";
         } else {
           showNotification(result.message || "Failed to add post.", "error");
-          console.log(result);
         }
       } catch (error) {
         showNotification("An error occurred. Please try again.", "error");
