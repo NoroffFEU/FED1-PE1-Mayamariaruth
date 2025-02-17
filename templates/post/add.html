@@ -119,7 +119,7 @@
             type="search"
             name="search"
             id="nav-search"
-            placeholder="Search posts, categories or authors"
+            placeholder="Search posts, tags or authors"
             required
           />
           <button class="nav-search-btn" type="submit">
@@ -134,7 +134,7 @@
             type="search"
             name="search"
             id="search-input"
-            placeholder="Search posts, categories or authors"
+            placeholder="Search posts, tags or authors"
             required
           />
           <button class="search-btn" type="submit">
@@ -149,58 +149,37 @@
       <section class="add-post">
         <h1 class="heading">Add Post</h1>
         <form method="POST" class="blog-forms" id="add-form">
-          <label for="title">Heading:</label>
+          <label for="title">Title:</label>
           <input
             type="text"
             id="title"
             name="title"
-            placeholder="Enter your blog post heading"
-            required
-          />
-          <label for="sub">Subheading:</label>
-          <input
-            type="text"
-            id="sub"
-            name="sub"
-            placeholder="Summarize your post in one sentence"
+            placeholder="Enter your blog post title here"
             required
           />
           <label for="author">Author:</label>
           <input type="text" id="author" name="author" required />
-          <label for="date">Date:</label>
-          <input type="date" id="date" name="date" required />
-          <label for="image">Main image:</label>
-          <input type="text" id="image" name="image" placeholder="Provide a URL to your image" required />
-          <!-- Categories -->
-          <fieldset>
-            <legend>Categories:</legend>
-            <div id="categoryList">
-              <!-- Default Categories (Dynamically generated) -->
-            </div>
-            <button type="button" id="show-category">
-              <i class="fa-solid fa-plus"></i>Add Category
-            </button>
-            <!-- Hidden Form for New Category -->
-            <div id="newCategoryForm">
-              <input
-                type="text"
-                id="newCategoryInput"
-                placeholder="Enter new category"
-              />
-              <button type="button" id="add-category">Add</button>
-            </div>
-          </fieldset>
+          <label for="created">Date:</label>
+          <input type="date" id="created" name="created" required />
+          <label for="media">Main image:</label>
+          <input
+            type="text"
+            id="media"
+            name="media"
+            placeholder="Provide a URL to your image"
+            required
+          />
 
           <!-- Quill Editor -->
           <div id="editor"></div>
-          <input type="hidden" id="content" name="content" />
+          <input type="hidden" id="body" name="body" />
 
           <!-- Tags Input Field -->
           <label for="tags">Tags:</label>
           <div class="tag-container" id="tagContainer">
             <input
               type="text"
-              id="tagInput"
+              id="tags"
               class="tag-input"
               placeholder="Type and press enter (E.g. trending)"
             />

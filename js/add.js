@@ -1,7 +1,7 @@
-// Prepopulate author and date fields
 document.addEventListener("DOMContentLoaded", () => {
+  // Prepopulate author and date fields
   const authorInput = document.getElementById("author");
-  const dateInput = document.getElementById("date");
+  const dateInput = document.getElementById("created");
   const userName = localStorage.getItem("userName");
 
   if (userName) {
