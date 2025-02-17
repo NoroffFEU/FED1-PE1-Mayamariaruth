@@ -151,50 +151,29 @@
         <form method="POST" class="blog-forms" id="edit-form">
           <label for="title">Heading:</label>
           <input type="text" id="title" name="title" required />
-          <label for="sub">Subheading:</label>
-          <input type="text" id="sub" name="sub" required />
           <label for="author">Author:</label>
           <input type="text" id="author" name="author" required />
-          <label for="date">Date:</label>
-          <input type="date" id="date" name="date" required />
-          <label for="image">Main image:</label>
-          <input type="file" id="image" name="image" required />
-          <!-- Categories -->
-          <fieldset>
-            <legend>Categories:</legend>
-            <div id="categoryList">
-              <!-- Default Categories (Dynamically generated) -->
-            </div>
-            <button type="button" id="show-category">
-              <i class="fa-solid fa-plus"></i>Add Category
-            </button>
-            <!-- Hidden Form for New Category -->
-            <div id="newCategoryForm">
-              <input
-                type="text"
-                id="newCategoryInput"
-                placeholder="Enter new category"
-              />
-              <button type="button" id="add-category">Add</button>
-            </div>
-          </fieldset>
+          <label for="created">Date:</label>
+          <input type="date" id="created" name="created" required />
+          <label for="media">Main image:</label>
+          <input type="text" id="media" name="media" required />
 
           <!-- Quill Editor -->
           <div id="editor"></div>
-          <input type="hidden" id="content" name="content" />
+          <input type="hidden" id="body" name="body" />
 
           <!-- Tags Input Field -->
           <label for="tags">Tags:</label>
-          <div class="tag-container" id="tagContainer">
-            <input
-              type="text"
-              id="tagInput"
-              class="tag-input"
-              placeholder="Type and press enter (E.g. trending)"
-            />
-          </div>
+          <input
+            type="text"
+            id="tags"
+            class="tag-input"
+            placeholder="Type and press enter (E.g. trending)"
+          />
+          <div class="tag-container" id="tagContainer"></div>
           <!-- Hidden input to store tags -->
           <input type="hidden" id="tagsHiddenInput" name="tags" />
+
           <div class="edit-btns">
             <button class="delete-btn">
               <i class="fa-solid fa-trash-can"></i>Delete Post

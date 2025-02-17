@@ -1,3 +1,5 @@
+import { showNotification } from "./script.js";
+
 // Handle prepopulating form fields, creating Tags and form submission
 document.addEventListener("DOMContentLoaded", () => {
   // Prepopulate author and date fields
@@ -67,11 +69,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const titleInput = document.getElementById("title");
   const bodyInput = document.getElementById("body");
   const mediaInput = document.getElementById("media");
-  const apiUrl = "https://v2.api.noroff.dev/blog/posts";
   const authToken = localStorage.getItem("authToken");
 
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
+
+    // Generate a slug from the title for the API
+    const postName = titleInput.value
+      .trim()
+      .split(" ")
+      .slice(0, 5)
+      .join("-")
+      .toLowerCase();
+    const apiUrl = `https://v2.api.noroff.dev/blog/posts/${postName}`;
 
     // Format tags correctly
     const tags = tagsHiddenInput.value
@@ -81,7 +91,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const blogPostData = {
       title: titleInput.value.trim(),
       body: bodyInput.value.trim(),
-      media: mediaInput.value.trim(),
+      media: {
+        url: mediaInput.value.trim(),
+        alt: "Image description",
+      },
       tags: tags,
       author: authorInput.value.trim(),
     };

@@ -77,13 +77,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (addForm) {
       addForm.addEventListener("submit", function () {
-        document.getElementById("content").value = quill.root.innerHTML;
+        document.getElementById("body").value = quill.root.innerHTML;
       });
     }
 
     if (editForm) {
       editForm.addEventListener("submit", function () {
-        document.getElementById("content").value = quill.root.innerHTML;
+        document.getElementById("body").value = quill.root.innerHTML;
       });
     }
   }
