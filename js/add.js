@@ -1,4 +1,4 @@
-// Handle prepopulating form fields and form submission
+// Handle prepopulating form fields, creating Tags and form submission
 document.addEventListener("DOMContentLoaded", () => {
   // Prepopulate author and date fields
   const authorInput = document.getElementById("author");
@@ -13,12 +13,60 @@ document.addEventListener("DOMContentLoaded", () => {
   const today = new Date().toISOString().split("T")[0];
   dateInput.value = today;
 
-  // Handle form submission
+  // Handle the "Tags" input and add them as buttons
+  const tagInput = document.getElementById("tags");
+  const tagContainer = document.getElementById("tagContainer");
+  const tagsHiddenInput = document.getElementById("tagsHiddenInput");
+
+  let tags = [];
+
+  // Update the hidden input field
+  function updateTagsInput() {
+    tagsHiddenInput.value = tags.join(",");
+  }
+
+  // Create tag elements
+  function createTagElement(tag) {
+    const tagElement = document.createElement("span");
+    tagElement.classList.add("tag-item");
+    tagElement.textContent = tag;
+
+    // Add X icon to remove tag
+    const removeBtn = document.createElement("button");
+    removeBtn.classList.add("tag-remove");
+    removeBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+
+    removeBtn.addEventListener("click", () => {
+      tags = tags.filter((t) => t !== tag);
+      tagElement.remove();
+      updateTagsInput();
+    });
+
+    tagElement.appendChild(removeBtn);
+    tagContainer.appendChild(tagElement);
+  }
+
+  // Handle tag input on Enter key
+  tagInput.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" && tagInput.value.trim() !== "") {
+      event.preventDefault();
+      const newTag = tagInput.value.trim();
+
+      if (!tags.includes(newTag)) {
+        tags.push(newTag);
+        createTagElement(newTag);
+        updateTagsInput();
+      }
+
+      tagInput.value = "";
+    }
+  });
+
+  // Handle Add Blog Post form submission
   const form = document.getElementById("add-form");
   const titleInput = document.getElementById("title");
   const bodyInput = document.getElementById("body");
   const mediaInput = document.getElementById("media");
-  const tagsHiddenInput = document.getElementById("tagsHiddenInput");
   const apiUrl = "https://v2.api.noroff.dev/blog/posts";
   const authToken = localStorage.getItem("authToken");
 
