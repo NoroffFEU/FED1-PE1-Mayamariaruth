@@ -2,7 +2,7 @@ import { apiKey } from "../config.js";
 import { showNotification } from "./script.js";
 
 // Register a new user in the API
-export async function registerUser(username, email, password, accessToken) {
+export async function registerUser(username, email, password) {
   const apiUrl = "https://v2.api.noroff.dev/auth/register";
   const userData = { name: username, email, password };
 
@@ -10,8 +10,7 @@ export async function registerUser(username, email, password, accessToken) {
     const response = await fetch(apiUrl, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json; charset=UTF-8",
         "X-Noroff-API-Key": apiKey,
       },
       body: JSON.stringify(userData),
@@ -29,7 +28,7 @@ export async function registerUser(username, email, password, accessToken) {
 }
 
 // Authenticates login with API
-export async function loginUser(email, password, apiKey) {
+export async function loginUser(email, password) {
   const apiUrl = "https://v2.api.noroff.dev/auth/login";
   const credentials = { email, password };
 
@@ -163,6 +162,8 @@ document.addEventListener("DOMContentLoaded", () => {
     loggedInLinks.forEach((link) => {
       link.addEventListener("click", () => {
         localStorage.removeItem("authToken");
+        localStorage.removeItem("userName");
+        localStorage.removeItem("userEmail");
         window.location.href = "/index.html";
       });
     });

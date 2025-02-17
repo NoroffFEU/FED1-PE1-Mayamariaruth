@@ -54,10 +54,11 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // Initialize Quill editor
+export let quill;
 document.addEventListener("DOMContentLoaded", function () {
   const editorContainer = document.getElementById("editor");
   if (editorContainer) {
-    var quill = new Quill("#editor", {
+    quill = new Quill("#editor", {
       theme: "snow",
       placeholder: "Start writing your blog post here...",
       modules: {

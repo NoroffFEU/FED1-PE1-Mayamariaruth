@@ -1,4 +1,6 @@
+import { apiKey } from "../config.js";
 import { showNotification } from "./script.js";
+import { quill } from "./script.js";
 
 // Handle prepopulating form fields, creating Tags and form submission
 document.addEventListener("DOMContentLoaded", () => {
@@ -7,13 +9,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const dateInput = document.getElementById("created");
   const userName = localStorage.getItem("userName");
 
-  if (userName) {
-    // Replace underscores with spaces to match API data
+  if (userName && authorInput) {
+    // Replace underscores with spaces
     authorInput.value = userName.replace(/_/g, " ");
   }
 
-  const today = new Date().toISOString().split("T")[0];
-  dateInput.value = today;
+  if (dateInput) {
+    const today = new Date().toISOString().split("T")[0];
+    dateInput.value = today;
+  }
 
   // Handle the "Tags" input and add them as buttons
   const tagInput = document.getElementById("tags");
@@ -49,92 +53,104 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Handle tag input on Enter key
-  tagInput.addEventListener("keydown", (event) => {
-    if (event.key === "Enter" && tagInput.value.trim() !== "") {
-      event.preventDefault();
-      const newTag = tagInput.value.trim();
+  if (tagInput) {
+    tagInput.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" && tagInput.value.trim() !== "") {
+        event.preventDefault();
+        const newTag = tagInput.value.trim();
 
-      if (!tags.includes(newTag)) {
-        tags.push(newTag);
-        createTagElement(newTag);
-        updateTagsInput();
+        if (!tags.includes(newTag)) {
+          tags.push(newTag);
+          createTagElement(newTag);
+          updateTagsInput();
+        }
+
+        tagInput.value = "";
       }
-
-      tagInput.value = "";
-    }
-  });
+    });
+  }
 
   // Handle Add Blog Post form submission
   const form = document.getElementById("add-form");
   const titleInput = document.getElementById("title");
-  const bodyInput = document.getElementById("body");
   const mediaInput = document.getElementById("media");
   const authToken = localStorage.getItem("authToken");
-  const userEmail = localStorage.getItem("userEmail");
 
-  form.addEventListener("submit", async (event) => {
-    event.preventDefault();
+  if (!authToken) {
+    showNotification("You must be logged in to add a post.", "error");
+    return;
+  }
 
-    // Generate a slug from the title for the API
-    const postName = titleInput.value
-      .trim()
-      .split(" ")
-      .slice(0, 5)
-      .join("-")
-      .toLowerCase();
-    const apiUrl = `https://v2.api.noroff.dev/blog/posts/${postName}`;
+  if (form) {
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const author = userName;
+      const bodyContent = quill.root.innerHTML;
+      document.getElementById("body").value = bodyContent;
 
-    // Format tags correctly
-    const tags = tagsHiddenInput.value
-      ? tagsHiddenInput.value.split(",").map((tag) => tag.trim())
-      : [];
+      // Generate a slug from the title for the API
+      const postName = titleInput.value
+        .trim()
+        .split(" ")
+        .slice(0, 5)
+        .join("-")
+        .toLowerCase();
 
-    const blogPostData = {
-      title: titleInput.value.trim(),
-      body: bodyInput.value.trim(),
-      media: {
-        url: mediaInput.value.trim(),
-        alt: "Image description",
-      },
-      tags: tags,
-      author: {
-        name: userName,
-        email: userEmail,
-      },
-    };
+      // Format tags correctly
+      const tags = tagsHiddenInput?.value
+        ? tagsHiddenInput.value.split(",").map((tag) => tag.trim())
+        : [];
 
-    if (!blogPostData.title || !blogPostData.body || !blogPostData.media) {
-      showNotification("Please fill in all required fields.", "error");
-      return;
-    }
-
-    try {
-      const response = await fetch(apiUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${authToken}`,
+      const blogPostData = {
+        title: titleInput.value.trim(),
+        body: bodyContent,
+        media: {
+          url: mediaInput.value.trim(),
+          alt: "Image description",
         },
-        body: JSON.stringify(blogPostData),
-      });
+        tags,
+      };
 
-      const result = await response.json();
-
-      if (response.ok) {
-        localStorage.setItem(
-          "notificationMessage",
-          "Blog post added successfully!"
-        );
-        localStorage.setItem("notificationType", "success");
-        window.location.href = "feed.html";
-      } else {
-        showNotification(result.message || "Failed to add post.", "error");
+      if (
+        !blogPostData.title ||
+        !blogPostData.body ||
+        !blogPostData.media.url
+      ) {
+        showNotification("Please fill in all required fields.", "error");
+        return;
       }
-    } catch (error) {
-      showNotification("An error occurred. Please try again.", "error");
-      console.error("Error:", error);
-    }
-  });
+
+      try {
+        const apiUrl = `https://v2.api.noroff.dev/blog/posts/${postName}`;
+        const response = await fetch(apiUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json; charset=UTF-8",
+            Authorization: `Bearer ${authToken}`,
+            "X-Noroff-API-Key": apiKey,
+          },
+          body: JSON.stringify(blogPostData),
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+          localStorage.setItem(
+            "notificationMessage",
+            "Blog post added successfully!"
+          );
+          localStorage.setItem("notificationType", "success");
+          window.location.href = "feed.html";
+        } else {
+          showNotification(result.message || "Failed to add post.", "error");
+          console.log(result);
+        }
+      } catch (error) {
+        showNotification("An error occurred. Please try again.", "error");
+        console.error("Error:", error);
+      }
+    });
+  }
 
   // Show success message on feed.html
   if (window.location.pathname.endsWith("feed.html")) {
