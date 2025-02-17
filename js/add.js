@@ -70,6 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const bodyInput = document.getElementById("body");
   const mediaInput = document.getElementById("media");
   const authToken = localStorage.getItem("authToken");
+  const userEmail = localStorage.getItem("userEmail");
 
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -96,7 +97,10 @@ document.addEventListener("DOMContentLoaded", () => {
         alt: "Image description",
       },
       tags: tags,
-      author: authorInput.value.trim(),
+      author: {
+        name: userName,
+        email: userEmail,
+      },
     };
 
     if (!blogPostData.title || !blogPostData.body || !blogPostData.media) {

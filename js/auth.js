@@ -114,6 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Store the access token and user info in localStorage
         localStorage.setItem("authToken", response.data.accessToken);
         localStorage.setItem("userName", response.data.name);
+        localStorage.setItem("userEmail", response.data.email);
         localStorage.setItem(
           "notificationMessage",
           "Login successful! Welcome back."
