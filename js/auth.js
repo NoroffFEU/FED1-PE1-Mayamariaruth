@@ -63,9 +63,63 @@ document.addEventListener("DOMContentLoaded", () => {
     registerForm.addEventListener("submit", async (event) => {
       event.preventDefault();
 
-      let username = document.getElementById("name").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value.trim();
+      const nameInput = document.getElementById("name");
+      const emailInput = document.getElementById("email");
+      const passwordInput = document.getElementById("password");
+
+      const nameError = document.getElementById("nameError");
+      const emailError = document.getElementById("emailError");
+      const passwordError = document.getElementById("passwordError");
+
+      // Clear previous error messages
+      nameError.textContent = "";
+      emailError.textContent = "";
+      passwordError.textContent = "";
+
+      let isValid = true;
+
+      // Validate first and last name
+      let username = nameInput.value.trim();
+      let nameParts = username.split(" ");
+      if (nameParts.length < 2) {
+        nameError.textContent = "First and last name are required.";
+        nameInput.classList.add("error");
+        isValid = false;
+      } else {
+        nameInput.classList.remove("error");
+      }
+
+      // Validate email format
+      const email = emailInput.value.trim();
+      const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+      if (!email) {
+        emailError.textContent = "Email is required.";
+        emailInput.classList.add("error");
+        isValid = false;
+      } else if (!email.match(emailPattern)) {
+        emailError.textContent = "Enter a valid email address.";
+        emailInput.classList.add("error");
+        isValid = false;
+      } else {
+        emailInput.classList.remove("error");
+      }
+
+      // Validate password
+      const password = passwordInput.value.trim();
+      if (!password) {
+        passwordError.textContent = "Password is required.";
+        passwordInput.classList.add("error");
+        isValid = false;
+      } else if (password.length < 8) {
+        passwordError.textContent =
+          "Password must be at least 8 characters long.";
+        passwordInput.classList.add("error");
+        isValid = false;
+      } else {
+        passwordInput.classList.remove("error");
+      }
+
+      if (!isValid) return;
 
       // Replace spaces in the full name with underscores
       username = username.replace(/\s+/g, "_");

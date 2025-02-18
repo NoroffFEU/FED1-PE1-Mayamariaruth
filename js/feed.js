@@ -72,7 +72,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  sortBtn.addEventListener("click", generateSortOverlay);
+  if (sortBtn) {
+    sortBtn.addEventListener("click", generateSortOverlay);
+  }
 });
 
 // Fetch and update blog feed based on sorting

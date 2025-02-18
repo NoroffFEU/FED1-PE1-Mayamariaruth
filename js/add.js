@@ -82,14 +82,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const bodyContent = quill.root.innerHTML;
       document.getElementById("body").value = bodyContent;
 
-      // Generate a slug from the title for the API
-      const postName = titleInput.value
-        .trim()
-        .split(" ")
-        .slice(0, 5)
-        .join("-")
-        .toLowerCase();
-
       // Format tags correctly
       const tags = tagsHiddenInput?.value
         ? tagsHiddenInput.value.split(",").map((tag) => tag.trim())
@@ -116,7 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       try {
-        const apiUrl = `https://v2.api.noroff.dev/blog/posts/${postName}`;
+        const apiUrl = `https://v2.api.noroff.dev/blog/posts/${userName}`;
         const response = await fetch(apiUrl, {
           method: "POST",
           headers: {
