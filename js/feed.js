@@ -22,7 +22,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Create sorting overlay
   function generateSortOverlay() {
-    sortOverlay.innerHTML = `
+    if (!sortOverlay.innerHTML) {
+      sortOverlay.innerHTML = `
       <div class="overlay-content">
         <form id="sort-form">
           ${sortingOptions
@@ -44,16 +45,18 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>
     `;
 
-    sortOverlay.classList.remove("hidden");
+      document.getElementById("close-sort").addEventListener("click", () => {
+        sortOverlay.classList.add("hidden");
+      });
 
-    document.getElementById("close-sort").addEventListener("click", () => {
-      sortOverlay.classList.add("hidden");
-    });
-
-    document.getElementById("sort-form").addEventListener("submit", (event) => {
-      event.preventDefault();
-      applySorting();
-    });
+      document
+        .getElementById("sort-form")
+        .addEventListener("submit", (event) => {
+          event.preventDefault();
+          applySorting();
+        });
+    }
+    sortOverlay.classList.toggle("hidden");
   }
 
   // Function to apply sorting
