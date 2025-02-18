@@ -23,26 +23,26 @@ document.addEventListener("DOMContentLoaded", () => {
   // Create sorting overlay
   function generateSortOverlay() {
     sortOverlay.innerHTML = `
-        <div class="overlay-content">
-          <h3>Sort By</h3>
-          <form id="sort-form">
-            ${sortingOptions
-              .map(
-                (option) => `
-              <label>
-                <input type="radio" name="sort" value="${option.value}" data-order="${option.order}">
-                ${option.label}
-              </label>
-            `
-              )
-              .join("")}
-            <div class="overlay-buttons">
-              <button type="button" id="close-sort">Close</button>
-              <button type="submit">Apply</button>
-            </div>
-          </form>
-        </div>
-      `;
+      <div class="overlay-content">
+        <form id="sort-form">
+          ${sortingOptions
+            .map(
+              (option) => `
+            <label>
+            ${option.label}
+              <input type="radio" name="sort" value="${option.value}" data-order="${option.order}">
+            </label>
+          `
+            )
+            .join("")}
+          <div class="overlay-buttons">
+            <hr />
+            <button type="button" id="close-sort">Close</button>
+            <button type="submit" id="apply-sort">Apply</button>
+          </div>
+        </form>
+      </div>
+    `;
 
     sortOverlay.classList.remove("hidden");
 
@@ -57,21 +57,54 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Function to apply sorting
-  function applySorting() {
+  async function applySorting() {
     const selectedOption = document.querySelector('input[name="sort"]:checked');
     if (selectedOption) {
       const sortValue = selectedOption.value;
       const sortOrder = selectedOption.dataset.order;
 
-      updateBlogFeed(sortValue, sortOrder);
+      await fetchSortedPosts(sortValue, sortOrder);
 
       sortOverlay.classList.add("hidden");
     }
   }
 
-  if (sortBtn) {
-    sortBtn.addEventListener("click", generateSortOverlay);
-  }
+  sortBtn.addEventListener("click", generateSortOverlay);
 });
 
-function updateBlogFeed(sort, order) {}
+// Fetch and update blog feed based on sorting
+async function fetchSortedPosts(sort, order) {
+  try {
+    const response = await fetch(`/blog/posts?sort=${sort}&sortOrder=${order}`);
+    if (!response.ok) throw new Error("Failed to fetch sorted posts");
+
+    const posts = await response.json();
+
+    updateBlogFeed(posts);
+  } catch (error) {
+    console.error("Error fetching sorted posts:", error);
+  }
+}
+
+// Render sorted blog posts in the feed
+function renderBlogPosts(posts) {
+  const blogFeed = document.getElementById("blog-feed-container");
+  blogFeed.innerHTML = "";
+  posts.forEach((post) => {
+    const postElement = document.createElement("div");
+    postElement.classList.add("blog-post");
+    postElement.innerHTML = `
+            <div class="blog-card">
+                <img src="${post.image}" alt="${post.title}">
+                <div class="blog-content">
+                    <p class="author">By ${post.author}</p>
+                    <h2>${post.title}</h2>
+                    <p class="tags">#${post.tags.join(" #")}</p>
+                    <i class="fa-solid fa-circle"></i>
+                    <p class="date">${post.date}</p>
+                </div>
+            </div>
+        `;
+    blogFeed.appendChild(postElement);
+  });
+}

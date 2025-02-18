@@ -38,7 +38,7 @@
   border: none;
   background-color: #ffffff;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 600;
   margin: 20px 0 0 16px;
 }
 
@@ -50,7 +50,7 @@
   color: #333333;
 }
 
-.filter-bar form {
+#search-form-feed {
   margin: 40px 0 45px 16px;
   padding-right: 16px;
   max-width: 550px;
@@ -91,6 +91,63 @@
 }
 
 /* Sorting overlay */
+#sort-overlay {
+  position: absolute;
+  background-color: #ffffff;
+  width: 80%;
+  max-width: 380px;
+  top: 40%;
+  border: solid 1px #333333;
+  border-radius: 20px;
+  padding: 20px 16px 30px 16px;
+  z-index: 1000;
+  left: 16px;
+}
+
+#sort-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+#sort-form label {
+  font-size: 16px;
+  font-weight: 500;
+  display: flex;
+  justify-content: space-between;
+}
+
+input[type="radio"] {
+  height: 19px;
+  width: 19px;
+}
+
+#apply-sort {
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #0790a5;
+  border-radius: 30px;
+  height: 48px;
+  width: 50%;
+  max-width: 220px;
+  border: none;
+  margin-top: 15px;
+}
+
+#apply-sort:hover {
+  color: #333333;
+  background-color: #ffffff;
+  border: solid 2px #0790a5;
+}
+
+#close-sort {
+  background-color: transparent;
+  border: none;
+  font-weight: bold;
+  font-size: 16px;
+  width: 40%;
+}
 
 @media (min-width: 768px) {
   .mobile-only {
@@ -104,22 +161,33 @@
   .filter-bar {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    padding: 25px 16px;
     align-items: center;
+    padding-right: 16px;
+    padding-left: 16px;
   }
 
   .filter-container {
     display: flex;
     gap: 20px;
+    position: relative;
+    bottom: 20px;
   }
 
-  .filter-bar form {
-    margin: 0;
-    width: 100%;
+  #search-filter-btn {
+    right: 0;
+  }
+
+  #search-form-feed {
+    margin-top: 30px;
+    padding: 0;
   }
 
   .filter-btn {
     margin: 0;
+  }
+
+  #sort-overlay {
+    top: 45%;
   }
 }
 
@@ -146,8 +214,9 @@
     bottom: -1px;
   }
 
-  .filter-bar form {
+  #search-form-feed {
     padding-right: 0;
+    width: 100%;
   }
 
   #feed-heading-container a {
@@ -156,5 +225,16 @@
 
   #feed-heading-container i {
     font-size: 22px;
+  }
+
+  #apply-sort {
+    height: 53px;
+    max-width: 200px;
+    font-size: 18px;
+  }
+
+  .filter-btn,
+  #close-sort {
+    font-size: 18px;
   }
 }
