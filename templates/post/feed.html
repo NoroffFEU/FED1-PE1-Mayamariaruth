@@ -157,17 +157,8 @@
         <hr class="styled-border" />
         <div class="filter-bar">
           <div class="filter-container">
-            <button id="filter-btn-mobile" class="filter-btn mobile-only">
-              Filter by<i class="fa-solid fa-caret-down"></i>
-            </button>
-            <button id="sort-btn" class="filter-btn desktop-only">
+            <button id="sort-btn" class="filter-btn">
               Sort by<i class="fa-solid fa-caret-down"></i>
-            </button>
-            <button id="tags-btn" class="filter-btn desktop-only">
-              Tags<i class="fa-solid fa-caret-down"></i>
-            </button>
-            <button id="author-btn" class="filter-btn desktop-only">
-              Author<i class="fa-solid fa-caret-down"></i>
             </button>
           </div>
           <div id="form-div">
@@ -182,8 +173,8 @@
               <button id="search-filter-btn" type="submit">Search</button>
             </form>
           </div>
-          <!-- Filter overlays (Dynamically generated) -->
-          <div id="filter-overlay" class="overlay hidden"></div>
+          <!-- Sorting overlay (Dynamically generated) -->
+          <div id="sort-overlay" class="overlay hidden"></div>
         </div>
         <hr class="styled-border" />
         <div class="blog-grid" id="blog-feed-container">
