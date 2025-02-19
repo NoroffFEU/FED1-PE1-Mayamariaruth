@@ -124,14 +124,6 @@ document.addEventListener("DOMContentLoaded", () => {
       // Replace spaces in the full name with underscores
       username = username.replace(/\s+/g, "_");
 
-      if (!username || !email || !password) {
-        showNotification(
-          "Please fill in all required fields correctly before proceeding.",
-          "error"
-        );
-        return;
-      }
-
       const response = await registerUser(username, email, password);
 
       if (response) {
@@ -150,16 +142,43 @@ document.addEventListener("DOMContentLoaded", () => {
     loginForm.addEventListener("submit", async (event) => {
       event.preventDefault();
 
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value.trim();
+      const emailInput = loginForm.querySelector("#email");
+      const passwordInput = loginForm.querySelector("#password");
 
-      if (!email || !password) {
-        showNotification(
-          "Please fill in all required fields correctly before proceeding.",
-          "error"
-        );
-        return;
+      const emailError = loginForm.querySelector("#emailError");
+      const passwordError = loginForm.querySelector("#passwordError");
+
+      emailError.textContent = "";
+      passwordError.textContent = "";
+
+      let isValid = true;
+
+      // Validate email
+      const email = emailInput.value.trim();
+      const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+      if (!email) {
+        emailError.textContent = "Email is required.";
+        emailInput.classList.add("error");
+        isValid = false;
+      } else if (!email.match(emailPattern)) {
+        emailError.textContent = "Enter a valid email address.";
+        emailInput.classList.add("error");
+        isValid = false;
+      } else {
+        emailInput.classList.remove("error");
       }
+
+      // Validate password
+      const password = passwordInput.value.trim();
+      if (!password) {
+        passwordError.textContent = "Password is required.";
+        passwordInput.classList.add("error");
+        isValid = false;
+      } else {
+        passwordInput.classList.remove("error");
+      }
+
+      if (!isValid) return;
 
       const response = await loginUser(email, password, apiKey);
 
