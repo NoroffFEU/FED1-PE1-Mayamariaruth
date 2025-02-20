@@ -114,9 +114,11 @@ function renderBlogPosts(posts) {
                       post.author?.name.replace(/_/g, " ") || "Unknown Author"
                     }</p>
                     <h2>${post.title}</h2>
-                    <p class="tags">#${post.tags.join(" #")}</p>
-                    <i class="fa-solid fa-circle"></i>
-                    <p class="date">${formatDate(post.created)}</p>
+                    <div id="tags-date">
+                      <p class="tags">#${post.tags.join(" #")}</p>
+                      <i class="fa-solid fa-circle"></i>
+                      <p class="date">${formatDate(post.created)}</p>
+                    </div>
                 </div>
             </div>
         `;
