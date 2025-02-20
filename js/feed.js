@@ -91,6 +91,12 @@ async function fetchSortedPosts(sort, order) {
   }
 }
 
+// Format blog feed dates correctly
+function formatDate(dateString) {
+  const options = { year: "numeric", month: "short", day: "numeric" };
+  return new Date(dateString).toLocaleDateString("en-US", options);
+}
+
 // Render sorted blog posts in the feed
 function renderBlogPosts(posts) {
   const blogFeed = document.getElementById("blog-feed-container");
@@ -100,16 +106,48 @@ function renderBlogPosts(posts) {
     postElement.classList.add("blog-post");
     postElement.innerHTML = `
             <div class="blog-card">
-                <img src="${post.image}" alt="${post.title}">
+                <img id="feed-img" src="${post.media?.url}" alt="${
+      post.media?.alt || "Blog image"
+    }">
                 <div class="blog-content">
-                    <p class="author">By ${post.author}</p>
+                    <p class="author">By ${
+                      post.author?.name.replace(/_/g, " ") || "Unknown Author"
+                    }</p>
                     <h2>${post.title}</h2>
                     <p class="tags">#${post.tags.join(" #")}</p>
                     <i class="fa-solid fa-circle"></i>
-                    <p class="date">${post.date}</p>
+                    <p class="date">${formatDate(post.created)}</p>
                 </div>
             </div>
         `;
     blogFeed.appendChild(postElement);
   });
 }
+
+// Fetch blog posts from API
+document.addEventListener("DOMContentLoaded", async () => {
+  const blogFeedContainer = document.getElementById("blog-feed-container");
+  const loggedInUser = localStorage.getItem("userName");
+
+  // Display my blog posts if no one is logged in
+  const author = loggedInUser ? loggedInUser : "Maya_Thompson";
+
+  async function fetchBlogPosts() {
+    try {
+      const response = await fetch(
+        `https://v2.api.noroff.dev/blog/posts/${author}`
+      );
+      if (!response.ok) {
+        throw new Error("Failed to fetch posts");
+      }
+
+      const data = await response.json();
+      renderBlogPosts(data.data || data);
+    } catch (error) {
+      console.error("Error fetching blog posts:", error);
+      blogFeedContainer.innerHTML = `<p class="error-message">Failed to load posts. Please try again later.</p>`;
+    }
+  }
+
+  fetchBlogPosts();
+});
