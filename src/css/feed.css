@@ -153,6 +153,10 @@ input[type="radio"] {
 }
 
 /* Feed */
+.blog-link {
+  text-decoration: none;
+  color: #333333;
+}
 .blog-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -196,7 +200,7 @@ input[type="radio"] {
   font-size: 15px;
 }
 
-.fa-circle {
+#circle-feed {
   font-size: 5px;
 }
 

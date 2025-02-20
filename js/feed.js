@@ -105,6 +105,9 @@ function renderBlogPosts(posts) {
     const postElement = document.createElement("div");
     postElement.classList.add("blog-post");
     postElement.innerHTML = `
+          <a href="post.html?author=${post.author.name}&id=${
+      post.id
+    }" class="blog-link">
             <div class="blog-card">
                 <img id="feed-img" src="${post.media?.url}" alt="${
       post.media?.alt || "Blog image"
@@ -116,11 +119,12 @@ function renderBlogPosts(posts) {
                     <h2>${post.title}</h2>
                     <div id="tags-date">
                       <p class="tags">#${post.tags.join(" #")}</p>
-                      <i class="fa-solid fa-circle"></i>
+                      <i class="fa-solid fa-circle" id="circle-feed"></i>
                       <p class="date">${formatDate(post.created)}</p>
                     </div>
                 </div>
             </div>
+          </a>
         `;
     blogFeed.appendChild(postElement);
   });
