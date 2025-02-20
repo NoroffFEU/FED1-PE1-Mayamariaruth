@@ -19,14 +19,17 @@ async function fetchBlogPostDetails() {
 
     const post = await response.json();
 
-    document.getElementById("post-date").textContent = formatDate(post.created);
-    document.getElementById("post-title").textContent = post.title;
-    document.getElementById("post-image").src = post.media?.url || "";
-    document.getElementById("post-image").alt = post.media?.alt || "Blog image";
+    document.getElementById("post-date").textContent = formatDate(
+      post.data.created
+    );
+    document.getElementById("post-title").textContent = post.data.title;
+    document.getElementById("post-image").src = post.data.media?.url || "";
+    document.getElementById("post-image").alt =
+      post.data.media?.alt || "Blog image";
     document.getElementById(
       "post-author"
-    ).textContent = `By ${post.author.name.replace(/_/g, " ")}`;
-    document.getElementById("post-body").innerHTML = post.body;
+    ).textContent = `By ${post.data.author.name.replace(/_/g, " ")}`;
+    document.getElementById("post-body").innerHTML = post.data.body;
 
     // Generate tag buttons
     const tagElement = document.getElementById("post-tag");
@@ -68,7 +71,8 @@ function formatDate(dateString) {
 }
 
 function showError(message) {
-  document.getElementById(
-    "error-container"
-  ).innerHTML = `<p class='error-message'>${message}</p>`;
+  const errorContainer = document.getElementById("error-container");
+  if (errorContainer) {
+    errorContainer.innerHTML = `<p class='error-message'>${message}</p>`;
+  }
 }

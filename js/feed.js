@@ -97,63 +97,66 @@ function formatDate(dateString) {
   return new Date(dateString).toLocaleDateString("en-US", options);
 }
 
-// Render sorted blog posts in the feed
+document.addEventListener("DOMContentLoaded", async () => {
+  if (window.location.pathname.includes("feed.html")) {
+    const blogFeed = document.getElementById("blog-feed-container");
+
+    const loggedInUser = localStorage.getItem("userName");
+    const author = loggedInUser ? loggedInUser : "Maya_Thompson";
+
+    async function fetchBlogPosts() {
+      try {
+        const response = await fetch(
+          `https://v2.api.noroff.dev/blog/posts/${author}`
+        );
+        if (!response.ok) {
+          throw new Error("Failed to fetch posts");
+        }
+
+        const data = await response.json();
+        const posts = data.data || data;
+
+        renderBlogPosts(posts);
+      } catch (error) {
+        console.error("Error fetching blog posts:", error);
+        blogFeed.innerHTML = `<p class="error-message">Failed to load posts. Please try again later.</p>`;
+      }
+    }
+
+    fetchBlogPosts();
+  }
+});
+
+// Render all blog post in the feed
 function renderBlogPosts(posts) {
   const blogFeed = document.getElementById("blog-feed-container");
   blogFeed.innerHTML = "";
+
   posts.forEach((post) => {
     const postElement = document.createElement("div");
     postElement.classList.add("blog-post");
     postElement.innerHTML = `
-          <a href="post.html?author=${post.author.name}&id=${
+      <a href="post.html?author=${post.author.name}&id=${
       post.id
     }" class="blog-link">
-            <div class="blog-card">
-                <img id="feed-img" src="${post.media?.url}" alt="${
+        <div class="blog-card">
+            <img id="feed-img" src="${post.media?.url}" alt="${
       post.media?.alt || "Blog image"
     }">
-                <div class="blog-content">
-                    <p class="author">By ${
-                      post.author?.name.replace(/_/g, " ") || "Unknown Author"
-                    }</p>
-                    <h2>${post.title}</h2>
-                    <div id="tags-date">
-                      <p class="tags">#${post.tags.join(" #")}</p>
-                      <i class="fa-solid fa-circle" id="circle-feed"></i>
-                      <p class="date">${formatDate(post.created)}</p>
-                    </div>
+            <div class="blog-content">
+                <p class="author">By ${
+                  post.author?.name.replace(/_/g, " ") || "Unknown Author"
+                }</p>
+                <h2>${post.title}</h2>
+                <div id="tags-date">
+                  <p class="tags">#${post.tags?.join(" #") || ""}</p>
+                  <i class="fa-solid fa-circle" id="circle-feed"></i>
+                  <p class="date">${formatDate(post.created)}</p>
                 </div>
             </div>
-          </a>
-        `;
+        </div>
+      </a>
+    `;
     blogFeed.appendChild(postElement);
   });
 }
-
-// Fetch blog posts from API
-document.addEventListener("DOMContentLoaded", async () => {
-  const blogFeedContainer = document.getElementById("blog-feed-container");
-  const loggedInUser = localStorage.getItem("userName");
-
-  // Display my blog posts if no one is logged in
-  const author = loggedInUser ? loggedInUser : "Maya_Thompson";
-
-  async function fetchBlogPosts() {
-    try {
-      const response = await fetch(
-        `https://v2.api.noroff.dev/blog/posts/${author}`
-      );
-      if (!response.ok) {
-        throw new Error("Failed to fetch posts");
-      }
-
-      const data = await response.json();
-      renderBlogPosts(data.data || data);
-    } catch (error) {
-      console.error("Error fetching blog posts:", error);
-      blogFeedContainer.innerHTML = `<p class="error-message">Failed to load posts. Please try again later.</p>`;
-    }
-  }
-
-  fetchBlogPosts();
-});
