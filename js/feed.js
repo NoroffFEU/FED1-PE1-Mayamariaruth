@@ -13,15 +13,21 @@ function formatDate(dateString) {
 // Function to hide the dropdown
 function closeDropdown() {
   const dropdownContent = document.querySelector(".dropdown-content");
+  const button = document.querySelector(".dropdown-btn");
   dropdownContent.classList.remove("show");
+  button.classList.remove("active");
 }
 
 // Toggle dropdown visibility when clicking the button
-document.querySelector(".dropdown-btn").addEventListener("click", (event) => {
-  const dropdownContent = document.querySelector(".dropdown-content");
-  dropdownContent.classList.toggle("show");
-  event.stopPropagation();
-});
+const dropdownContent = document.querySelector(".dropdown-content");
+const button = document.querySelector(".dropdown-btn");
+if (button && dropdownContent) {
+  document.querySelector(".dropdown-btn").addEventListener("click", (event) => {
+    dropdownContent.classList.toggle("show");
+    button.classList.toggle("active");
+    event.stopPropagation();
+  });
+}
 
 // Listen for user input on the radio buttons
 function sortDropdown() {
@@ -47,7 +53,7 @@ function sortDropdown() {
   // Close the dropdown if clicking outside of it
   document.addEventListener("click", (event) => {
     const dropdown = document.querySelector(".custom-dropdown");
-    if (!dropdown.contains(event.target)) {
+    if (dropdown && !dropdown.contains(event.target)) {
       closeDropdown();
     }
   });
