@@ -35,12 +35,12 @@ async function fetchBlogPostDetails() {
     const tagElement = document.getElementById("post-tag");
     const allTagsContainer = document.getElementById("post-all-tags");
 
-    if (post.tags && post.tags.length > 0) {
+    if (post.data.tags && post.data.tags.length > 0) {
       // Set the first tag as the main post tag
-      tagElement.textContent = `#${post.tags[0]}`;
+      tagElement.textContent = `#${post.data.tags[0]}`;
 
       // Remove the first tag from the array and create buttons for the remaining tags
-      const remainingTags = post.tags.slice(1);
+      const remainingTags = post.data.tags.slice(1);
       allTagsContainer.innerHTML = "";
 
       remainingTags.forEach((tag) => {

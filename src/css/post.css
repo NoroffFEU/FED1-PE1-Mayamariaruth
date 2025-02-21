@@ -1,0 +1,156 @@
+.blog-post-details {
+  margin: 30px 0 80px;
+}
+
+.date-tag-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+#post-title {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  text-transform: capitalize;
+  width: 80%;
+  max-width: 1000px;
+  margin: 20px auto 25px auto;
+}
+
+#post-image {
+  max-width: 1600px;
+  max-height: 695px;
+  width: 100%;
+  object-fit: cover;
+}
+
+#post-tag {
+  font-size: 12px;
+  font-weight: 500;
+  color: #1f789c;
+}
+
+#post-date {
+  font-size: 12px;
+}
+
+#post-circle {
+  font-size: 4px;
+}
+
+#post-author {
+  font-size: 14px;
+  font-weight: 200;
+  padding-left: 16px;
+}
+
+#post-body {
+  padding-left: 16px;
+}
+
+#post-body h1 {
+  font-size: 20px;
+}
+
+#post-body h2 {
+  font-size: 18px;
+}
+
+#post-body h3 {
+  font-size: 18px;
+}
+
+#post-body p {
+  font-size: 16px;
+}
+
+#post-all-tags {
+  padding-left: 16px;
+}
+
+#post-all-tags {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tags-blog-post {
+  background-color: #1f789c;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 500;
+  height: 45px;
+  width: auto;
+  min-width: 100px;
+  font-size: 16px;
+  border-radius: 30px;
+  padding: 3px 20px;
+  max-width: fit-content;
+}
+
+@media (min-width: 768px) {
+  .blog-post-details {
+    padding: 0 16px;
+  }
+
+  #post-title {
+    font-size: 28px;
+  }
+
+  #post-image {
+    border-radius: 20px;
+    display: block;
+    margin: 0 auto;
+  }
+
+  #post-date,
+  #post-tag {
+    font-size: 18px;
+  }
+
+  #post-all-tags {
+    padding-left: 0;
+  }
+
+  #post-author {
+    font-size: 18px;
+    padding-left: 0;
+  }
+
+  #post-body {
+    padding-left: 0;
+  }
+
+  #post-body h1 {
+    font-size: 24px;
+  }
+
+  #post-body h2 {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .blog-post-details {
+    padding: 0 54px;
+  }
+
+  #post-image {
+    display: block;
+    margin: 0;
+  }
+}
+
+@media (min-width: 1800px) {
+  .date-tag-container {
+    justify-content: left;
+  }
+
+  #post-title {
+    text-align: left;
+    margin: 20px 0 25px 0;
+  }
+}
