@@ -137,7 +137,8 @@ input[type="radio"] {
   cursor: pointer;
 }
 
-#apply-sort:hover {
+#apply-sort:hover,
+.pag-btn:hover {
   color: #333333;
   background-color: #ffffff;
   border: solid 2px #0790a5;
@@ -205,6 +206,29 @@ input[type="radio"] {
 
 #circle-feed {
   font-size: 5px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.pag-btn {
+  height: 43px;
+  font-size: 16px;
+  min-width: 130px;
+  width: fit-content;
+  background-color: #0790a5;
+  color: #ffffff;
+  border-radius: 30px;
+  border: none;
+}
+
+#page-count {
+  font-size: 16px;
 }
 
 @media (min-width: 768px) {
@@ -290,7 +314,8 @@ input[type="radio"] {
     width: 100%;
   }
 
-  #feed-heading-container a {
+  #feed-heading-container a,
+  .blog-content h2 {
     font-size: 20px;
   }
 
@@ -305,7 +330,8 @@ input[type="radio"] {
   }
 
   .filter-btn,
-  #close-sort {
+  #close-sort,
+  #page-count {
     font-size: 18px;
   }
 
@@ -313,14 +339,16 @@ input[type="radio"] {
     grid-template-columns: 1fr 1fr 1fr;
   }
 
-  .blog-content h2 {
-    font-size: 20px;
-  }
-
   .tags,
   .date,
   .author {
     font-size: 16px;
+  }
+
+  .pag-btn {
+    font-size: 18px;
+    width: 180px;
+    height: 53px;
   }
 }
 

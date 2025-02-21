@@ -51,13 +51,13 @@ function renderPagination(meta, currentPage, limit) {
   const nextPage = currentPage < totalPages ? currentPage + 1 : null;
 
   if (prevPage) {
-    paginationContainer.innerHTML += `<button onclick="fetchBlogPosts(${prevPage}, ${limit})">Prev</button>`;
+    paginationContainer.innerHTML += `<button class="pag-btn" onclick="fetchBlogPosts(${prevPage}, ${limit})">Prev</button>`;
   }
 
-  paginationContainer.innerHTML += `<span>Page ${currentPage} of ${totalPages}</span>`;
+  paginationContainer.innerHTML += `<span id="page-count">Page ${currentPage} of ${totalPages}</span>`;
 
   if (nextPage) {
-    paginationContainer.innerHTML += `<button onclick="fetchBlogPosts(${nextPage}, ${limit})">Next</button>`;
+    paginationContainer.innerHTML += `<button class="pag-btn" onclick="fetchBlogPosts(${nextPage}, ${limit})">Next</button>`;
   }
 }
 
