@@ -121,13 +121,17 @@ function renderPagination(meta, currentPage, limit) {
   }
 }
 
+// Render all blog posts in the feed
 function renderBlogPosts(posts) {
   const blogFeed = document.getElementById("blog-feed-container");
+  const loggedInUser = localStorage.getItem("userName");
   if (!blogFeed) return;
 
   blogFeed.innerHTML = "";
 
   posts.forEach((post) => {
+    const postAuthor = post.author.name;
+    const isAuthor = loggedInUser && loggedInUser === postAuthor;
     const postElement = document.createElement("div");
     postElement.classList.add("blog-post");
     postElement.innerHTML = `
@@ -139,19 +143,38 @@ function renderBlogPosts(posts) {
       post.media?.alt || "Blog image"
     }">
             <div class="blog-content">
+              <div class="author-edit">
                 <p class="author">By ${
                   post.author?.name.replace(/_/g, " ") || "Unknown Author"
                 }</p>
-                <h2>${post.title}</h2>
-                <div id="tags-date">
-                  <p class="tags">#${post.tags?.[0]}</p>
-                  <i class="fa-solid fa-circle" id="circle-feed"></i>
-                  <p class="date">${formatDate(post.created)}</p>
-                </div>
+                ${
+                  isAuthor
+                    ? `<button class="edit" data-id="${post.id}"><i class="fa-solid fa-pen"></i> Edit</button>`
+                    : ""
+                }
+              </div>
+              <h2>${post.title}</h2>
+              <div id="tags-date">
+                <p class="tags">#${post.tags?.[0]}</p>
+                <i class="fa-solid fa-circle" id="circle-feed"></i>
+                <p class="date">${formatDate(post.created)}</p>
+              </div>
             </div>
         </div>
       </a>
     `;
+
     blogFeed.appendChild(postElement);
+
+    // Event listener for the edit button
+    const editButton = postElement.querySelector(".edit");
+    if (editButton) {
+      editButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        const postId = editButton.getAttribute("data-id");
+        window.location.href = `edit.html?id=${postId}`;
+      });
+    }
   });
 }
