@@ -1,6 +1,8 @@
-// Variables for pagination
+// Variables for pagination and sorting
 const postsPerPage = 12;
 let currentPage = 1;
+let currentSort = "created";
+let currentSortOrder = "desc";
 
 // Format blog feed dates correctly
 function formatDate(dateString) {
@@ -8,8 +10,21 @@ function formatDate(dateString) {
   return new Date(dateString).toLocaleDateString("en-US", options);
 }
 
-// Fetch blog posts by author
-window.fetchBlogPosts = async function (page = 1, limit = 12) {
+// Listen for changes in the sort dropdown
+document.getElementById("sort-dropdown").addEventListener("change", (event) => {
+  const [sort, order] = event.target.value.split("-");
+  currentSort = sort;
+  currentSortOrder = order;
+  fetchBlogPosts(currentPage, postsPerPage, currentSort, currentSortOrder);
+});
+
+// Fetch blog posts by author (with pagination and sorting)
+window.fetchBlogPosts = async function (
+  page = 1,
+  limit = 12,
+  sort = "created",
+  sortOrder = "desc"
+) {
   const blogFeed = document.getElementById("blog-feed-container");
   const loggedInUser = localStorage.getItem("userName");
   const author = loggedInUser ? loggedInUser : "Maya_Thompson";
@@ -22,7 +37,7 @@ window.fetchBlogPosts = async function (page = 1, limit = 12) {
 
   try {
     const response = await fetch(
-      `https://v2.api.noroff.dev/blog/posts/${author}?limit=${limit}&page=${page}`
+      `https://v2.api.noroff.dev/blog/posts/${author}?limit=${limit}&page=${page}&sort=${sort}&sortOrder=${sortOrder}`
     );
     if (!response.ok) throw new Error("Failed to fetch posts");
 

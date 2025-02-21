@@ -156,10 +156,15 @@
       <section id="blog-feed">
         <hr class="styled-border" />
         <div class="filter-bar">
-          <div class="filter-container">
-            <button id="sort-btn" class="filter-btn">
-              Sort by<i class="fa-solid fa-caret-down"></i>
-            </button>
+          <div class="sorting-container">
+            <!-- Sorting dropdown -->
+            <label for="sort-dropdown">Sort By:</label>
+            <select id="sort-dropdown">
+              <option value="title-asc">Title A-Z</option>
+              <option value="title-desc">Title Z-A</option>
+              <option value="created-desc">Date (Newest)</option>
+              <option value="created-asc">Date (Oldest)</option>
+            </select>
           </div>
           <div id="form-div">
             <form action="/search" method="GET" id="search-form-feed">
@@ -173,9 +178,8 @@
               <button id="search-filter-btn" type="submit">Search</button>
             </form>
           </div>
-          <!-- Sorting overlay (Dynamically generated) -->
-          <div id="sort-overlay" class="overlay hidden"></div>
         </div>
+
         <div class="blog-grid" id="blog-feed-container">
           <!-- Blog posts (Dynamically generated) -->
         </div>

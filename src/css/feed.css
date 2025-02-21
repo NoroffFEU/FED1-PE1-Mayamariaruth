@@ -91,67 +91,7 @@
   border: #eda92e solid 2px;
 }
 
-/* Sorting overlay */
-#sort-overlay {
-  position: absolute;
-  background-color: #ffffff;
-  width: 80%;
-  max-width: 380px;
-  top: 40%;
-  border: solid 1px #333333;
-  border-radius: 20px;
-  padding: 20px 16px 25px 16px;
-  z-index: 1000;
-  left: 16px;
-}
-
-#sort-form {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-#sort-form label {
-  font-size: 16px;
-  font-weight: 500;
-  display: flex;
-  justify-content: space-between;
-}
-
-input[type="radio"] {
-  height: 19px;
-  width: 19px;
-}
-
-#apply-sort {
-  font-size: 16px;
-  font-weight: 600;
-  color: #ffffff;
-  background-color: #0790a5;
-  border-radius: 30px;
-  height: 48px;
-  width: 50%;
-  max-width: 220px;
-  border: none;
-  margin-top: 15px;
-  cursor: pointer;
-}
-
-#apply-sort:hover,
-.pag-btn:hover {
-  color: #333333;
-  background-color: #ffffff;
-  border: solid 2px #0790a5;
-}
-
-#close-sort {
-  background-color: transparent;
-  border: none;
-  font-weight: bold;
-  font-size: 16px;
-  width: 40%;
-  cursor: pointer;
-}
+/* Sorting dropdown */
 
 /* Feed */
 .blog-link {
@@ -227,6 +167,12 @@ input[type="radio"] {
   border: none;
 }
 
+.pag-btn:hover {
+  color: #333333;
+  background-color: #ffffff;
+  border: solid 2px #0790a5;
+}
+
 #page-count {
   font-size: 16px;
 }
@@ -248,13 +194,6 @@ input[type="radio"] {
     padding-left: 16px;
   }
 
-  .filter-container {
-    display: flex;
-    gap: 20px;
-    position: relative;
-    bottom: 20px;
-  }
-
   #search-filter-btn {
     right: 0;
   }
@@ -262,14 +201,6 @@ input[type="radio"] {
   #search-form-feed {
     margin-top: 30px;
     padding: 0;
-  }
-
-  .filter-btn {
-    margin: 0;
-  }
-
-  #sort-overlay {
-    top: 45%;
   }
 
   .blog-grid {
@@ -287,10 +218,6 @@ input[type="radio"] {
 }
 
 @media (min-width: 998px) {
-  .filter-container {
-    gap: 47px;
-  }
-
   #form-div {
     display: flex;
     flex-direction: column;
@@ -323,14 +250,6 @@ input[type="radio"] {
     font-size: 22px;
   }
 
-  #apply-sort {
-    height: 53px;
-    max-width: 200px;
-    font-size: 18px;
-  }
-
-  .filter-btn,
-  #close-sort,
   #page-count {
     font-size: 18px;
   }
