@@ -149,7 +149,7 @@ function renderBlogPosts(posts) {
                 }</p>
                 <h2>${post.title}</h2>
                 <div id="tags-date">
-                  <p class="tags">#${post.tags?.join(" #") || ""}</p>
+                  <p class="tags">#${post.tags?.[0]}</p>
                   <i class="fa-solid fa-circle" id="circle-feed"></i>
                   <p class="date">${formatDate(post.created)}</p>
                 </div>

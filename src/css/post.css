@@ -45,36 +45,39 @@
   font-size: 14px;
   font-weight: 200;
   padding-left: 16px;
+  margin-bottom: 45px;
 }
 
 #post-body {
   padding-left: 16px;
+  margin-bottom: 50px;
 }
 
 #post-body h1 {
   font-size: 20px;
+  margin: 0 0 10px 0;
 }
 
 #post-body h2 {
   font-size: 18px;
+  margin: 0 0 10px 0;
 }
 
 #post-body h3 {
   font-size: 18px;
+  margin: 0 0 10px 0;
 }
 
 #post-body p {
   font-size: 16px;
-}
-
-#post-all-tags {
-  padding-left: 16px;
+  font-weight: 400;
+  margin: 0;
 }
 
 #post-all-tags {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 15px;
 }
 
 .tags-blog-post {
@@ -87,8 +90,9 @@
   min-width: 100px;
   font-size: 16px;
   border-radius: 30px;
-  padding: 3px 20px;
+  padding: 3px 25px;
   max-width: fit-content;
+  border: none;
 }
 
 @media (min-width: 768px) {
@@ -116,7 +120,7 @@
   }
 
   #post-author {
-    font-size: 18px;
+    font-size: 16px;
     padding-left: 0;
   }
 
