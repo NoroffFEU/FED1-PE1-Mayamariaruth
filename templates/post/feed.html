@@ -156,16 +156,7 @@
       <section id="blog-feed">
         <hr class="styled-border" />
         <div class="filter-bar">
-          <div class="sorting-container">
-            <!-- Sorting dropdown -->
-            <label for="sort-dropdown">Sort By:</label>
-            <select id="sort-dropdown">
-              <option value="title-asc">Title A-Z</option>
-              <option value="title-desc">Title Z-A</option>
-              <option value="created-desc">Date (Newest)</option>
-              <option value="created-asc">Date (Oldest)</option>
-            </select>
-          </div>
+          <!-- Search form -->
           <div id="form-div">
             <form action="/search" method="GET" id="search-form-feed">
               <input
@@ -177,6 +168,30 @@
               />
               <button id="search-filter-btn" type="submit">Search</button>
             </form>
+          </div>
+          <!-- Sorting dropdown -->
+          <div class="custom-dropdown">
+            <button class="dropdown-btn">
+              Sort By <i class="fa-solid fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+              <label
+                ><input type="radio" name="sort" value="title-asc" /> Title
+                A-Z</label
+              >
+              <label
+                ><input type="radio" name="sort" value="title-desc" /> Title
+                Z-A</label
+              >
+              <label
+                ><input type="radio" name="sort" value="created-desc" /> Date
+                (Newest)</label
+              >
+              <label
+                ><input type="radio" name="sort" value="created-asc" /> Date
+                (Oldest)</label
+              >
+            </div>
           </div>
         </div>
 

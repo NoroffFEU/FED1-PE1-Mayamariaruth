@@ -10,13 +10,50 @@ function formatDate(dateString) {
   return new Date(dateString).toLocaleDateString("en-US", options);
 }
 
-// Listen for changes in the sort dropdown
-document.getElementById("sort-dropdown").addEventListener("change", (event) => {
-  const [sort, order] = event.target.value.split("-");
-  currentSort = sort;
-  currentSortOrder = order;
-  fetchBlogPosts(currentPage, postsPerPage, currentSort, currentSortOrder);
+// Function to hide the dropdown
+function closeDropdown() {
+  const dropdownContent = document.querySelector(".dropdown-content");
+  dropdownContent.classList.remove("show");
+}
+
+// Toggle dropdown visibility when clicking the button
+document.querySelector(".dropdown-btn").addEventListener("click", (event) => {
+  const dropdownContent = document.querySelector(".dropdown-content");
+  dropdownContent.classList.toggle("show");
+  event.stopPropagation();
 });
+
+// Listen for user input on the radio buttons
+function sortDropdown() {
+  const dropdownItems = document.querySelectorAll(
+    ".dropdown-content input[type='radio']"
+  );
+
+  dropdownItems.forEach((item) => {
+    item.addEventListener("change", (event) => {
+      const value = event.target.value;
+      const [sort, order] = value.split("-");
+
+      currentSort = sort;
+      currentSortOrder = order;
+
+      // Fetch posts with the selected sorting options
+      fetchBlogPosts(currentPage, postsPerPage, currentSort, currentSortOrder);
+
+      closeDropdown();
+    });
+  });
+
+  // Close the dropdown if clicking outside of it
+  document.addEventListener("click", (event) => {
+    const dropdown = document.querySelector(".custom-dropdown");
+    if (!dropdown.contains(event.target)) {
+      closeDropdown();
+    }
+  });
+}
+
+sortDropdown();
 
 // Fetch blog posts by author (with pagination and sorting)
 window.fetchBlogPosts = async function (
@@ -53,12 +90,14 @@ window.fetchBlogPosts = async function (
 };
 
 document.addEventListener("DOMContentLoaded", async () => {
+  sortDropdown();
   await fetchBlogPosts(currentPage, postsPerPage);
 });
 
 // Render pagination buttons
 function renderPagination(meta, currentPage, limit) {
   const paginationContainer = document.getElementById("pagination-container");
+  if (!paginationContainer) return;
   paginationContainer.innerHTML = "";
 
   const totalPages = Math.ceil(meta.totalCount / limit);
@@ -78,6 +117,8 @@ function renderPagination(meta, currentPage, limit) {
 
 function renderBlogPosts(posts) {
   const blogFeed = document.getElementById("blog-feed-container");
+  if (!blogFeed) return;
+
   blogFeed.innerHTML = "";
 
   posts.forEach((post) => {
