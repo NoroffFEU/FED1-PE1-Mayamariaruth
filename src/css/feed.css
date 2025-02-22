@@ -262,6 +262,76 @@
   font-size: 17px;
 }
 
+/* Latest Posts (Carousel) */
+.carousel-item img {
+  height: 250px;
+  width: 300px;
+  object-fit: cover;
+}
+
+.carousel {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  width: 100%;
+}
+
+.carousel-item {
+  display: flex;
+  transition: transform 0.3s ease;
+}
+
+.carousel-content {
+  flex: 0 0 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  transition: opacity 0.3s ease;
+}
+
+.carousel-content.dim {
+  opacity: 0.3; /* Dimmed effect */
+}
+
+.carousel-button {
+  position: absolute;
+  top: 50%;
+  z-index: 1;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: #333;
+  transform: translateY(-50%);
+}
+
+.carousel-button.prev {
+  left: 10px;
+}
+
+.carousel-button.next {
+  right: 10px;
+}
+
+@media (min-width: 600px) {
+  .carousel {
+    display: flex;
+    justify-content: center;
+  }
+
+  .carousel-item {
+    flex: 0 0 33.33%;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+
+  .carousel-item.dim {
+    opacity: 0.5;
+  }
+}
+
 @media (min-width: 768px) {
   .mobile-only {
     display: none;

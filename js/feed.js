@@ -178,3 +178,84 @@ function renderBlogPosts(posts) {
     }
   });
 }
+
+// Function to fetch and render the latest posts as a carousel
+async function fetchLatestPosts() {
+  const author = localStorage.getItem("userName");
+  const limit = 3;
+
+  try {
+    const response = await fetch(
+      `https://v2.api.noroff.dev/blog/posts/${author}?limit=${limit}&sort=created&sortOrder=desc`
+    );
+    if (!response.ok) throw new Error("Failed to fetch latest posts");
+
+    const data = await response.json();
+    renderCarouselPosts(data.data);
+  } catch (error) {
+    console.error("Error fetching latest posts:", error);
+  }
+}
+
+// Function to render the latest posts in the carousel
+function renderCarouselPosts(posts) {
+  const latestPostsContainer = document.getElementById(
+    "latest-posts-container"
+  );
+  latestPostsContainer.innerHTML = "";
+
+  const carouselWrapper = document.createElement("div");
+  carouselWrapper.classList.add("carousel");
+
+  const carouselContent = document.createElement("div");
+  carouselContent.classList.add("carousel-content");
+
+  posts.forEach((post) => {
+    const postElement = document.createElement("div");
+    postElement.classList.add("carousel-item");
+    postElement.innerHTML = `
+      <a href="post.html?author=${post.author?.name}&id=${post.id}">
+        <img src="${post.media?.url}" alt="${post.media?.alt || "Post image"}">
+        <h3>${post.title}</h3>
+        <p>${formatDate(post.created)}</p>
+      </a>
+    `;
+    carouselContent.appendChild(postElement);
+  });
+
+  const prevButton = document.createElement("button");
+  prevButton.classList.add("carousel-button", "prev");
+  prevButton.innerHTML = '<i class="fa-solid fa-circle-chevron-left"></i>';
+  prevButton.setAttribute("onclick", "scrollCarousel('prev')");
+
+  const nextButton = document.createElement("button");
+  nextButton.classList.add("carousel-button", "next");
+  nextButton.innerHTML = '<i class="fa-solid fa-circle-chevron-right"></i>';
+  nextButton.setAttribute("onclick", "scrollCarousel('next')");
+
+  carouselWrapper.appendChild(prevButton);
+  carouselWrapper.appendChild(carouselContent);
+  carouselWrapper.appendChild(nextButton);
+
+  latestPostsContainer.appendChild(carouselWrapper);
+}
+
+// Function to scroll the carousel
+let currentIndex = 0;
+
+function scrollCarousel(direction) {
+  const items = document.querySelectorAll(".carousel-item");
+  const totalItems = items.length;
+
+  if (direction === "next") {
+    currentIndex = (currentIndex + 1) % totalItems;
+  } else {
+    currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+  }
+
+  const carousel = document.querySelector(".carousel-items");
+  const scrollAmount = items[0].offsetWidth;
+  carousel.style.transform = `translateX(-${scrollAmount * currentIndex}px)`;
+}
+
+document.addEventListener("DOMContentLoaded", fetchLatestPosts);
