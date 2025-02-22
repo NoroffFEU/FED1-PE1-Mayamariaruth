@@ -173,7 +173,7 @@ function renderBlogPosts(posts) {
         event.preventDefault();
         event.stopPropagation();
         const postId = editButton.getAttribute("data-id");
-        window.location.href = `edit.html?id=${postId}`;
+        window.location.href = `edit.html?author=${postAuthor}&id=${postId}`;
       });
     }
   });

@@ -131,6 +131,7 @@ document.addEventListener("DOMContentLoaded", () => {
           "notification",
           "Your account has been created successfully! Please log in to continue."
         );
+        localStorage.setItem("notificationType", "success");
         window.location.href = "login.html";
       }
     });

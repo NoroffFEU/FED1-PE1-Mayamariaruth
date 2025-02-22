@@ -23,33 +23,56 @@ async function fetchBlogPostDetails() {
 
     // Render the edit button if the user is the author
     if (isAuthor) {
-      const editButton = document.createElement("button");
-      editButton.classList.add("edit-button");
-      editButton.innerHTML = `<i class="fa-solid fa-pen"></i> Edit`;
-      editButton.addEventListener("click", () => {
-        window.location.href = `edit.html?id=${postId}`;
-      });
-
-      document.getElementById("edit-container").appendChild(editButton);
+      const editContainer = document.getElementById("edit-container");
+      if (editContainer) {
+        const editButton = document.createElement("button");
+        editButton.classList.add("edit-button");
+        editButton.innerHTML = `<i class="fa-solid fa-pen"></i> Edit`;
+        editButton.addEventListener("click", () => {
+          window.location.href = `edit.html?author=${author}&id=${postId}`;
+        });
+        editContainer.appendChild(editButton);
+      }
     }
 
-    document.getElementById("post-date").textContent = formatDate(
-      post.data.created
-    );
-    document.getElementById("post-title").textContent = post.data.title;
-    document.getElementById("post-image").src = post.data.media?.url || "";
-    document.getElementById("post-image").alt =
-      post.data.media?.alt || "Blog image";
-    document.getElementById(
-      "post-author"
-    ).textContent = `By ${post.data.author.name.replace(/_/g, " ")}`;
-    document.getElementById("post-body").innerHTML = post.data.body;
+    const postDateElement = document.getElementById("post-date");
+    if (postDateElement) {
+      postDateElement.textContent = formatDate(post.data.created);
+    }
 
+    const postTitleElement = document.getElementById("post-title");
+    if (postTitleElement) {
+      postTitleElement.textContent = post.data.title;
+    }
+
+    const postImageElement = document.getElementById("post-image");
+    if (postImageElement) {
+      postImageElement.src = post.data.media?.url || "";
+      postImageElement.alt = post.data.media?.alt || "Blog image";
+    }
+
+    const postAuthorElement = document.getElementById("post-author");
+    if (postAuthorElement) {
+      postAuthorElement.textContent = `By ${post.data.author.name.replace(
+        /_/g,
+        " "
+      )}`;
+    }
+
+    const postBodyElement = document.getElementById("post-body");
+    if (postBodyElement) {
+      postBodyElement.innerHTML = post.data.body;
+    }
     // Generate tag buttons
     const tagElement = document.getElementById("post-tag");
     const allTagsContainer = document.getElementById("post-all-tags");
 
-    if (post.data.tags && post.data.tags.length > 0) {
+    if (
+      tagElement &&
+      allTagsContainer &&
+      post.data.tags &&
+      post.data.tags.length > 0
+    ) {
       // Set the first tag as the main post tag
       tagElement.textContent = `#${post.data.tags[0]}`;
 
@@ -68,7 +91,9 @@ async function fetchBlogPostDetails() {
         allTagsContainer.appendChild(tagButton);
       });
     } else {
-      allTagsContainer.innerHTML = "";
+      if (allTagsContainer) {
+        allTagsContainer.innerHTML = "";
+      }
     }
   } catch (error) {
     console.error("Error fetching post:", error);
