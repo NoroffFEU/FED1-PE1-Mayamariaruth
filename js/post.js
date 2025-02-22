@@ -18,6 +18,20 @@ async function fetchBlogPostDetails() {
     if (!response.ok) throw new Error("Failed to fetch post.");
 
     const post = await response.json();
+    const loggedInUser = localStorage.getItem("userName");
+    const isAuthor = loggedInUser === post.data.author.name;
+
+    // Render the edit button if the user is the author
+    if (isAuthor) {
+      const editButton = document.createElement("button");
+      editButton.classList.add("edit-button");
+      editButton.innerHTML = `<i class="fa-solid fa-pen"></i> Edit`;
+      editButton.addEventListener("click", () => {
+        window.location.href = `edit.html?id=${postId}`;
+      });
+
+      document.getElementById("edit-container").appendChild(editButton);
+    }
 
     document.getElementById("post-date").textContent = formatDate(
       post.data.created
@@ -62,6 +76,7 @@ async function fetchBlogPostDetails() {
   }
 }
 
+// Function to format the date
 function formatDate(dateString) {
   return new Date(dateString).toLocaleDateString("en-US", {
     year: "numeric",
@@ -70,6 +85,7 @@ function formatDate(dateString) {
   });
 }
 
+// Function to show the form field error messages
 function showError(message) {
   const errorContainer = document.getElementById("error-container");
   if (errorContainer) {
