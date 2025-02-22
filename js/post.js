@@ -12,8 +12,9 @@ async function fetchBlogPostDetails() {
   }
 
   try {
+    const formattedAuthor = author.replace(/ /g, "_");
     const response = await fetch(
-      `https://v2.api.noroff.dev/blog/posts/${author}/${postId}`
+      `https://v2.api.noroff.dev/blog/posts/${formattedAuthor}/${postId}`
     );
     if (!response.ok) throw new Error("Failed to fetch post.");
 
@@ -27,7 +28,7 @@ async function fetchBlogPostDetails() {
       if (editContainer) {
         const editButton = document.createElement("button");
         editButton.classList.add("edit-button");
-        editButton.innerHTML = `<i class="fa-solid fa-pen"></i> Edit`;
+        editButton.innerHTML = '<i class="fa-solid fa-pen"></i> Edit';
         editButton.addEventListener("click", () => {
           window.location.href = `edit.html?author=${author}&id=${postId}`;
         });

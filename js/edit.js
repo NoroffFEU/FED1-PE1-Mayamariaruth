@@ -7,6 +7,8 @@ document.addEventListener("DOMContentLoaded", fetchPostData);
 
 // Fetch blog post details for form fields
 async function fetchPostData() {
+  if (!window.location.pathname.includes("edit.html")) return;
+
   const urlParams = new URLSearchParams(window.location.search);
   postId = urlParams.get("id");
   const author = urlParams.get("author");
@@ -14,14 +16,16 @@ async function fetchPostData() {
 
   if (!postId || !author) {
     if (editForm) {
-      editForm.innerHTML = `<p class="error-message">Failed to load post. Please try again later.</p>`;
+      editForm.innerHTML =
+        '<p class="error-message">Failed to load post. Please try again later.</p>';
       return;
     }
   }
 
   try {
+    const formattedAuthor = author.replace(/ /g, "_");
     const response = await fetch(
-      `https://v2.api.noroff.dev/blog/posts/${author}/${postId}`
+      `https://v2.api.noroff.dev/blog/posts/${formattedAuthor}/${postId}`
     );
     if (!response.ok) throw new Error("Failed to fetch post.");
 
@@ -90,7 +94,8 @@ async function fetchPostData() {
   } catch (error) {
     console.error("Error fetching post:", error);
     if (editForm) {
-      editForm.innerHTML = `<p class="error-message">Failed to load post. Please try again later.</p>`;
+      editForm.innerHTML =
+        '<p class="error-message">Failed to load post. Please try again later.</p>';
     }
   }
 }
@@ -108,10 +113,20 @@ if (editForm) {
       const created = document.getElementById("created").value;
       const media = document.getElementById("media").value;
       const body = quill.root.innerHTML;
-      const tags = document
-        .getElementById("tags-hidden-input")
-        .value.split(",")
-        .map((tag) => tag.trim());
+      const tagsHiddenInput = document.getElementById("tags-hidden-input");
+      const tagContainer = document.getElementById("tag-container");
+
+      // Merge old tags with new tags
+      const existingTags = tagsHiddenInput.value
+        ? tagsHiddenInput.value.split(",").map((tag) => tag.trim())
+        : [];
+
+      const visibleTags = Array.from(
+        tagContainer.querySelectorAll(".tag-item")
+      ).map((tagEl) => tagEl.textContent.trim());
+
+      const tags = [...new Set([...existingTags, ...visibleTags])];
+      tagsHiddenInput.value = tags.join(",");
 
       const token = localStorage.getItem("authToken");
       const userName = localStorage.getItem("userName");
@@ -144,7 +159,7 @@ if (editForm) {
         );
         localStorage.setItem("notificationType", "success");
 
-        window.location.href = `/post.html?author=${author}&id=${postId}`;
+        window.location.href = `/templates/post/post.html?author=${author}&id=${postId}`;
       } catch (error) {
         console.error("Error updating post:", error);
 
