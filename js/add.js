@@ -21,8 +21,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Handle the "Tags" input and add them as buttons
   const tagInput = document.getElementById("tags");
-  const tagContainer = document.getElementById("tagContainer");
-  const tagsHiddenInput = document.getElementById("tagsHiddenInput");
+  const tagContainer = document.getElementById("tag-container");
+  const tagsHiddenInput = document.getElementById("tags-hidden-input");
 
   let tags = [];
 

@@ -90,7 +90,7 @@
   flex-wrap: wrap;
   gap: 10px;
   max-width: 100%;
-  margin-bottom: 30px;
+  margin-bottom: 50px;
 }
 
 #tags {
@@ -102,15 +102,15 @@
   color: #ffffff;
   height: 45px;
   width: auto;
-  min-width: 100px;
   font-size: 16px;
   font-weight: 500;
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-radius: 30px;
-  padding: 3px 20px;
+  padding: 1px 8px 1px 20px;
   max-width: fit-content;
+  gap: 20px;
 }
 
 .tag-remove {
