@@ -86,6 +86,9 @@ document.addEventListener("DOMContentLoaded", () => {
       const tags = tagsHiddenInput?.value
         ? tagsHiddenInput.value.split(",").map((tag) => tag.trim())
         : [];
+      if (tags.length === 0) {
+        tags.push("Technology");
+      }
 
       const blogPostData = {
         title: titleInput.value.trim(),

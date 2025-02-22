@@ -1,3 +1,4 @@
+import { apiKey } from "../config.js";
 import { quill } from "./script.js";
 import { showNotification } from "./script.js";
 
@@ -36,7 +37,9 @@ async function fetchPostData() {
     document.getElementById("title").value = data.title || "";
     document.getElementById("author").value =
       data.author.name.replace(/_/g, " ") || "";
-    document.getElementById("created").value = formatDateForInput(data.created);
+    document.getElementById("created").value = data.created
+      ? formatDateForInput(data.created)
+      : "";
     document.getElementById("media").value = data.media?.url || "";
     quill.root.innerHTML = data.body || "";
 
@@ -199,3 +202,57 @@ if (editForm) {
 function formatDateForInput(dateString) {
   return new Date(dateString).toISOString().split("T")[0];
 }
+
+// Delete blog post functionality (with modal)
+document.addEventListener("DOMContentLoaded", () => {
+  const deleteButton = document.querySelector(".delete-btn");
+  const modal = document.getElementById("delete-modal");
+  const confirmDelete = document.getElementById("confirm-delete");
+  const cancelDelete = document.getElementById("cancel-delete");
+  const postId = new URLSearchParams(window.location.search).get("id");
+  const userName = localStorage.getItem("userName");
+  const authToken = localStorage.getItem("authToken");
+
+  if (deleteButton && postId && userName) {
+    deleteButton.addEventListener("click", (event) => {
+      event.preventDefault();
+      modal.style.display = "flex";
+    });
+
+    // Confirm delete action
+    confirmDelete.addEventListener("click", async () => {
+      try {
+        const response = await fetch(
+          `https://v2.api.noroff.dev/blog/posts/${userName}/${postId}`,
+          {
+            method: "DELETE",
+            headers: {
+              Authorization: `Bearer ${authToken}`,
+              "X-Noroff-API-Key": apiKey,
+            },
+          }
+        );
+
+        if (response.ok) {
+          localStorage.setItem(
+            "notificationMessage",
+            "Post deleted successfully!"
+          );
+          localStorage.setItem("notificationType", "success");
+          window.location.href = "/templates/post/feed.html";
+        } else {
+          showNotification("Failed to delete post. Try again later.", "error");
+        }
+      } catch (error) {
+        showNotification("An error occurred. Please try again.", "error");
+        console.error("Error deleting post:", error);
+      } finally {
+        modal.style.display = "none";
+      }
+    });
+
+    cancelDelete.addEventListener("click", () => {
+      modal.style.display = "none";
+    });
+  }
+});
