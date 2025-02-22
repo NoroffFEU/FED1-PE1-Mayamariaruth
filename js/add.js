@@ -74,13 +74,56 @@ document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("add-form");
   const titleInput = document.getElementById("title");
   const mediaInput = document.getElementById("media");
+  const createdInput = document.getElementById("created");
   const authToken = localStorage.getItem("authToken");
 
   if (form) {
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
+      let isValid = true;
       const bodyContent = quill.root.innerHTML;
       document.getElementById("body").value = bodyContent;
+
+      // Validate form fields
+      [titleInput, authorInput, createdInput, mediaInput].forEach((field) => {
+        // Remove error-forms class when typing
+        field.addEventListener("input", () => {
+          if (field.value.trim()) {
+            field.classList.remove("error-forms");
+          }
+        });
+
+        // Validate on submit
+        if (!field || !field.value.trim()) {
+          field.classList.add("error-forms");
+          isValid = false;
+        } else {
+          field.classList.remove("error-forms");
+        }
+      });
+
+      // Validate Quill body (which already automatically contains tags when empty)
+      const quillContainer = document.querySelector(".ql-container");
+      quillContainer.addEventListener("input", () => {
+        const quillContent = quill.root.innerHTML.trim();
+
+        if (quillContent !== "<p><br></p>" && quillContent) {
+          quillContainer.classList.remove("error-forms");
+        }
+      });
+
+      const quillContent = quill.root.innerHTML.trim();
+      if (quillContent === "<p><br></p>" || !quillContent) {
+        quillContainer.classList.add("error-forms");
+        isValid = false;
+      } else {
+        quillContainer.classList.remove("error-forms");
+      }
+
+      if (!isValid) {
+        showNotification("Please fill out all required fields.", "error");
+        return;
+      }
 
       // Format tags correctly
       const tags = tagsHiddenInput?.value

@@ -146,6 +146,7 @@ if (editForm) {
     const quillContent = quill.root.innerHTML.trim();
     if (quillContent === "<p><br></p>" || !quillContent) {
       quillContainer.classList.add("error-forms");
+      isValid = false;
     } else {
       quillContainer.classList.remove("error-forms");
     }
