@@ -83,9 +83,6 @@
           <a href="../../index.html" class="navbar-btns logged-in">
             <span>Logout</span>
           </a>
-          <a href="#" class="navbar-btns search-icon">
-            <i class="fa-solid fa-magnifying-glass"></i>
-          </a>
         </div>
       </section>
       <!-- Mobile navigation overlay -->
@@ -107,35 +104,7 @@
         <a href="../../index.html" class="nav-link logged-in">
           <span class="nav-item">Logout</span>
         </a>
-        <p id="nav-text">Looking for something specific?</p>
-        <form action="/search" method="GET">
-          <input
-            type="search"
-            name="search"
-            id="nav-search"
-            placeholder="Search posts, tags or authors"
-            required
-          />
-          <button class="nav-search-btn" type="submit">
-            <i class="fa-solid fa-magnifying-glass"></i>
-          </button>
-        </form>
       </nav>
-      <!-- Search overlay for Desktop -->
-      <div id="search-overlay">
-        <form action="/search" method="GET" class="search-form">
-          <input
-            type="search"
-            name="search"
-            id="search-input"
-            placeholder="Search posts, tags or authors"
-            required
-          />
-          <button class="search-btn" type="submit">
-            <i class="fa-solid fa-magnifying-glass"></i>
-          </button>
-        </form>
-      </div>
     </header>
     <div id="notifications" class="notifications-container"></div>
     <!-- Main content -->
@@ -156,19 +125,6 @@
       <section id="blog-feed">
         <hr class="styled-border" />
         <div class="filter-bar">
-          <!-- Search form -->
-          <div id="form-div">
-            <form action="/search" method="GET" id="search-form-feed">
-              <input
-                type="search"
-                name="search"
-                id="search-filter"
-                placeholder="Search for posts..."
-                required
-              />
-              <button id="search-filter-btn" type="submit">Search</button>
-            </form>
-          </div>
           <!-- Sorting dropdown -->
           <div class="custom-dropdown">
             <button class="dropdown-btn">

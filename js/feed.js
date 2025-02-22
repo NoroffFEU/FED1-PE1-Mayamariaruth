@@ -216,8 +216,17 @@ function renderCarouselPosts(posts) {
     postElement.innerHTML = `
       <a href="post.html?author=${post.author?.name}&id=${post.id}">
         <img src="${post.media?.url}" alt="${post.media?.alt || "Post image"}">
-        <h3>${post.title}</h3>
-        <p>${formatDate(post.created)}</p>
+        <div class="carousel-text">
+          <p class="author">By ${
+            post.author?.name.replace(/_/g, " ") || "Unknown Author"
+          }</p>
+          <h3>${post.title}</h3>
+          <div id="tags-date">
+            <p class="tags latest-tags">#${post.tags?.[0]}</p>
+            <i class="fa-solid fa-circle" id="circle-feed"></i>
+            <p class="date latest-date">${formatDate(post.created)}</p>
+          </div>
+        </div>
       </a>
     `;
     carouselContent.appendChild(postElement);
@@ -242,7 +251,6 @@ function renderCarouselPosts(posts) {
 
 // Function to scroll the carousel
 let currentIndex = 0;
-
 function scrollCarousel(direction) {
   const items = document.querySelectorAll(".carousel-item");
   const totalItems = items.length;
@@ -253,9 +261,23 @@ function scrollCarousel(direction) {
     currentIndex = (currentIndex - 1 + totalItems) % totalItems;
   }
 
-  const carousel = document.querySelector(".carousel-items");
+  const carousel = document.querySelector(".carousel");
   const scrollAmount = items[0].offsetWidth;
   carousel.style.transform = `translateX(-${scrollAmount * currentIndex}px)`;
+
+  updateCarousel();
+}
+
+// Dim left/right posts
+function updateCarousel() {
+  const items = document.querySelectorAll(".carousel-item");
+  items.forEach((item, index) => {
+    if (index === currentIndex) {
+      item.classList.remove("dim");
+    } else {
+      item.classList.add("dim");
+    }
+  });
 }
 
 document.addEventListener("DOMContentLoaded", fetchLatestPosts);

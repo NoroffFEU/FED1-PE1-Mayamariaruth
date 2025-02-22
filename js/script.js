@@ -25,32 +25,6 @@ document.addEventListener("DOMContentLoaded", function () {
       hamburger.classList.add("fa-bars");
     }
   });
-
-  // Display search bar in desktop nav bar
-  const searchIcon = document.querySelector(".search-icon");
-  const searchOverlay = document.getElementById("search-overlay");
-  const searchInput = document.getElementById("search-input");
-
-  // Open search overlay
-  searchIcon.addEventListener("click", (e) => {
-    e.preventDefault();
-    searchOverlay.classList.add("active");
-    searchInput.focus();
-  });
-
-  // Close search overlay when clicking outside
-  document.addEventListener("click", (e) => {
-    if (!searchOverlay.contains(e.target) && e.target !== searchIcon) {
-      searchOverlay.classList.remove("active");
-    }
-  });
-
-  // Prevent closing when clicking inside the search overlay
-  searchOverlay.addEventListener("click", (e) => {
-    if (e.target === searchOverlay) {
-      e.stopPropagation();
-    }
-  });
 });
 
 // Initialize Quill editor
