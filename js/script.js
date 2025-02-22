@@ -124,7 +124,7 @@ export function showNotification(message, type = "success") {
 
   setTimeout(() => {
     if (notification) notification.remove();
-  }, 5000);
+  }, 6000);
 }
 
 // Home page hero buttons link
