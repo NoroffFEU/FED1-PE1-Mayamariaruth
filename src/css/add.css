@@ -108,7 +108,7 @@
   justify-content: space-between;
   align-items: center;
   border-radius: 30px;
-  padding: 1px 8px 1px 20px;
+  padding: 0px 8px 0px 20px;
   max-width: fit-content;
   gap: 20px;
 }
