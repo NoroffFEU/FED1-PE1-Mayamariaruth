@@ -118,6 +118,7 @@
   background-color: transparent;
   font-size: 27px;
   color: #ffffff;
+  cursor: pointer;
 }
 
 @media (min-width: 998px) {
