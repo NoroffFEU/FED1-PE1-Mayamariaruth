@@ -78,7 +78,6 @@
   display: flex;
   align-items: center;
   gap: 15px;
-  margin-left: 16px;
 }
 
 .tags-blog-post {
@@ -133,10 +132,6 @@
   #post-date,
   #post-tag {
     font-size: 18px;
-  }
-
-  #post-all-tags {
-    padding-left: 0;
   }
 
   #post-author {

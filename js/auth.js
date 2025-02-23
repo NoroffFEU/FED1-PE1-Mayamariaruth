@@ -203,23 +203,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Show notification after login or registration
-  if (currentPage.endsWith("login.html") || currentPage.endsWith("feed.html")) {
-    const message = localStorage.getItem("notificationMessage");
-    const type = localStorage.getItem("notificationType");
-
-    if (message) {
-      showNotification(message, type);
-
-      localStorage.removeItem("notificationMessage");
-      localStorage.removeItem("notificationType");
-
-      setTimeout(() => {
-        document.querySelector(".notification")?.remove();
-      }, 5000);
-    }
-  }
-
   // Update navbar when logged in
   const loggedOutLinks = document.querySelectorAll(
     ".navbar-btns.logged-out, .nav-link.logged-out"

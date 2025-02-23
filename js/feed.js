@@ -179,9 +179,9 @@ function renderBlogPosts(posts) {
   });
 }
 
-// Function to fetch and render the latest posts as a carousel
+// Function to fetch the latest posts
 async function fetchLatestPosts() {
-  const author = localStorage.getItem("userName");
+  const author = localStorage.getItem("userName") || "Maya_Thompson";
   const limit = 3;
 
   try {
@@ -202,7 +202,9 @@ function renderCarouselPosts(posts) {
   const latestPostsContainer = document.getElementById(
     "latest-posts-container"
   );
-  latestPostsContainer.innerHTML = "";
+  if (latestPostsContainer) {
+    latestPostsContainer.innerHTML = "";
+  }
 
   const carouselWrapper = document.createElement("div");
   carouselWrapper.classList.add("carousel");
@@ -231,8 +233,12 @@ function renderCarouselPosts(posts) {
     `;
     carouselContent.appendChild(postElement);
   });
-  carouselWrapper.appendChild(carouselContent);
-  latestPostsContainer.appendChild(carouselWrapper);
+  if (carouselWrapper) {
+    carouselWrapper.appendChild(carouselContent);
+  }
+  if (latestPostsContainer) {
+    latestPostsContainer.appendChild(carouselWrapper);
+  }
 
   // Navigation buttons
   const prevButton = document.createElement("button");
@@ -258,16 +264,27 @@ function scrollCarousel(direction) {
   const items = document.querySelectorAll(".carousel-item");
   const totalItems = items.length;
 
-  if (direction === "next") {
-    currentIndex = (currentIndex + 1) % totalItems;
-  } else {
-    currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+  if (totalItems === 0) {
+    if (carouselContent) {
+      carouselContent.innerHTML = `<p class="error-message">There are no latest posts. Please add new blog posts.</p>`;
+      return;
+    }
   }
 
-  const scrollLeft =
-    items[currentIndex].offsetLeft -
-    (carouselContent.offsetWidth - items[currentIndex].offsetWidth) / 2;
-  carouselContent.scrollTo({ left: scrollLeft, behavior: "smooth" });
+  const currentItem = items[currentIndex];
+
+  if (currentItem) {
+    if (direction === "next") {
+      currentIndex = (currentIndex + 1) % totalItems;
+    } else {
+      currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+    }
+
+    const scrollLeft =
+      items[currentIndex].offsetLeft -
+      (carouselContent.offsetWidth - items[currentIndex].offsetWidth) / 2;
+    carouselContent.scrollTo({ left: scrollLeft, behavior: "smooth" });
+  }
 }
 
 function initializeCarousel() {

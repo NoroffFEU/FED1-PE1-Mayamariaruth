@@ -105,6 +105,25 @@ export function showNotification(message, type = "success") {
 document.addEventListener("DOMContentLoaded", () => {
   const heroBtn = document.querySelector(".hero-btn");
   const loginBtn = document.querySelector(".login-btn");
+  const btnContainer = document.querySelector(".btn-container");
+
+  // Hide login button if user is logged in and style hero buttons properly
+  if (localStorage.getItem("userName")) {
+    if (loginBtn) {
+      loginBtn.style.display = "none";
+      if (window.innerWidth > 768 && btnContainer) {
+        btnContainer.style.flexDirection = "row";
+      }
+    }
+  }
+  // Adjust styling if window is resized
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 768 && window.innerWidth <= 1440 && btnContainer) {
+      btnContainer.style.flexDirection = "row";
+    } else {
+      btnContainer.style.flexDirection = "";
+    }
+  });
 
   if (heroBtn) {
     heroBtn.addEventListener("click", () => {
@@ -126,5 +145,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if ((currentPage.includes("add") || currentPage.includes("edit")) && !token) {
     window.location.href = "../account/login.html";
+  }
+});
+
+// Show notifications after action
+document.addEventListener("DOMContentLoaded", () => {
+  const message = localStorage.getItem("notificationMessage");
+  const type = localStorage.getItem("notificationType");
+
+  if (message) {
+    showNotification(message, type);
+
+    localStorage.removeItem("notificationMessage");
+    localStorage.removeItem("notificationType");
+
+    setTimeout(() => {
+      document.querySelector(".notification")?.remove();
+    }, 5000);
   }
 });
