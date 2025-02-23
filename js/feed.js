@@ -204,6 +204,7 @@ async function fetchLatestPosts() {
 
 // Function to render the latest posts in the carousel
 function renderCarouselPosts(posts) {
+  const loggedInUser = localStorage.getItem("userName");
   const latestPostsContainer = document.getElementById(
     "latest-posts-container"
   );
@@ -220,23 +221,58 @@ function renderCarouselPosts(posts) {
   posts.forEach((post) => {
     const postElement = document.createElement("div");
     postElement.classList.add("carousel-item");
+    const postAuthor = post.author.name;
+    const isAuthor = loggedInUser && loggedInUser === postAuthor;
     postElement.innerHTML = `
       <a href="post.html?author=${post.author?.name}&id=${post.id}">
         <img src="${post.media?.url}" alt="${post.media?.alt || "Post image"}">
         <div class="carousel-text">
-          <p class="author latest-author">By ${
-            post.author?.name.replace(/_/g, " ") || "Unknown Author"
-          }</p>
+          <div class="author-edit">
+            <p class="author latest-author">By ${
+              post.author?.name.replace(/_/g, " ") || "Unknown Author"
+            }</p>
+            ${
+              isAuthor
+                ? `<button class="edit latest-edit small" data-id="${post.id}">
+                    <i class="fa-solid fa-pen"></i> Edit
+                  </button>`
+                : ""
+            }
+          </div>
           <h2>${post.title}</h2>
           <div id="tags-date">
             <p class="tags latest-tags">#${post.tags?.[0]}</p>
             <i class="fa-solid fa-circle" id="circle-feed"></i>
             <p class="date latest-date">${formatDate(post.created)}</p>
           </div>
+          ${
+            isAuthor
+              ? `<button class="edit latest-edit-large" data-id="${post.id}">
+                  <i class="fa-solid fa-pen"></i> Edit
+                </button>`
+              : ""
+          }
         </div>
       </a>
     `;
     carouselContent.appendChild(postElement);
+
+    // Event listener for the edit button
+    document.addEventListener("click", function (event) {
+      const editButton = event.target.closest(".edit");
+      if (editButton) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        const postId = editButton.getAttribute("data-id");
+        const postAuthor = editButton
+          .closest(".carousel-item")
+          .querySelector(".author")
+          .innerText.replace("By ", "");
+
+        window.location.href = `edit.html?author=${postAuthor}&id=${postId}`;
+      }
+    });
   });
   if (carouselWrapper) {
     carouselWrapper.appendChild(carouselContent);

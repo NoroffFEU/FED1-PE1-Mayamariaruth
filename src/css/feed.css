@@ -299,6 +299,10 @@
   font-size: 17px;
 }
 
+.latest-edit-large {
+  display: none;
+}
+
 @media (min-width: 768px) {
   .blog-grid {
     grid-template-columns: 1fr 1fr;
@@ -348,6 +352,20 @@
   .carousel-button {
     top: 0;
     bottom: 0;
+  }
+
+  .latest-edit-large {
+    display: flex;
+    font-size: 18px;
+    gap: 3px;
+  }
+
+  .latest-edit-large i {
+    font-size: 20px;
+  }
+
+  .small {
+    display: none;
   }
 }
 
@@ -409,6 +427,12 @@
   #feed-img {
     max-width: 430px;
     height: 350px;
+  }
+
+  .latest-tags,
+  .latest-date,
+  .latest-author {
+    font-size: 18px !important;
   }
 }
 
