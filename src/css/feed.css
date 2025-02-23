@@ -217,53 +217,68 @@
 }
 
 /* Latest Posts (Carousel) */
-.carousel-item img {
-  height: 265px;
-  width: 324px;
-  object-fit: cover;
-  border-radius: 20px;
-}
-
 .carousel {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   overflow: hidden;
   width: 100%;
-}
-
-.carousel-item {
   display: flex;
-  transition: transform 0.3s ease;
+  justify-content: center;
+  position: relative;
 }
 
 .carousel-content {
-  flex: 0 0 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: opacity 0.3s ease;
-  gap: 50px;
-  padding-bottom: 150px;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  padding: 20px 0 130px;
 }
 
-.carousel-content a {
+.carousel-item {
+  flex: 0 0 100%;
+  scroll-snap-align: center;
+  text-align: center;
+}
+
+.carousel-item img {
+  min-height: 265px;
+  min-width: 324px;
+  object-fit: cover;
+  border-radius: 20px;
+  width: 70%;
+  max-width: 700px;
+}
+
+.carousel-item a {
   text-decoration: none;
   color: #333333;
 }
 
 .carousel-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   text-align: left;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
   border-radius: 20px;
   padding: 0 16px 0;
+  min-width: 324px;
+  margin: 0 auto;
+  min-height: 220px;
+  box-sizing: border-box;
+  width: 70%;
+  max-width: 600px;
 }
 
 .carousel-text h3 {
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 50px;
+  margin-top: 0;
+}
+
+#tags-date {
+  margin-top: auto;
 }
 
 .latest-tags,
@@ -271,31 +286,23 @@
   font-size: 14px;
 }
 
-.carousel-content.dim {
-  opacity: 0.3;
-}
-
-.carousel-item.dim {
-  opacity: 0.5;
-}
-
 .carousel-button {
-  position: relative;
-  top: 50%;
+  position: absolute;
+  top: 45%;
   z-index: 1;
   background: none;
   border: none;
   font-size: 45px;
-  color: #333;
-  transform: translateY(-110%);
+  color: #333333;
+  cursor: pointer;
 }
 
 .carousel-button.prev {
-  left: 395px;
+  left: 0;
 }
 
 .carousel-button.next {
-  right: 395px;
+  right: 0;
 }
 
 @media (min-width: 768px) {
@@ -318,6 +325,43 @@
   #feed-img {
     object-fit: cover;
     max-width: 344px;
+  }
+
+  .carousel-content {
+    padding-bottom: 80px;
+  }
+
+  .carousel-item a {
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    margin: 0 auto;
+    max-width: 1200px;
+  }
+
+  .carousel-text {
+    box-shadow: none;
+    justify-content: center;
+  }
+
+  .carousel-text h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  #tags-date {
+    margin-top: 0;
+  }
+
+  .latest-tags,
+  .latest-date,
+  .latest-author {
+    font-size: 16px !important;
+  }
+
+  .carousel-button {
+    top: 0;
+    bottom: 0;
   }
 }
 

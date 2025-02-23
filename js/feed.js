@@ -217,7 +217,7 @@ function renderCarouselPosts(posts) {
       <a href="post.html?author=${post.author?.name}&id=${post.id}">
         <img src="${post.media?.url}" alt="${post.media?.alt || "Post image"}">
         <div class="carousel-text">
-          <p class="author">By ${
+          <p class="author latest-author">By ${
             post.author?.name.replace(/_/g, " ") || "Unknown Author"
           }</p>
           <h3>${post.title}</h3>
@@ -231,27 +231,30 @@ function renderCarouselPosts(posts) {
     `;
     carouselContent.appendChild(postElement);
   });
+  carouselWrapper.appendChild(carouselContent);
+  latestPostsContainer.appendChild(carouselWrapper);
 
+  // Navigation buttons
   const prevButton = document.createElement("button");
   prevButton.classList.add("carousel-button", "prev");
   prevButton.innerHTML = '<i class="fa-solid fa-circle-chevron-left"></i>';
-  prevButton.setAttribute("onclick", "scrollCarousel('prev')");
+  prevButton.addEventListener("click", () => scrollCarousel("prev"));
 
   const nextButton = document.createElement("button");
   nextButton.classList.add("carousel-button", "next");
   nextButton.innerHTML = '<i class="fa-solid fa-circle-chevron-right"></i>';
-  nextButton.setAttribute("onclick", "scrollCarousel('next')");
+  nextButton.addEventListener("click", () => scrollCarousel("next"));
 
-  carouselWrapper.appendChild(prevButton);
-  carouselWrapper.appendChild(carouselContent);
-  carouselWrapper.appendChild(nextButton);
+  carouselContent.appendChild(prevButton);
+  carouselContent.appendChild(nextButton);
 
-  latestPostsContainer.appendChild(carouselWrapper);
+  initializeCarousel();
 }
 
-// Function to scroll the carousel
+// Scrolling functionality
 let currentIndex = 0;
 function scrollCarousel(direction) {
+  const carouselContent = document.querySelector(".carousel-content");
   const items = document.querySelectorAll(".carousel-item");
   const totalItems = items.length;
 
@@ -261,23 +264,16 @@ function scrollCarousel(direction) {
     currentIndex = (currentIndex - 1 + totalItems) % totalItems;
   }
 
-  const carousel = document.querySelector(".carousel");
-  const scrollAmount = items[0].offsetWidth;
-  carousel.style.transform = `translateX(-${scrollAmount * currentIndex}px)`;
-
-  updateCarousel();
+  const scrollLeft =
+    items[currentIndex].offsetLeft -
+    (carouselContent.offsetWidth - items[currentIndex].offsetWidth) / 2;
+  carouselContent.scrollTo({ left: scrollLeft, behavior: "smooth" });
 }
 
-// Dim left/right posts
-function updateCarousel() {
-  const items = document.querySelectorAll(".carousel-item");
-  items.forEach((item, index) => {
-    if (index === currentIndex) {
-      item.classList.remove("dim");
-    } else {
-      item.classList.add("dim");
-    }
-  });
+function initializeCarousel() {
+  setTimeout(() => scrollCarousel("next"), 100);
 }
 
-document.addEventListener("DOMContentLoaded", fetchLatestPosts);
+document.addEventListener("DOMContentLoaded", () => {
+  fetchLatestPosts();
+});
