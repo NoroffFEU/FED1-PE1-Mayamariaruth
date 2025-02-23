@@ -62,7 +62,7 @@ function sortDropdown() {
 sortDropdown();
 
 // Fetch blog posts by author (with pagination and sorting)
-window.fetchBlogPosts = async function (
+async function fetchBlogPosts(
   page = 1,
   limit = 12,
   sort = "created",
@@ -93,9 +93,10 @@ window.fetchBlogPosts = async function (
     console.error("Error fetching blog posts:", error);
     blogFeed.innerHTML = `<p class="error-message">Failed to load posts. Please try again later.</p>`;
   }
-};
+}
 
 document.addEventListener("DOMContentLoaded", async () => {
+  window.fetchBlogPosts = fetchBlogPosts;
   sortDropdown();
   await fetchBlogPosts(currentPage, postsPerPage);
 });

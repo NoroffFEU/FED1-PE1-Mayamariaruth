@@ -2,42 +2,62 @@ import { apiKey } from "./api.js";
 import { showNotification } from "./script.js";
 import { quill } from "./script.js";
 
-// Handle prepopulating form fields, creating Tags and form submission
 document.addEventListener("DOMContentLoaded", () => {
-  // Prepopulate author and date fields
   const authorInput = document.getElementById("author");
   const dateInput = document.getElementById("created");
-  const userName = localStorage.getItem("userName");
-
-  if (userName && authorInput) {
-    // Replace underscores with spaces
-    authorInput.value = userName.replace(/_/g, " ");
-  }
-
-  if (dateInput) {
-    const today = new Date().toISOString().split("T")[0];
-    dateInput.value = today;
-  }
-
-  // Handle the "Tags" input and add them as buttons
   const tagInput = document.getElementById("tags");
   const tagContainer = document.getElementById("tag-container");
   const tagsHiddenInput = document.getElementById("tags-hidden-input");
+  const form = document.getElementById("add-form");
+  const titleInput = document.getElementById("title");
+  const mediaInput = document.getElementById("media");
+  const createdInput = document.getElementById("created");
+  const authToken = localStorage.getItem("authToken");
+  const userName = localStorage.getItem("userName");
 
   let tags = [];
 
-  // Update the hidden input field
-  function updateTagsInput() {
-    tagsHiddenInput.value = tags.join(",");
+  prepopulateFields();
+
+  // Event listener for tags
+  tagInput?.addEventListener("keydown", handleTagInput);
+
+  // Form submission handler
+  form?.addEventListener("submit", handleFormSubmit);
+
+  // Function to prepopulate author and date fields
+  function prepopulateFields() {
+    if (userName && authorInput) {
+      authorInput.value = userName.replace(/_/g, " ");
+    }
+
+    if (dateInput) {
+      dateInput.value = new Date().toISOString().split("T")[0];
+    }
   }
 
-  // Create tag elements
+  // Function to handle the tag input field
+  function handleTagInput(event) {
+    if (event.key === "Enter" && tagInput.value.trim() !== "") {
+      event.preventDefault();
+      const newTag = tagInput.value.trim();
+
+      if (!tags.includes(newTag)) {
+        tags.push(newTag);
+        createTagElement(newTag);
+        updateTagsInput();
+      }
+
+      tagInput.value = "";
+    }
+  }
+
+  // Function to create tag elements
   function createTagElement(tag) {
     const tagElement = document.createElement("span");
     tagElement.classList.add("tag-item");
     tagElement.textContent = tag;
 
-    // Add X icon to remove tag
     const removeBtn = document.createElement("button");
     removeBtn.classList.add("tag-remove");
     removeBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
@@ -52,147 +72,114 @@ document.addEventListener("DOMContentLoaded", () => {
     tagContainer.appendChild(tagElement);
   }
 
-  // Handle tag input on Enter key
-  if (tagInput) {
-    tagInput.addEventListener("keydown", (event) => {
-      if (event.key === "Enter" && tagInput.value.trim() !== "") {
-        event.preventDefault();
-        const newTag = tagInput.value.trim();
-
-        if (!tags.includes(newTag)) {
-          tags.push(newTag);
-          createTagElement(newTag);
-          updateTagsInput();
-        }
-
-        tagInput.value = "";
-      }
-    });
+  function updateTagsInput() {
+    tagsHiddenInput.value = tags.join(",");
   }
 
-  // Handle Add Blog Post form submission
-  const form = document.getElementById("add-form");
-  const titleInput = document.getElementById("title");
-  const mediaInput = document.getElementById("media");
-  const createdInput = document.getElementById("created");
-  const authToken = localStorage.getItem("authToken");
+  // Function to handle form submission
+  async function handleFormSubmit(event) {
+    event.preventDefault();
+    let isValid = true;
 
-  if (form) {
-    form.addEventListener("submit", async (event) => {
-      event.preventDefault();
-      let isValid = true;
-      document.getElementById("body").value = bodyContent;
-      const bodyContent = quill.root.innerHTML;
-      const mediaInput = document.getElementById("media");
-      const mediaUrl = mediaInput.value.trim();
+    const bodyContent = quill.root.innerHTML;
+    document.getElementById("body").value = bodyContent;
+    const mediaUrl = mediaInput.value.trim();
 
-      // Validate media URL
-      if (mediaUrl && !(await isValidImageUrl(mediaUrl))) {
-        mediaInput.classList.add("error-forms");
-        isValid = false;
-        showNotification("Please provide a valid image URL.", "error");
-      } else {
-        mediaInput.classList.remove("error-forms");
-      }
+    // Validate form fields
+    isValid = await validateForm(mediaUrl, bodyContent);
 
-      // Validate form fields
-      [titleInput, authorInput, createdInput, mediaInput].forEach((field) => {
-        // Remove error-forms class when typing
-        field.addEventListener("input", () => {
-          if (field.value.trim()) {
-            field.classList.remove("error-forms");
-          }
-        });
+    if (!isValid) {
+      showNotification("Please fill out all required fields.", "error");
+      return;
+    }
 
-        // Validate on submit
-        if (!field || !field.value.trim()) {
-          field.classList.add("error-forms");
-          isValid = false;
-        } else {
-          field.classList.remove("error-forms");
-        }
-      });
+    const blogPostData = createBlogPostData(bodyContent);
 
-      // Validate Quill body (which already automatically contains tags when empty)
-      const quillContainer = document.querySelector(".ql-container");
-      quillContainer.addEventListener("input", () => {
-        const quillContent = quill.root.innerHTML.trim();
+    if (await submitBlogPost(blogPostData)) {
+      localStorage.setItem(
+        "notificationMessage",
+        "Blog post added successfully!"
+      );
+      localStorage.setItem("notificationType", "success");
+      window.location.href = "feed.html";
+    }
+  }
 
-        if (quillContent !== "<p><br></p>" && quillContent) {
-          quillContainer.classList.remove("error-forms");
-        }
-      });
+  // Function to validate form fields
+  async function validateForm(mediaUrl, bodyContent) {
+    let isValid = true;
 
-      const quillContent = quill.root.innerHTML.trim();
-      if (quillContent === "<p><br></p>" || !quillContent) {
-        quillContainer.classList.add("error-forms");
+    // Validate media URL
+    if (mediaUrl && !(await isValidImageUrl(mediaUrl))) {
+      mediaInput.classList.add("error-forms");
+      showNotification("Please provide a valid image URL.", "error");
+      isValid = false;
+    } else {
+      mediaInput.classList.remove("error-forms");
+    }
+
+    // Validate required fields
+    [titleInput, authorInput, createdInput, mediaInput].forEach((field) => {
+      if (!field?.value.trim()) {
+        field.classList.add("error-forms");
         isValid = false;
       } else {
-        quillContainer.classList.remove("error-forms");
-      }
-
-      if (!isValid) {
-        showNotification("Please fill out all required fields.", "error");
-        return;
-      }
-
-      // Format tags correctly
-      const tags = tagsHiddenInput?.value
-        ? tagsHiddenInput.value.split(",").map((tag) => tag.trim())
-        : [];
-      if (tags.length === 0) {
-        tags.push("Technology");
-      }
-
-      const blogPostData = {
-        title: titleInput.value.trim(),
-        body: bodyContent,
-        media: {
-          url: mediaInput.value.trim(),
-          alt: "Image description",
-        },
-        tags,
-        author: userName,
-      };
-
-      if (
-        !blogPostData.title ||
-        !blogPostData.body ||
-        !blogPostData.media.url
-      ) {
-        showNotification("Please fill in all required fields.", "error");
-        return;
-      }
-
-      try {
-        const apiUrl = `https://v2.api.noroff.dev/blog/posts/${userName}`;
-        const response = await fetch(apiUrl, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json; charset=UTF-8",
-            Authorization: `Bearer ${authToken}`,
-            "X-Noroff-API-Key": apiKey,
-          },
-          body: JSON.stringify(blogPostData),
-        });
-
-        const result = await response.json();
-
-        if (response.ok) {
-          localStorage.setItem(
-            "notificationMessage",
-            "Blog post added successfully!"
-          );
-          localStorage.setItem("notificationType", "success");
-          window.location.href = "feed.html";
-        } else {
-          showNotification(result.message || "Failed to add post.", "error");
-        }
-      } catch (error) {
-        showNotification("An error occurred. Please try again.", "error");
-        console.error("Error:", error);
+        field.classList.remove("error-forms");
       }
     });
+
+    // Validate Quill body
+    if (!bodyContent.trim() || bodyContent === "<p><br></p>") {
+      document.querySelector(".ql-container")?.classList.add("error-forms");
+      isValid = false;
+    } else {
+      document.querySelector(".ql-container")?.classList.remove("error-forms");
+    }
+
+    return isValid;
+  }
+
+  // Function to return blog post data
+  function createBlogPostData(bodyContent) {
+    const tags =
+      tagsHiddenInput && tagsHiddenInput.value.trim()
+        ? tagsHiddenInput.value.split(",").map((tag) => tag.trim())
+        : ["Technology"];
+
+    return {
+      title: titleInput.value.trim(),
+      body: bodyContent,
+      media: { url: mediaInput.value.trim(), alt: "Image description" },
+      tags,
+      author: userName,
+    };
+  }
+
+  // Function to submit blog post data to API
+  async function submitBlogPost(blogPostData) {
+    try {
+      const apiUrl = `https://v2.api.noroff.dev/blog/posts/${userName}`;
+      const response = await fetch(apiUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json; charset=UTF-8",
+          Authorization: `Bearer ${authToken}`,
+          "X-Noroff-API-Key": apiKey,
+        },
+        body: JSON.stringify(blogPostData),
+      });
+
+      const result = await response.json();
+      if (!response.ok) {
+        showNotification(result.message || "Failed to add post.", "error");
+        return false;
+      }
+      return true;
+    } catch (error) {
+      showNotification("An error occurred. Please try again.", "error");
+      console.error("Error:", error);
+      return false;
+    }
   }
 
   // Show success message on feed.html
@@ -213,14 +200,14 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+// Function to check if image URL is valid
 export async function isValidImageUrl(url) {
   try {
     const response = await fetch(url);
-    if (response.ok && response.headers.get("Content-Type").includes("image")) {
-      return true;
-    }
-    return false;
-  } catch (error) {
+    return (
+      response.ok && response.headers.get("Content-Type").includes("image")
+    );
+  } catch {
     return false;
   }
 }

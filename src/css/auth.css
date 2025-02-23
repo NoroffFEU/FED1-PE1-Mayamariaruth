@@ -67,7 +67,7 @@
   width: 100%;
   border-radius: 30px;
   background-color: #eda92e;
-  color: #ffffff;
+  color: #333333;
   height: 55px;
   font-size: 18px;
   border: none;
@@ -76,7 +76,6 @@
 }
 
 .form-btn:hover {
-  color: #333333;
   background-color: #ffffff;
   border: #eda92e solid 2px;
 }

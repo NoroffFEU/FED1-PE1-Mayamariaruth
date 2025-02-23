@@ -204,7 +204,7 @@ footer {
 
 .subscribe-btn {
   position: absolute;
-  color: #ffffff;
+  color: #333333;
   background-color: #eda92e;
   height: 57px;
   width: 155px;
@@ -217,7 +217,6 @@ footer {
 }
 
 .subscribe-btn:hover {
-  color: #333333;
   background-color: #ffffff;
   border: #eda92e solid 2px;
 }
@@ -341,7 +340,7 @@ footer {
   font-weight: bold;
   border-radius: 30px;
   border: none;
-  color: #ffffff;
+  color: #333333;
   background-color: #eda92e;
   width: 100%;
   max-width: 366px;

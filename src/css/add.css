@@ -37,7 +37,7 @@
   width: 80%;
   max-width: 334px;
   background-color: #eda92e;
-  color: #ffffff;
+  color: #333333;
   font-size: 18px;
   font-weight: bold;
   height: 55px;
@@ -47,7 +47,6 @@
 }
 
 .add-btn:hover {
-  color: #333333;
   background-color: #ffffff;
   border: #eda92e solid 2px;
 }
