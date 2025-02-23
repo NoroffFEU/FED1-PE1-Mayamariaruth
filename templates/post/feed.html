@@ -44,13 +44,13 @@
       crossorigin="anonymous"
     ></script>
     <!-- JavaScript link -->
-    <script defer type="module" src="../../js/script.js"></script>
-    <title>HotView Labs | Home</title>
+    <script type="module" src="../../js/script.js"></script>
+    <title>HotView Labs | Blog Feed</title>
   </head>
   <body>
     <!-- Header -->
     <header class="header-styling">
-      <section class="header-nav">
+      <div class="header-nav">
         <div>
           <a href="../../index.html">
             <img
@@ -84,7 +84,7 @@
             <span>Logout</span>
           </a>
         </div>
-      </section>
+      </div>
       <!-- Mobile navigation overlay -->
       <nav>
         <a href="../../index.html" class="nav-link">
@@ -153,13 +153,11 @@
           </div>
         </div>
 
-        <div class="blog-grid" id="blog-feed-container">
-          <!-- Blog posts (Dynamically generated) -->
-        </div>
+        <!-- Blog posts (Dynamically generated) -->
+        <div class="blog-grid" id="blog-feed-container"></div>
 
-        <div class="pagination" id="pagination-container">
-          <!-- Pagination (Dynamically generated) -->
-        </div>
+        <!-- Pagination (Dynamically generated) -->
+        <div class="pagination" id="pagination-container"></div>
       </section>
     </main>
     <!-- Footer -->

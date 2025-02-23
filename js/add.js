@@ -81,8 +81,19 @@ document.addEventListener("DOMContentLoaded", () => {
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
       let isValid = true;
-      const bodyContent = quill.root.innerHTML;
       document.getElementById("body").value = bodyContent;
+      const bodyContent = quill.root.innerHTML;
+      const mediaInput = document.getElementById("media");
+      const mediaUrl = mediaInput.value.trim();
+
+      // Validate media URL
+      if (mediaUrl && !(await isValidImageUrl(mediaUrl))) {
+        mediaInput.classList.add("error-forms");
+        isValid = false;
+        showNotification("Please provide a valid image URL.", "error");
+      } else {
+        mediaInput.classList.remove("error-forms");
+      }
 
       // Validate form fields
       [titleInput, authorInput, createdInput, mediaInput].forEach((field) => {
@@ -201,3 +212,15 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 });
+
+export async function isValidImageUrl(url) {
+  try {
+    const response = await fetch(url);
+    if (response.ok && response.headers.get("Content-Type").includes("image")) {
+      return true;
+    }
+    return false;
+  } catch (error) {
+    return false;
+  }
+}

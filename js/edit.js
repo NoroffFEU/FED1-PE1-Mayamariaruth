@@ -1,6 +1,7 @@
 import { apiKey } from "./api.js";
 import { quill } from "./script.js";
 import { showNotification } from "./script.js";
+import { isValidImageUrl } from "./add.js";
 
 let postId;
 
@@ -121,9 +122,19 @@ if (editForm) {
     const titleInput = document.getElementById("title");
     const authorInput = document.getElementById("author");
     const createdInput = document.getElementById("created");
-    const mediaInput = document.getElementById("media");
     const quillContainer = document.querySelector(".ql-container");
+    const mediaInput = document.getElementById("media");
+    const mediaUrl = mediaInput.value.trim();
     let isValid = true;
+
+    // Validate media URL for edit form
+    if (mediaUrl && !(await isValidImageUrl(mediaUrl))) {
+      mediaInput.classList.add("error-forms");
+      isValid = false;
+      showNotification("Please provide a valid image URL.", "error");
+    } else {
+      mediaInput.classList.remove("error-forms");
+    }
 
     [titleInput, authorInput, createdInput, mediaInput].forEach((field) => {
       // Remove error-forms class when typing

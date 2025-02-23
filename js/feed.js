@@ -156,7 +156,7 @@ function renderBlogPosts(posts) {
                         : ""
                     }
                   </div>
-                  <h2>${post.title}</h2>
+                  <h3>${post.title}</h3>
                   <div id="tags-date">
                     <p class="tags">#${post.tags?.[0]}</p>
                     <i class="fa-solid fa-circle" id="circle-feed"></i>
@@ -227,7 +227,7 @@ function renderCarouselPosts(posts) {
           <p class="author latest-author">By ${
             post.author?.name.replace(/_/g, " ") || "Unknown Author"
           }</p>
-          <h3>${post.title}</h3>
+          <h2>${post.title}</h2>
           <div id="tags-date">
             <p class="tags latest-tags">#${post.tags?.[0]}</p>
             <i class="fa-solid fa-circle" id="circle-feed"></i>

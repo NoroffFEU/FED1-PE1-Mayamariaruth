@@ -159,7 +159,7 @@
   max-width: 600px;
 }
 
-.carousel-text h3 {
+.carousel-text h2 {
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 50px;
@@ -217,7 +217,7 @@
   height: 280px;
 }
 
-.blog-content h2 {
+.blog-content h3 {
   font-size: 18px;
   font-weight: bold;
   line-height: 28px;
@@ -329,7 +329,7 @@
     justify-content: center;
   }
 
-  .carousel-text h3 {
+  .carousel-text h2 {
     font-size: 24px;
     margin-bottom: 10px;
   }
@@ -356,7 +356,7 @@
   }
 
   #feed-heading-container a,
-  .blog-content h2 {
+  .blog-content h3 {
     font-size: 20px;
   }
 
