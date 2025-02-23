@@ -45,7 +45,6 @@
   font-size: 14px;
   font-weight: 200;
   padding-left: 16px;
-  margin-bottom: 45px;
 }
 
 #post-body {
@@ -113,6 +112,31 @@
 
 .edit-button i {
   font-size: 15px;
+}
+
+.post-share {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 45px;
+  align-items: center;
+}
+
+#share-btn {
+  font-size: 20px;
+}
+
+#share-container {
+  display: flex;
+  gap: 3px;
+}
+
+#share-message {
+  display: none;
+  font-size: 16px;
+  font-weight: 600;
+  color: #439f6e;
+  margin: 0;
 }
 
 @media (min-width: 768px) {
@@ -186,6 +210,10 @@
 
   #edit-container {
     margin: 30px 54px 0 0;
+  }
+
+  #share-btn {
+    font-size: 24px;
   }
 }
 

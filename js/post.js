@@ -96,6 +96,31 @@ async function fetchBlogPostDetails() {
   }
 }
 
+// Get a shareable URL link from share icon
+document.addEventListener("DOMContentLoaded", () => {
+  const shareBtn = document.getElementById("share-btn");
+  const shareMessage = document.getElementById("share-message");
+
+  if (!shareBtn) {
+    console.error("❌ Share button not found!");
+    return;
+  }
+
+  const shareableURL = window.location.href;
+
+  shareBtn.addEventListener("click", () => {
+    navigator.clipboard
+      .writeText(shareableURL)
+      .then(() => {
+        shareMessage.style.display = "block";
+        setTimeout(() => {
+          shareMessage.style.display = "none";
+        }, 3000);
+      })
+      .catch((err) => console.error("❌ Failed to copy:", err));
+  });
+});
+
 // Function to format the date
 function formatDate(dateString) {
   return new Date(dateString).toLocaleDateString("en-US", {
