@@ -4,63 +4,6 @@ let currentPage = 1;
 let currentSort = "created";
 let currentSortOrder = "desc";
 
-// Format blog feed dates correctly
-function formatDate(dateString) {
-  const options = { year: "numeric", month: "short", day: "numeric" };
-  return new Date(dateString).toLocaleDateString("en-US", options);
-}
-
-// Function to hide the dropdown
-function closeDropdown() {
-  const dropdownContent = document.querySelector(".dropdown-content");
-  const button = document.querySelector(".dropdown-btn");
-  dropdownContent.classList.remove("show");
-  button.classList.remove("active");
-}
-
-// Toggle dropdown visibility when clicking the button
-const dropdownContent = document.querySelector(".dropdown-content");
-const button = document.querySelector(".dropdown-btn");
-if (button && dropdownContent) {
-  document.querySelector(".dropdown-btn").addEventListener("click", (event) => {
-    dropdownContent.classList.toggle("show");
-    button.classList.toggle("active");
-    event.stopPropagation();
-  });
-}
-
-// Listen for user input on the radio buttons
-function sortDropdown() {
-  const dropdownItems = document.querySelectorAll(
-    ".dropdown-content input[type='radio']"
-  );
-
-  dropdownItems.forEach((item) => {
-    item.addEventListener("change", (event) => {
-      const value = event.target.value;
-      const [sort, order] = value.split("-");
-
-      currentSort = sort;
-      currentSortOrder = order;
-
-      // Fetch posts with the selected sorting options
-      fetchBlogPosts(currentPage, postsPerPage, currentSort, currentSortOrder);
-
-      closeDropdown();
-    });
-  });
-
-  // Close the dropdown if clicking outside of it
-  document.addEventListener("click", (event) => {
-    const dropdown = document.querySelector(".custom-dropdown");
-    if (dropdown && !dropdown.contains(event.target)) {
-      closeDropdown();
-    }
-  });
-}
-
-sortDropdown();
-
 // Fetch blog posts by author (with pagination and sorting)
 async function fetchBlogPosts(
   page = 1,
@@ -70,7 +13,7 @@ async function fetchBlogPosts(
 ) {
   const blogFeed = document.getElementById("blog-feed-container");
   const loggedInUser = localStorage.getItem("userName");
-  const author = loggedInUser ? loggedInUser : "Maya_Thompson";
+  const author = loggedInUser || "Maya_Thompson";
   const addPostLink = document.querySelector(".add-post-link");
   const authToken = localStorage.getItem("authToken");
 
@@ -95,11 +38,72 @@ async function fetchBlogPosts(
   }
 }
 
-document.addEventListener("DOMContentLoaded", async () => {
-  window.fetchBlogPosts = fetchBlogPosts;
-  sortDropdown();
-  await fetchBlogPosts(currentPage, postsPerPage);
-});
+// Globally accessible
+window.fetchBlogPosts = fetchBlogPosts;
+
+// Render all blog posts in the feed from logged in user (or default Maya_Thompson)
+function renderBlogPosts(posts) {
+  const blogFeed = document.getElementById("blog-feed-container");
+  const loggedInUser = localStorage.getItem("userName");
+
+  if (!blogFeed) return;
+
+  blogFeed.innerHTML = "";
+  if (!posts.length) {
+    blogFeed.innerHTML = `<p class="error-message margin-left">You have not made a post yet. Please add a new blog post.</p>`;
+    return;
+  }
+
+  posts.forEach((post) => {
+    const postAuthor = post.author.name;
+    const isAuthor = loggedInUser && loggedInUser === postAuthor;
+    const postElement = document.createElement("div");
+    postElement.classList.add("blog-post");
+
+    postElement.innerHTML = `
+      <a href="post.html?author=${post.author?.name}&id=${
+      post.id
+    }" class="blog-link">
+        <div class="blog-card">
+          <img id="feed-img" src="${post.media?.url}" alt="${
+      post.media?.alt || "Blog image"
+    }">
+          <div class="blog-content">
+            <div class="author-edit">
+              <p class="author">By ${
+                post.author?.name.replace(/_/g, " ") || "Unknown Author"
+              }</p>
+              ${
+                isAuthor
+                  ? `<button class="edit" data-id="${post.id}"><i class="fa-solid fa-pen"></i> Edit</button>`
+                  : ""
+              }
+            </div>
+            <h3>${post.title}</h3>
+            <div id="tags-date">
+              <p class="tags">#${post.tags?.[0]}</p>
+              <i class="fa-solid fa-circle" id="circle-feed"></i>
+              <p class="date">${formatDate(post.created)}</p>
+            </div>
+          </div>
+        </div>
+      </a>
+    `;
+
+    blogFeed.appendChild(postElement);
+
+    // Event listener for the edit button
+    const editButton = postElement.querySelector(".edit");
+    if (editButton) {
+      editButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        const postId = editButton.getAttribute("data-id");
+        window.location.href = `edit.html?author=${postAuthor}&id=${postId}`;
+      });
+    }
+  });
+}
 
 // Render pagination buttons
 function renderPagination(meta, currentPage, limit) {
@@ -122,67 +126,58 @@ function renderPagination(meta, currentPage, limit) {
   }
 }
 
-// Render all blog posts in the feed
-function renderBlogPosts(posts) {
-  const blogFeed = document.getElementById("blog-feed-container");
-  const loggedInUser = localStorage.getItem("userName");
+// Format blog feed dates correctly
+function formatDate(dateString) {
+  const options = { year: "numeric", month: "short", day: "numeric" };
+  return new Date(dateString).toLocaleDateString("en-US", options);
+}
 
-  if (blogFeed) {
-    blogFeed.innerHTML = "";
+// Dropdown for sorting
+function sortDropdown() {
+  const dropdownItems = document.querySelectorAll(
+    ".dropdown-content input[type='radio']"
+  );
 
-    if (!posts.length) {
-      blogFeed.innerHTML = `<p class="error-message margin-left">You have not made a post yet. Please add a new blog post.</p>`;
-    } else {
-      posts.forEach((post) => {
-        const postAuthor = post.author.name;
-        const isAuthor = loggedInUser && loggedInUser === postAuthor;
-        const postElement = document.createElement("div");
-        postElement.classList.add("blog-post");
-        postElement.innerHTML = `
-          <a href="post.html?author=${post.author?.name}&id=${
-          post.id
-        }" class="blog-link">
-            <div class="blog-card">
-                <img id="feed-img" src="${post.media?.url}" alt="${
-          post.media?.alt || "Blog image"
-        }">
-                <div class="blog-content">
-                  <div class="author-edit">
-                    <p class="author">By ${
-                      post.author?.name.replace(/_/g, " ") || "Unknown Author"
-                    }</p>
-                    ${
-                      isAuthor
-                        ? `<button class="edit" data-id="${post.id}"><i class="fa-solid fa-pen"></i> Edit</button>`
-                        : ""
-                    }
-                  </div>
-                  <h3>${post.title}</h3>
-                  <div id="tags-date">
-                    <p class="tags">#${post.tags?.[0]}</p>
-                    <i class="fa-solid fa-circle" id="circle-feed"></i>
-                    <p class="date">${formatDate(post.created)}</p>
-                  </div>
-                </div>
-            </div>
-          </a>
-        `;
+  dropdownItems.forEach((item) => {
+    item.addEventListener("change", (event) => {
+      const value = event.target.value;
+      const [sort, order] = value.split("-");
 
-        blogFeed.appendChild(postElement);
+      currentSort = sort;
+      currentSortOrder = order;
 
-        // Event listener for the edit button
-        const editButton = postElement.querySelector(".edit");
-        if (editButton) {
-          editButton.addEventListener("click", (event) => {
-            event.preventDefault();
-            event.stopPropagation();
-            const postId = editButton.getAttribute("data-id");
-            window.location.href = `edit.html?author=${postAuthor}&id=${postId}`;
-          });
-        }
-      });
+      // Fetch posts with the selected sorting options
+      fetchBlogPosts(currentPage, postsPerPage, currentSort, currentSortOrder);
+      closeDropdown();
+    });
+  });
+
+  // Close the dropdown if clicking outside of it
+  document.addEventListener("click", (event) => {
+    const dropdown = document.querySelector(".custom-dropdown");
+    if (dropdown && !dropdown.contains(event.target)) {
+      closeDropdown();
     }
-  }
+  });
+}
+
+// Function to hide the dropdown
+function closeDropdown() {
+  const dropdownContent = document.querySelector(".dropdown-content");
+  const button = document.querySelector(".dropdown-btn");
+  dropdownContent.classList.remove("show");
+  button.classList.remove("active");
+}
+
+// Toggle dropdown visibility when clicking the button
+const dropdownContent = document.querySelector(".dropdown-content");
+const button = document.querySelector(".dropdown-btn");
+if (button && dropdownContent) {
+  button.addEventListener("click", (event) => {
+    dropdownContent.classList.toggle("show");
+    button.classList.toggle("active");
+    event.stopPropagation();
+  });
 }
 
 // Function to fetch the latest posts
@@ -203,7 +198,7 @@ async function fetchLatestPosts() {
   }
 }
 
-// Function to render the latest posts in the carousel
+// Render latest posts in the carousel
 function renderCarouselPosts(posts) {
   const loggedInUser = localStorage.getItem("userName");
   const latestPostsContainer = document.getElementById(
@@ -220,10 +215,11 @@ function renderCarouselPosts(posts) {
   carouselContent.classList.add("carousel-content");
 
   posts.forEach((post) => {
-    const postElement = document.createElement("div");
-    postElement.classList.add("carousel-item");
     const postAuthor = post.author.name;
     const isAuthor = loggedInUser && loggedInUser === postAuthor;
+    const postElement = document.createElement("div");
+    postElement.classList.add("carousel-item");
+
     postElement.innerHTML = `
       <a href="post.html?author=${post.author?.name}&id=${post.id}">
         <img src="${post.media?.url}" alt="${post.media?.alt || "Post image"}">
@@ -234,9 +230,7 @@ function renderCarouselPosts(posts) {
             }</p>
             ${
               isAuthor
-                ? `<button class="edit latest-edit small" data-id="${post.id}">
-                    <i class="fa-solid fa-pen"></i> Edit
-                  </button>`
+                ? `<button class="edit latest-edit small" data-id="${post.id}"><i class="fa-solid fa-pen"></i> Edit</button>`
                 : ""
             }
           </div>
@@ -248,9 +242,7 @@ function renderCarouselPosts(posts) {
           </div>
           ${
             isAuthor
-              ? `<button class="edit latest-edit-large" data-id="${post.id}">
-                  <i class="fa-solid fa-pen"></i> Edit
-                </button>`
+              ? `<button class="edit latest-edit-large" data-id="${post.id}"><i class="fa-solid fa-pen"></i> Edit</button>`
               : ""
           }
         </div>
@@ -275,14 +267,20 @@ function renderCarouselPosts(posts) {
       }
     });
   });
+
   if (carouselWrapper) {
     carouselWrapper.appendChild(carouselContent);
   }
+
   if (latestPostsContainer) {
     latestPostsContainer.appendChild(carouselWrapper);
   }
 
-  // Navigation buttons
+  addCarouselNavigation(carouselContent);
+}
+
+// Add navigation buttons to the carousel
+function addCarouselNavigation(carouselContent) {
   const prevButton = document.createElement("button");
   prevButton.classList.add("carousel-button", "prev");
   prevButton.innerHTML = '<i class="fa-solid fa-circle-chevron-left"></i>';
@@ -299,7 +297,12 @@ function renderCarouselPosts(posts) {
   initializeCarousel();
 }
 
-// Scrolling functionality
+// Function t initialize carousel scrolling
+function initializeCarousel() {
+  setTimeout(() => scrollCarousel("next"), 100);
+}
+
+// Scrolling functionality for the carousel
 let currentIndex = 0;
 function scrollCarousel(direction) {
   const carouselContent = document.querySelector(".carousel-content");
@@ -322,17 +325,22 @@ function scrollCarousel(direction) {
       currentIndex = (currentIndex - 1 + totalItems) % totalItems;
     }
 
-    const scrollLeft =
-      items[currentIndex].offsetLeft -
-      (carouselContent.offsetWidth - items[currentIndex].offsetWidth) / 2;
-    carouselContent.scrollTo({ left: scrollLeft, behavior: "smooth" });
+    const nextItem = items[currentIndex];
+    carouselContent.scrollTo({
+      left: nextItem.offsetLeft,
+      behavior: "smooth",
+    });
   }
 }
 
-function initializeCarousel() {
-  setTimeout(() => scrollCarousel("next"), 100);
-}
-
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   fetchLatestPosts();
+  sortDropdown();
+
+  await fetchBlogPosts(
+    currentPage,
+    postsPerPage,
+    currentSort,
+    currentSortOrder
+  );
 });

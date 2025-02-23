@@ -105,7 +105,7 @@ function formatDate(dateString) {
   });
 }
 
-// Function to show the form field error messages
+// Function to display error messages
 function showError(message) {
   const errorContainer = document.getElementById("error-container");
   if (errorContainer) {

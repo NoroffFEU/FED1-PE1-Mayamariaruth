@@ -160,6 +160,10 @@
   .edit-button i {
     font-size: 20px;
   }
+
+  #post-all-tags {
+    padding-left: 0;
+  }
 }
 
 @media (min-width: 1440px) {
