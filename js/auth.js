@@ -1,4 +1,4 @@
-import { apiKey } from "../config.js";
+import { apiKey } from "./api.js";
 import { showNotification } from "./script.js";
 
 // Register a new user in the API

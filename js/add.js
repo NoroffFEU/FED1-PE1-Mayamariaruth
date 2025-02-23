@@ -1,4 +1,4 @@
-import { apiKey } from "../config.js";
+import { apiKey } from "./api.js";
 import { showNotification } from "./script.js";
 import { quill } from "./script.js";
 
