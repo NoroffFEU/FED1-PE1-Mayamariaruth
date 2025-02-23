@@ -101,13 +101,13 @@ export function showNotification(message, type = "success") {
   }, 6000);
 }
 
-// Home page hero buttons link
+// Link buttons in hero section
 document.addEventListener("DOMContentLoaded", () => {
   const heroBtn = document.querySelector(".hero-btn");
   const loginBtn = document.querySelector(".login-btn");
   const btnContainer = document.querySelector(".btn-container");
 
-  // Hide login button if user is logged in and style hero buttons properly
+  // Hide login button if user is logged in and style hero button properly
   if (localStorage.getItem("userName")) {
     if (loginBtn) {
       loginBtn.style.display = "none";

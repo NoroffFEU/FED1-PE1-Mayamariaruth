@@ -1,4 +1,4 @@
-// Display blog post content based on ID
+// Fetch blog post content with author and ID parameters
 document.addEventListener("DOMContentLoaded", fetchBlogPostDetails);
 
 async function fetchBlogPostDetails() {
