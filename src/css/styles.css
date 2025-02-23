@@ -114,7 +114,7 @@ nav {
   display: flex;
   flex-direction: column;
   padding: 50px 16px 30px;
-  position: fixed;
+  position: absolute;
   width: 100%;
   z-index: 1000;
   transform: translateY(-100%);
@@ -206,7 +206,7 @@ footer {
   position: absolute;
   color: #ffffff;
   background-color: #eda92e;
-  height: 56px;
+  height: 57px;
   width: 155px;
   border-radius: 30px;
   border: none;
@@ -442,13 +442,13 @@ footer {
   font-size: 24px;
   font-weight: 500;
   line-height: 29px;
-  width: 400px;
+  width: 330px;
   margin: 0 auto 40px;
 }
 
 .news-btn {
   height: 53px;
-  right: 22px;
+  right: 18px;
 }
 
 #newsletter-email {
@@ -486,7 +486,7 @@ footer {
   top: 40px;
   position: relative;
   border: #333333 solid 1px;
-  right: 20px;
+  right: 27px;
 }
 
 #newsletter2 {
