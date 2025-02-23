@@ -54,8 +54,6 @@ export async function loginUser(email, password) {
 
 // Handle form submission for user registration or login
 document.addEventListener("DOMContentLoaded", () => {
-  const currentPage = window.location.pathname;
-
   // Handle registration form submission
   const registerForm = document.getElementById("register");
   if (registerForm) {
@@ -209,11 +207,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const loggedInLinks = document.querySelectorAll(
     ".navbar-btns.logged-in, .nav-link.logged-in"
   );
+
+  const navbar = document.getElementById("navbar");
   const token = localStorage.getItem("authToken");
 
   if (token) {
     loggedInLinks.forEach((link) => (link.style.display = "flex"));
     loggedOutLinks.forEach((link) => (link.style.display = "none"));
+
+    if (navbar) {
+      navbar.style.maxWidth = "600px";
+    }
 
     loggedInLinks.forEach((link) => {
       link.addEventListener("click", () => {
@@ -226,5 +230,9 @@ document.addEventListener("DOMContentLoaded", () => {
   } else {
     loggedOutLinks.forEach((link) => (link.style.display = "flex"));
     loggedInLinks.forEach((link) => (link.style.display = "none"));
+
+    if (navbar) {
+      navbar.style.maxWidth = "730px";
+    }
   }
 });

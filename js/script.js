@@ -5,7 +5,7 @@ import "./edit.js";
 import "./feed.js";
 import "./post.js";
 
-// Navbar functionality
+// Mobile navbar functionality
 document.addEventListener("DOMContentLoaded", function () {
   // Toggle mobile hamburger menu overlay visibility
   const hamburger = document.getElementById("hamburger");
@@ -146,13 +146,21 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// Restrict access to edit/add pages for only logged in users
 document.addEventListener("DOMContentLoaded", () => {
   const token = localStorage.getItem("authToken");
   const currentPage = window.location.pathname;
 
+  // Restrict access to edit/add pages for only logged in users
   if ((currentPage.includes("add") || currentPage.includes("edit")) && !token) {
     window.location.href = "../account/login.html";
+  }
+
+  // Restrict login and register pages for logged in users
+  if (
+    (currentPage.includes("login") || currentPage.includes("register")) &&
+    token
+  ) {
+    window.location.href = "../post/feed.html";
   }
 });
 

@@ -36,10 +36,8 @@ textarea:focus {
   padding-left: 16px;
 }
 
-#nav-search::placeholder,
 #footer-email::placeholder,
 #newsletter-email::placeholder,
-#search-input::placeholder,
 .blog-forms input::placeholder {
   font-size: 16px;
   color: rgba(51, 51, 51, 0.38);
@@ -151,33 +149,6 @@ nav.nav-active {
   font-size: 18px;
   font-weight: 500;
   margin: 10px 0px 11px 0px;
-}
-
-#nav-search {
-  width: 100%;
-  height: 53px;
-  border: #333333 solid 1px;
-  border-radius: 30px;
-  padding-left: 15px;
-  font-size: 16px;
-}
-
-.nav-search-btn {
-  width: 74px;
-  height: 56px;
-  position: absolute;
-  right: 15px;
-  border-radius: 30px;
-  border: none;
-  background-color: #0790a5;
-  font-size: 24px;
-  color: #ffffff;
-  bottom: 29px;
-  cursor: pointer;
-}
-
-#search-overlay {
-  display: none;
 }
 
 /* Footer */
@@ -445,42 +416,6 @@ footer {
   font-weight: 600;
 }
 
-/* Trending section */
-.trending-container {
-  background-color: #ffffff;
-  border-radius: 20px;
-  width: 100%;
-  margin-bottom: 184px;
-}
-
-.trending-container h2 {
-  padding-top: 40px;
-  margin-bottom: 10px;
-}
-
-.div2 {
-  padding-bottom: 40px;
-}
-
-.div2 a {
-  text-decoration: none;
-  color: #333333;
-  padding-left: 16px;
-}
-
-.div2 span {
-  font-size: 16px;
-  font-style: italic;
-  font-weight: 200;
-}
-
-#arrow {
-  width: 20px;
-  height: 9px;
-  display: inline-block;
-  padding-left: 10px;
-}
-
 /* Newsletter section */
 .newsletter-container {
   background-color: #ffffff;
@@ -576,24 +511,6 @@ footer {
   #illustration {
     max-width: 1100px;
   }
-
-  .trending-container {
-    display: grid;
-    grid-template-columns: 40% auto;
-    align-items: center;
-    padding-top: 40px;
-    padding-bottom: 40px;
-  }
-
-  .div2 {
-    padding-bottom: 0;
-  }
-
-  .trending-container h2 {
-    padding-top: 0;
-    margin-bottom: 0;
-    margin-top: 0;
-  }
 }
 
 @media (min-width: 768px) {
@@ -624,7 +541,7 @@ footer {
     border: 1px solid #ffffff;
     border-radius: 30px;
     width: 70%;
-    max-width: 750px;
+    max-width: 600px;
     justify-content: space-evenly;
     transition: width 0.3s ease;
     height: 44px;
@@ -647,54 +564,6 @@ footer {
     background-color: #ffffff;
     color: #333333;
     border-radius: 30px;
-  }
-
-  .search-icon {
-    font-size: 18px;
-    width: 50%;
-  }
-
-  #search-overlay {
-    position: absolute;
-    width: 63%;
-    max-width: 752px;
-    transition: opacity 0.3s ease, visibility 0.3s;
-    display: none;
-    z-index: 2000;
-    top: 30px;
-    right: 16px;
-  }
-
-  #search-overlay.active {
-    display: flex;
-  }
-
-  .search-form {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    position: relative;
-  }
-
-  #search-input {
-    height: 46px;
-    width: 100%;
-    font-size: 16px;
-    border: none;
-    border-radius: 30px;
-    background: #ffffff;
-    outline: none;
-    padding-left: 16px;
-  }
-
-  .search-btn {
-    position: absolute;
-    right: 16px;
-    border: none;
-    background: transparent;
-    cursor: pointer;
-    color: #333333;
-    font-size: 18px;
   }
 
   /* Home */
@@ -720,24 +589,6 @@ footer {
   .about-container h2 {
     width: 80%;
     line-height: 49px;
-  }
-
-  .div2 {
-    padding-top: 8px;
-  }
-
-  .div2 span {
-    font-size: 18px;
-  }
-
-  #arrow {
-    width: 29px;
-    height: 11px;
-  }
-
-  .div2:hover #arrow {
-    transform: translateX(50px);
-    transition: transform 0.3s ease-in-out;
   }
 
   .newsletter-container {
@@ -790,19 +641,6 @@ footer {
 
   .navbar-btns {
     font-size: 16px;
-  }
-
-  .search-icon {
-    font-size: 20px;
-  }
-
-  .search-btn {
-    right: 27px;
-    font-size: 20px;
-  }
-
-  #search-overlay {
-    width: 68%;
   }
 
   /* Footer */
@@ -979,10 +817,6 @@ footer {
     font-size: 18px;
   }
 
-  .search-icon {
-    font-size: 22px;
-  }
-
   #illustration {
     left: 20%;
   }
@@ -1020,14 +854,6 @@ footer {
 
   .about-container p {
     max-width: 550px;
-  }
-
-  .trending-container {
-    grid-template-columns: 30% auto;
-  }
-
-  .div2 span {
-    font-size: 20px;
   }
 
   .news1 h2 {
