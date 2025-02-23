@@ -111,17 +111,25 @@ document.addEventListener("DOMContentLoaded", () => {
   if (localStorage.getItem("userName")) {
     if (loginBtn) {
       loginBtn.style.display = "none";
-      if (window.innerWidth > 768 && btnContainer) {
+      if (
+        window.innerWidth > 768 &&
+        window.innerWidth <= 1440 &&
+        btnContainer
+      ) {
         btnContainer.style.flexDirection = "row";
       }
     }
   }
   // Adjust styling if window is resized
   window.addEventListener("resize", () => {
-    if (window.innerWidth > 768 && window.innerWidth <= 1440 && btnContainer) {
-      btnContainer.style.flexDirection = "row";
-    } else {
-      btnContainer.style.flexDirection = "";
+    const btnContainer = document.querySelector(".btn-container");
+
+    if (btnContainer) {
+      if (window.innerWidth > 768 && window.innerWidth <= 1440) {
+        btnContainer.style.flexDirection = "row";
+      } else {
+        btnContainer.style.flexDirection = "";
+      }
     }
   });
 

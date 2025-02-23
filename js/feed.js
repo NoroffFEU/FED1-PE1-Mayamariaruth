@@ -125,58 +125,63 @@ function renderPagination(meta, currentPage, limit) {
 function renderBlogPosts(posts) {
   const blogFeed = document.getElementById("blog-feed-container");
   const loggedInUser = localStorage.getItem("userName");
-  if (!blogFeed) return;
 
-  blogFeed.innerHTML = "";
+  if (blogFeed) {
+    blogFeed.innerHTML = "";
 
-  posts.forEach((post) => {
-    const postAuthor = post.author.name;
-    const isAuthor = loggedInUser && loggedInUser === postAuthor;
-    const postElement = document.createElement("div");
-    postElement.classList.add("blog-post");
-    postElement.innerHTML = `
-      <a href="post.html?author=${post.author?.name}&id=${
-      post.id
-    }" class="blog-link">
-        <div class="blog-card">
-            <img id="feed-img" src="${post.media?.url}" alt="${
-      post.media?.alt || "Blog image"
-    }">
-            <div class="blog-content">
-              <div class="author-edit">
-                <p class="author">By ${
-                  post.author?.name.replace(/_/g, " ") || "Unknown Author"
-                }</p>
-                ${
-                  isAuthor
-                    ? `<button class="edit" data-id="${post.id}"><i class="fa-solid fa-pen"></i> Edit</button>`
-                    : ""
-                }
-              </div>
-              <h2>${post.title}</h2>
-              <div id="tags-date">
-                <p class="tags">#${post.tags?.[0]}</p>
-                <i class="fa-solid fa-circle" id="circle-feed"></i>
-                <p class="date">${formatDate(post.created)}</p>
-              </div>
+    if (!posts.length) {
+      blogFeed.innerHTML = `<p class="error-message margin-left">You have not made a post yet. Please add a new blog post.</p>`;
+    } else {
+      posts.forEach((post) => {
+        const postAuthor = post.author.name;
+        const isAuthor = loggedInUser && loggedInUser === postAuthor;
+        const postElement = document.createElement("div");
+        postElement.classList.add("blog-post");
+        postElement.innerHTML = `
+          <a href="post.html?author=${post.author?.name}&id=${
+          post.id
+        }" class="blog-link">
+            <div class="blog-card">
+                <img id="feed-img" src="${post.media?.url}" alt="${
+          post.media?.alt || "Blog image"
+        }">
+                <div class="blog-content">
+                  <div class="author-edit">
+                    <p class="author">By ${
+                      post.author?.name.replace(/_/g, " ") || "Unknown Author"
+                    }</p>
+                    ${
+                      isAuthor
+                        ? `<button class="edit" data-id="${post.id}"><i class="fa-solid fa-pen"></i> Edit</button>`
+                        : ""
+                    }
+                  </div>
+                  <h2>${post.title}</h2>
+                  <div id="tags-date">
+                    <p class="tags">#${post.tags?.[0]}</p>
+                    <i class="fa-solid fa-circle" id="circle-feed"></i>
+                    <p class="date">${formatDate(post.created)}</p>
+                  </div>
+                </div>
             </div>
-        </div>
-      </a>
-    `;
+          </a>
+        `;
 
-    blogFeed.appendChild(postElement);
+        blogFeed.appendChild(postElement);
 
-    // Event listener for the edit button
-    const editButton = postElement.querySelector(".edit");
-    if (editButton) {
-      editButton.addEventListener("click", (event) => {
-        event.preventDefault();
-        event.stopPropagation();
-        const postId = editButton.getAttribute("data-id");
-        window.location.href = `edit.html?author=${postAuthor}&id=${postId}`;
+        // Event listener for the edit button
+        const editButton = postElement.querySelector(".edit");
+        if (editButton) {
+          editButton.addEventListener("click", (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            const postId = editButton.getAttribute("data-id");
+            window.location.href = `edit.html?author=${postAuthor}&id=${postId}`;
+          });
+        }
       });
     }
-  });
+  }
 }
 
 // Function to fetch the latest posts

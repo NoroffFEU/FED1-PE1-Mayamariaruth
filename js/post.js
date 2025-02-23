@@ -77,18 +77,12 @@ async function fetchBlogPostDetails() {
       // Set the first tag as the main post tag
       tagElement.textContent = `#${post.data.tags[0]}`;
 
-      // Remove the first tag from the array and create buttons for the remaining tags
-      const remainingTags = post.data.tags.slice(1);
       allTagsContainer.innerHTML = "";
 
-      remainingTags.forEach((tag) => {
+      post.data.tags.forEach((tag) => {
         const tagButton = document.createElement("button");
         tagButton.classList.add("tags-blog-post");
         tagButton.textContent = `#${tag}`;
-        tagButton.addEventListener("click", () => {
-          window.location.href = `feed.html?tag=${encodeURIComponent(tag)}`;
-        });
-
         allTagsContainer.appendChild(tagButton);
       });
     } else {

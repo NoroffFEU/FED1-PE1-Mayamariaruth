@@ -2,6 +2,10 @@
   margin: 20px 0 90px;
 }
 
+.margin-left {
+  margin-left: 16px;
+}
+
 .mobile-only {
   display: inline-block;
 }

@@ -48,7 +48,6 @@ export async function loginUser(email, password) {
     return data;
   } catch (error) {
     console.error("Error logging in:", error);
-    showNotification(error.message, "error");
     return null;
   }
 }
@@ -128,7 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (response) {
         localStorage.setItem(
-          "notification",
+          "notificationMessage",
           "Your account has been created successfully! Please log in to continue."
         );
         localStorage.setItem("notificationType", "success");
