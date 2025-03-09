@@ -1,25 +1,55 @@
 # FED1 Project Exam 1
 
-This project is a blog platform developed for HotView Labs, a tech research and development company with 30 employees operating worldwide. HotView Labs' mission is to provide the most accurate and up-to-date insights to tech leaders across the world.
+![HotView Labs](assets/images/por3.jpg)
 
-## Features
+## Table of Contents
 
+1. [Description](#description)
+2. [Technologies Used](#technologies-used)
+3. [How to Run](#how-to-run)
+4. [Contact](#contact)
+5. [Acknowledgments](#acknowledgments)
+6. [Future Enhancements](#future-enhancements)
+
+## Description
+
+This project is a blog platform created for HotView Labs, a tech research and development company with a global team of 30 employees. HotView Labs focuses on providing cutting-edge insights to tech leaders, helping them stay ahead in the rapidly evolving tech world.
+
+The platform serves as a space for sharing knowledge and discussing various technology topics. It allows users to easily browse, view, and share posts, while also providing owners with the ability to manage content efficiently.
+
+### Key Features
 - Browse Posts – Users can view a list of blog posts on various technology-related topics.
-
-- Sorting & Pagination – Users can sort posts by date and title and navigate through pages efficiently with pagination on each feed page.
-
+- Custom Sorting and Pagination – Enables users to sort posts by date or title and navigate through pages smoothly with pagination.
 - View Blog Posts – Each post has a dedicated page displaying its full content.
-
 - Share Posts – A "Copy Link" button allows users to copy the post’s URL for easy sharing.
-
 - Manage Posts - An owner is able to edit, delete and add new blog posts.
 
-## Technology Stack
+### API Usage
+This project integrates the [Noroff API v2](https://docs.noroff.dev/docs/v2) to dynamically fetch blog posts and enable CRUD operations (Create, Read, Update, Delete) for efficient content management.
 
-Frontend: HTML, CSS, JavaScript.
+## Technologies Used
+
+- HTML5
+- CSS3
+- JavaScript
+- GitHub (for version control)
+- Netlify (for hosting)
+  
 Backend: Blog data is retrieved dynamically using the [Noroff API](https://docs.noroff.dev/docs/v2).
 
-## Credit/helpful tips
+## How to Run
+
+To view this portfolio locally, you can clone the repository:
+
+```bash
+git clone https://github.com/NoroffFEU/FED1-PE1-Mayamariaruth.git
+```
+
+## Contact
+
+You can connect with me through my [LinkedIn Profile](https://www.linkedin.com/in/maya-thompson-9b602a255/).
+
+## Acknowledgments
 
 - https://stackoverflow.com/
 - https://www.w3schools.com/
